@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概览
 
-独立游戏 UI 配色参考工具，单文件（`game_colors.html`），CSS 和 JS 全部内嵌，无构建、无依赖。
+独立游戏 UI 配色参考工具，单文件（`index.html`），CSS 和 JS 全部内嵌，无构建、无依赖。
 
-浏览器直接打开 `game_colors.html` 即可使用。
+浏览器直接打开 `index.html` 即可使用。也托管在 GitHub Pages 上。
 
 ## 架构
 
