@@ -644,11 +644,11 @@ function switchScheme(id) {
 // 7. 导出功能 (TS / C#)
 // --------------------------------------------------------------
 function toCamel(str) {
-    return str.replace(/[()（）·/]/g, ' ').trim().split(/\s+/).map(w => w.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '')).join('');
+    return str.replace(/[()（）·/]/g, ' ').trim().split(/\s+/).map(w => w.replace(/[^a-zA-Z0-9]/g, '')).filter(Boolean).join('');
 }
 function toPascal(str) {
     const camel = toCamel(str);
-    if (!camel) return 'Color';
+    if (!camel) return '';
     return camel.charAt(0).toUpperCase() + camel.slice(1);
 }
 function hexToRgb(hex) {
@@ -659,16 +659,18 @@ function hexToRgb(hex) {
 function exportTs(scheme) {
     let lines = [`// ${scheme.title} 配色方案 · 自动生成`, `export const ColorScheme = {`];
     const used = new Set();
-    scheme.groups.forEach(g => {
+    scheme.groups.forEach((g, gIdx) => {
         lines.push(`  // ${g.title}`);
-        const groupPrefix = toCamel(g.title.split('·')[0].trim());
-        g.items.forEach(it => {
-            let key = toCamel(it[0]) || 'color';
-            if (used.has(key)) {
-                key = groupPrefix + key.charAt(0).toUpperCase() + key.slice(1);
+        g.items.forEach((it, iIdx) => {
+            let key = toCamel(it[0]) || `color${gIdx}_${iIdx}`;
+            let uniqueKey = key;
+            let counter = 1;
+            while (used.has(uniqueKey)) {
+                uniqueKey = key + counter;
+                counter++;
             }
-            used.add(key);
-            lines.push(`  ${key}: '${it[1]}',`);
+            used.add(uniqueKey);
+            lines.push(`  ${uniqueKey}: '${it[1]}', // ${it[0]}`);
         });
     });
     lines.push(`};`);
@@ -678,17 +680,19 @@ function exportTs(scheme) {
 function exportCsharp(scheme) {
     let lines = [`// ${scheme.title} 配色方案 · 自动生成`, `using UnityEngine;`, ``, `public static class ColorScheme`, `{`];
     const used = new Set();
-    scheme.groups.forEach(g => {
+    scheme.groups.forEach((g, gIdx) => {
         lines.push(`    // ${g.title}`);
-        const groupPrefix = toPascal(g.title.split('·')[0].trim());
-        g.items.forEach(it => {
-            let key = toPascal(it[0]) || 'Color';
-            if (used.has(key)) {
-                key = groupPrefix + key;
+        g.items.forEach((it, iIdx) => {
+            let key = toPascal(it[0]) || `Color${gIdx}_${iIdx}`;
+            let uniqueKey = key;
+            let counter = 1;
+            while (used.has(uniqueKey)) {
+                uniqueKey = key + counter;
+                counter++;
             }
-            used.add(key);
+            used.add(uniqueKey);
             const [r, g2, b] = hexToRgb(it[1]);
-            lines.push(`    public static readonly Color32 ${key} = new Color32(${r}, ${g2}, ${b}, 255);`);
+            lines.push(`    public static readonly Color32 ${uniqueKey} = new Color32(${r}, ${g2}, ${b}, 255); // ${it[0]}`);
         });
     });
     lines.push(`}`);
