@@ -194,57 +194,222 @@
             background: #2d7a4a;
         }
 
-        .demo-panel {
-            border-radius: 14px;
-            padding: 20px;
-            margin-top: 4px;
+        /* ---- 组合效果预览 ---- */
+        .preview-wrap {
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 8px;
         }
-        .demo-row {
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .preview-block {
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+        .preview-block-hd {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
             margin-bottom: 14px;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            opacity: 0.42;
         }
-        .demo-divider {
+        .preview-block-hd::after {
+            content: '';
+            flex: 1;
             height: 1px;
-            background: rgba(128,128,128,0.15);
-            margin: 0 0 14px;
+            background: rgba(255,255,255,0.06);
         }
-        .progress-track {
+        /* Buttons */
+        .pbtn {
+            border: none;
+            border-radius: 9px;
+            padding: 9px 15px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: default;
+            font-family: inherit;
+            transition: filter 0.15s;
+        }
+        .pbtn:hover { filter: brightness(1.08); }
+        .pbtn-sm {
+            padding: 5px 11px;
+            font-size: 10.5px;
+            border-radius: 7px;
+        }
+        .pbtn-ghost {
+            background: transparent !important;
+            border: 1.5px solid;
+        }
+        /* Tags */
+        .ptag {
+            border-radius: 6px;
+            padding: 5px 11px;
+            font-size: 11.5px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .ptag-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        /* Badge */
+        .pbadge {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .pbadge-num {
+            position: absolute;
+            top: -7px;
+            right: -10px;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 9px;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            line-height: 1;
+        }
+        /* Progress */
+        .pprog {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .pprog:last-child { margin-bottom: 0; }
+        .pprog-label {
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 28px;
+        }
+        .pprog-track {
             flex: 1;
             height: 12px;
             border-radius: 6px;
             overflow: hidden;
-            background: rgba(128,128,128,0.2);
+            background: rgba(128,128,128,0.12);
         }
-        .progress-fill {
+        .pprog-fill {
             height: 100%;
             border-radius: 6px;
         }
-        .preview-input {
-            border: 1px solid rgba(128,128,128,0.2);
-            border-radius: 8px;
-            padding: 9px 14px;
+        .pprog-pct {
+            font-size: 10.5px;
+            min-width: 34px;
+            text-align: right;
+            font-weight: 600;
+        }
+        /* Typography */
+        .ptype-h1 { font-size: 20px; font-weight: 700; line-height: 1.3; margin-bottom: 3px; }
+        .ptype-body { font-size: 13px; line-height: 1.5; margin-bottom: 3px; }
+        .ptype-caption { font-size: 11px; opacity: 0.5; margin-bottom: 3px; }
+        .ptype-num { font-size: 18px; font-weight: 700; }
+        /* Item Card */
+        .pcard {
+            border-radius: 10px;
+            overflow: hidden;
+            width: 150px;
+            flex-shrink: 0;
+        }
+        .pcard-media {
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+        .pcard-info {
+            padding: 10px 11px;
+        }
+        .pcard-name {
             font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .pcard-meta {
+            font-size: 10.5px;
+            opacity: 0.5;
+            line-height: 1.4;
+        }
+        /* Input */
+        .pinput {
+            border-radius: 8px;
+            padding: 9px 12px;
+            font-size: 12.5px;
             font-family: inherit;
             outline: none;
             width: 100%;
-            max-width: 260px;
         }
-        button.demo {
-            border: none;
-            border-radius: 10px;
-            padding: 11px 20px;
-            font-size: 13px;
-            color: #fff;
+        .pinput::placeholder { opacity: 0.3; }
+        /* Toggle */
+        .ptoggle {
+            width: 38px;
+            height: 22px;
+            border-radius: 11px;
+            display: inline-flex;
+            align-items: center;
+            padding: 2px;
             cursor: default;
-            font-family: inherit;
+            flex-shrink: 0;
         }
-        .tag {
+        .ptoggle-knob {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .ptoggle.on .ptoggle-knob { margin-left: auto; }
+        /* Tooltip */
+        .ptip {
+            display: inline-block;
+            padding: 8px 14px;
             border-radius: 8px;
-            padding: 8px 15px;
             font-size: 12px;
             font-weight: 600;
+            position: relative;
+        }
+        .ptip-arrow {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid;
+        }
+        /* Resources */
+        .pres-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+        .pres-icon { font-size: 15px; }
+        @media (max-width: 700px) {
+            .preview-grid { grid-template-columns: 1fr; }
+            .pcard { width: 100%; }
         }
 
         .universal-section {
@@ -350,10 +515,19 @@ const schemes = [
                 ['危险', '#FF5A5F', '#3a0505', 'danger'],
             ]}
         ],
-        demoBg: '#2C2C3A',
-        demo: [['#FF9F43', '常态'], ['#F58024', '按下'], ['#4A90D9', '次要'], ['#C99A6E', '禁用']],
-        tags: [['#4CD97B', '#0a3319', '成功'], ['#FFC53D', '#402d00', '警告'], ['#FF5A5F', '#3a0505', '危险']],
-        demoText: ['#F5F5F8', '#9A9AA8', '#FFD43B']
+        preview: {
+            bg: '#2C2C3A',
+            text: { primary: '#F5F5F8', secondary: '#9A9AA8', highlight: '#FFD43B' },
+            primary: { bg: '#FF9F43', fg: '#fff' },
+            primaryHover: { bg: '#FFB35F', fg: '#fff' },
+            accent: { bg: '#4A90D9', fg: '#fff' },
+            disabled: { bg: '#C99A6E', fg: '#eee' },
+            success: { bg: '#4CD97B', fg: '#0a3319' },
+            warning: { bg: '#FFC53D', fg: '#402d00' },
+            danger: { bg: '#FF5A5F', fg: '#3a0505' },
+            card: { bg: '#3A3A4A', border: '#52525F' },
+            input: { bg: 'rgba(128,128,128,0.08)', border: 'rgba(128,128,128,0.2)' },
+        },
     },
 
     // ---- ② 暗金像素 ----
@@ -395,10 +569,19 @@ const schemes = [
                 ['青', '#75E2EF', '#0F1B1D', 'accentCyan'],
             ]}
         ],
-        demoBg: '#40374B',
-        demo: [['#FFC848', '常态'], ['#FDA500', '按下'], ['#3089E0', '次要']],
-        tags: [['#1CA455', '#fff', '成功'], ['#DFC50B', '#3A2400', '警告'], ['#DA1625', '#fff', '危险']],
-        demoText: ['#FFFFF6', '#DAD7C9', '#FAFCA0']
+        preview: {
+            bg: '#40374B',
+            text: { primary: '#FFFFF6', secondary: '#DAD7C9', highlight: '#FAFCA0' },
+            primary: { bg: '#FFC848', fg: '#3A2400' },
+            primaryHover: { bg: '#FFEE79', fg: '#3A2400' },
+            accent: { bg: '#3089E0', fg: '#fff' },
+            disabled: { bg: '#939393', fg: '#2C2C2A' },
+            success: { bg: '#1CA455', fg: '#fff' },
+            warning: { bg: '#DFC50B', fg: '#3A2400' },
+            danger: { bg: '#DA1625', fg: '#fff' },
+            card: { bg: '#524541', border: '#000000' },
+            input: { bg: 'rgba(128,128,128,0.08)', border: 'rgba(128,128,128,0.2)' },
+        },
     },
 
     // ---- ③ 冷色专业 ----
@@ -454,10 +637,19 @@ const schemes = [
                 ['半透明遮罩', '#00000080', '#fff', 'overlay'],
             ]}
         ],
-        demoBg: '#374355',
-        demo: [['#FF648B', '常态'], ['#E83F86', '按下'], ['#339AF0', '次要'], ['#FFB700', '高亮']],
-        tags: [['#03BD5B', '#fff', '成功'], ['#FFB700', '#1F2430', '警告'], ['#F13242', '#fff', '危险']],
-        demoText: ['#F5F5F8', '#9A9AA8', '#FFB700']
+        preview: {
+            bg: '#374355',
+            text: { primary: '#F5F5F8', secondary: '#9A9AA8', highlight: '#FFB700' },
+            primary: { bg: '#FF648B', fg: '#fff' },
+            primaryHover: { bg: '#FF4C65', fg: '#fff' },
+            accent: { bg: '#339AF0', fg: '#fff' },
+            disabled: { bg: '#8393A7', fg: '#fff' },
+            success: { bg: '#03BD5B', fg: '#fff' },
+            warning: { bg: '#FFB700', fg: '#1F2430' },
+            danger: { bg: '#F13242', fg: '#fff' },
+            card: { bg: '#3D4D65', border: '#5B6E88' },
+            input: { bg: 'rgba(128,128,128,0.08)', border: 'rgba(128,128,128,0.2)' },
+        },
     }
 ];
 
@@ -587,41 +779,109 @@ schemes.forEach((s, idx) => {
         html += `</div></section>`;
     });
 
+    const p = s.preview;
     html += `<section><h2>🧩 组合效果预览</h2>
-        <div class="demo-panel" style="background:${s.demoBg}">
-            <div class="demo-row">`;
-    s.demo.forEach(d => {
-        html += `<button class="demo" style="background:${d[0]}">${d[1]}按钮</button>`;
-    });
-    html += `</div><div class="demo-row">`;
-    s.tags.forEach(t => {
-        html += `<span class="tag" style="background:${t[0]};color:${t[1]}">${t[2]}提示</span>`;
-    });
-    const altColor = s.demo.length > 2 ? s.demo[2][0] : s.demo[0][0];
-    html += `</div>
-            <div class="demo-divider"></div>
-            <div class="demo-row" style="align-items:center;gap:10px;">
-                <span style="color:${s.demoText[0]};font-size:12px;font-weight:600;min-width:22px;">HP</span>
-                <div class="progress-track"><div class="progress-fill" style="width:72%;background:${s.demo[0][0]};"></div></div>
-                <span style="color:${s.demoText[0]};font-size:11px;white-space:nowrap;">720 / 1000</span>
+        <div class="preview-wrap" style="background:${p.bg}">
+            <div class="preview-grid">
+                <div class="preview-block">
+                    <div class="preview-block-hd">按钮 Buttons</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+                        <button class="pbtn" style="background:${p.primary.bg};color:${p.primary.fg}">确认按钮</button>
+                        <button class="pbtn pbtn-ghost" style="color:${p.primary.bg}">次要按钮</button>
+                        <button class="pbtn pbtn-sm" style="background:${p.accent.bg};color:${p.accent.fg}">小型</button>
+                        <button class="pbtn" style="background:${p.disabled.bg};color:${p.disabled.fg};opacity:0.5">禁用</button>
+                    </div>
+                </div>
+                <div class="preview-block">
+                    <div class="preview-block-hd">标签与徽章 Tags & Badges</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+                        <span class="ptag" style="background:${p.success.bg};color:${p.success.fg}"><span class="ptag-dot"></span>成功</span>
+                        <span class="ptag" style="background:${p.warning.bg};color:${p.warning.fg}"><span class="ptag-dot"></span>警告</span>
+                        <span class="ptag" style="background:${p.danger.bg};color:${p.danger.fg}"><span class="ptag-dot"></span>危险</span>
+                        <span class="ptag" style="background:${p.accent.bg};color:${p.accent.fg}">信息</span>
+                        <span class="pbadge" style="margin-left:6px;"><span style="font-size:18px;">📦</span><span class="pbadge-num" style="background:${p.danger.bg};color:${p.danger.fg}">3</span></span>
+                    </div>
+                </div>
+                <div class="preview-block">
+                    <div class="preview-block-hd">进度条 Progress Bars</div>
+                    <div class="pprog">
+                        <span class="pprog-label" style="color:${p.text.primary}">HP</span>
+                        <div class="pprog-track"><div class="pprog-fill" style="width:72%;background:${p.primary.bg}"></div></div>
+                        <span class="pprog-pct" style="color:${p.text.primary}">72%</span>
+                    </div>
+                    <div class="pprog">
+                        <span class="pprog-label" style="color:${p.text.primary}">MP</span>
+                        <div class="pprog-track"><div class="pprog-fill" style="width:45%;background:${p.accent.bg}"></div></div>
+                        <span class="pprog-pct" style="color:${p.text.primary}">45%</span>
+                    </div>
+                    <div class="pprog">
+                        <span class="pprog-label" style="color:${p.text.primary}">EXP</span>
+                        <div class="pprog-track"><div class="pprog-fill" style="width:28%;background:${p.text.highlight}"></div></div>
+                        <span class="pprog-pct" style="color:${p.text.secondary}">28%</span>
+                    </div>
+                </div>
+                <div class="preview-block">
+                    <div class="preview-block-hd">文字层级 Typography</div>
+                    <div style="color:${p.text.primary}">
+                        <div class="ptype-h1">任务标题显示</div>
+                        <div class="ptype-body">正文段落内容，用于描述任务详情或物品说明。</div>
+                        <div class="ptype-caption" style="color:${p.text.secondary}">次要说明文字 · 3 分钟前更新</div>
+                        <div class="ptype-num" style="color:${p.text.highlight}">+12,345</div>
+                    </div>
+                </div>
+                <div class="preview-block">
+                    <div class="preview-block-hd">输入控件 Input Controls</div>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                        <input class="pinput" type="text" placeholder="搜索物品名称..." style="background:${p.input.bg};color:${p.text.primary};border:1px solid ${p.input.border};" readonly>
+                        <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+                            <span style="color:${p.text.primary};min-width:32px;">音效</span>
+                            <div class="ptoggle on" style="background:${p.primary.bg}"><div class="ptoggle-knob"></div></div>
+                            <span style="color:${p.text.primary};font-size:10px;opacity:0.6;">ON</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+                            <span style="color:${p.text.secondary};min-width:32px;">音乐</span>
+                            <div class="ptoggle" style="background:rgba(128,128,128,0.25)"><div class="ptoggle-knob"></div></div>
+                            <span style="color:${p.text.secondary};font-size:10px;opacity:0.6;">OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-block">
+                    <div class="preview-block-hd">物品卡片 Item Card</div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                        <div class="pcard" style="background:${p.card.bg};border:1px solid ${p.card.border}">
+                            <div class="pcard-media" style="background:${p.primary.bg};color:${p.primary.fg}">⚔️</div>
+                            <div class="pcard-info">
+                                <div class="pcard-name" style="color:${p.text.primary}">铁剑 Iron Sword</div>
+                                <div class="pcard-meta" style="color:${p.text.secondary}">攻击力 +15 · 普通品质</div>
+                            </div>
+                        </div>
+                        <div class="pcard" style="background:${p.card.bg};border:1px solid ${p.card.border}">
+                            <div class="pcard-media" style="background:${p.accent.bg};color:${p.accent.fg}">🛡️</div>
+                            <div class="pcard-info">
+                                <div class="pcard-name" style="color:${p.text.primary}">铁盾 Iron Shield</div>
+                                <div class="pcard-meta" style="color:${p.text.secondary}">防御力 +10 · 普通品质</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-block">
+                    <div class="preview-block-hd">资源显示 Resources</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                        <span class="pres-item" style="background:${p.card.bg};color:${p.text.primary}"><span class="pres-icon">🪙</span>12,345</span>
+                        <span class="pres-item" style="background:${p.card.bg};color:${p.text.primary}"><span class="pres-icon">💎</span>999</span>
+                        <span class="pres-item" style="background:${p.card.bg};color:${p.text.primary}"><span class="pres-icon">⚡</span>150 / 200</span>
+                    </div>
+                </div>
+                <div class="preview-block">
+                    <div class="preview-block-hd">提示框 Tooltip</div>
+                    <div style="padding-top:4px;">
+                        <div class="ptip" style="background:${p.card.bg};color:${p.text.primary};border:1px solid ${p.card.border}">
+                            装备后提升 15% 暴击率
+                            <div class="ptip-arrow" style="border-top-color:${p.card.border}"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="demo-row" style="align-items:center;gap:10px;">
-                <span style="color:${s.demoText[0]};font-size:12px;font-weight:600;min-width:22px;">MP</span>
-                <div class="progress-track"><div class="progress-fill" style="width:45%;background:${altColor};"></div></div>
-                <span style="color:${s.demoText[0]};font-size:11px;white-space:nowrap;">450 / 1000</span>
-            </div>
-            <div class="demo-divider"></div>
-            <div class="demo-row" style="gap:16px;">
-                <span style="display:flex;align-items:center;gap:5px;font-size:13px;background:rgba(128,128,128,0.1);padding:4px 10px;border-radius:8px;">🪙 <span style="color:${s.demoText[2]};font-weight:700;">12,345</span></span>
-                <span style="display:flex;align-items:center;gap:5px;font-size:13px;background:rgba(128,128,128,0.1);padding:4px 10px;border-radius:8px;">💎 <span style="color:${s.demoText[2]};font-weight:700;">999</span></span>
-            </div>
-            <div class="demo-divider"></div>
-            <div class="demo-row">
-                <input class="preview-input" type="text" placeholder="搜索物品名称..." style="background:rgba(128,128,128,0.08);color:${s.demoText[0]};" readonly>
-            </div>
-            <p style="color:${s.demoText[0]};font-size:16px;margin:14px 0 4px">面板主文字示例</p>
-            <p style="color:${s.demoText[1]};font-size:13px;margin:0 0 8px">次要说明文字，用于描述或提示</p>
-            <p style="color:${s.demoText[2]};font-size:18px;margin:0">数值高亮 9,999</p>
         </div></section>`;
 
     panel.innerHTML = html;
