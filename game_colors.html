@@ -205,6 +205,32 @@
             flex-wrap: wrap;
             margin-bottom: 14px;
         }
+        .demo-divider {
+            height: 1px;
+            background: rgba(128,128,128,0.15);
+            margin: 0 0 14px;
+        }
+        .progress-track {
+            flex: 1;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: rgba(128,128,128,0.2);
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+        }
+        .preview-input {
+            border: 1px solid rgba(128,128,128,0.2);
+            border-radius: 8px;
+            padding: 9px 14px;
+            font-size: 12px;
+            font-family: inherit;
+            outline: none;
+            width: 100%;
+            max-width: 260px;
+        }
         button.demo {
             border: none;
             border-radius: 10px;
@@ -330,60 +356,10 @@ const schemes = [
         demoText: ['#F5F5F8', '#9A9AA8', '#FFD43B']
     },
 
-    // ---- ② 极简扁平 (已拓展) ----
-    {
-        id: 'minimal',
-        name: '② 极简扁平',
-        title: '极简扁平 (拓展版)',
-        scene: '适用于 <b>解谜、棋牌、工具型、UI优先的游戏</b> —— 干净现代，通用性最强，现已支持浅色/深色双模式',
-        groups: [
-            { title: '浅色模式 · 背景/面板', items: [
-                ['全局背景 (浅)', '#F4F5F7', '#3D4A5C'],
-                ['面板底图 (浅)', '#FFFFFF', '#3D4A5C'],
-                ['卡片底图 (浅)', '#EDEFF2', '#3D4A5C'],
-                ['边框/分割线 (浅)', '#DCDFE4', '#3D4A5C'],
-                ['输入框底色 (浅)', '#B0B8C4', '#3D4A5C']
-            ]},
-            { title: '深色模式 · 背景/面板', items: [
-                ['全局背景 (暗)', '#1C1C24', '#F0F0F5'],
-                ['面板底图 (暗)', '#2C2C38', '#F0F0F5'],
-                ['卡片底图 (暗)', '#3A3A48', '#F0F0F5'],
-                ['边框/分割线 (暗)', '#8A929E', '#F0F0F5']
-            ]},
-            { title: '主色 · 蓝色按钮', items: [
-                ['常态', '#4C6FFF', '#fff'],
-                ['悬浮', '#6483FF', '#fff'],
-                ['按下', '#3A56D4', '#fff'],
-                ['阴影/边框', '#2A3F9E', '#fff']
-            ]},
-            { title: '辅助色 · 青绿', items: [
-                ['常态', '#2BBBAD', '#fff'],
-                ['悬浮', '#3ECCB5', '#fff'],
-                ['按下', '#1F9088', '#fff'],
-                ['阴影/边框', '#17917A', '#fff']
-            ]},
-            { title: '文本 & 功能色', items: [
-                ['主文字 (浅底)', '#3D4A5C', '#FFFFFF', true],
-                ['次文字 (浅底)', '#8A94A6', '#FFFFFF', true],
-                ['主文字 (深底)', '#F0F0F5', '#1C1C24', true],
-                ['次文字 (深底)', '#A0A8B8', '#1C1C24', true],
-                ['高亮数值', '#6C8CFF', '#fff'],
-                ['成功', '#34C759', '#0a2e12'],
-                ['警告', '#FFB020', '#402d00'],
-                ['危险', '#FF3B30', '#fff'],
-                ['信息', '#4A9BF5', '#fff']
-            ]}
-        ],
-        demoBg: '#FFFFFF',
-        demo: [['#4C6FFF', '常态'], ['#3A56D4', '按下'], ['#2BBBAD', '青绿'], ['#6C8CFF', '高亮']],
-        tags: [['#34C759', '#0a2e12', '成功'], ['#FFB020', '#402d00', '警告'], ['#FF3B30', '#fff', '危险'], ['#4A9BF5', '#fff', '信息']],
-        demoText: ['#3D4A5C', '#8A94A6', '#6C8CFF']
-    },
-
-    // ---- ③ 暗金像素 ----
+    // ---- ② 暗金像素 ----
     {
         id: 'darkgold',
-        name: '③ 暗金像素',
+        name: '② 暗金像素',
         title: '暗金像素',
         scene: '适用于 <b>生存建造、荒野拓荒、末日废土</b> —— 暗沉大地色系，金色高光点缀交互',
         groups: [
@@ -425,12 +401,12 @@ const schemes = [
         demoText: ['#FFFFF6', '#DAD7C9', '#FAFCA0']
     },
 
-    // ---- ④ 冷色专业 (从 Unity 调色板导入) ----
+    // ---- ③ 冷色专业 ----
     {
         id: 'coolpro',
-        name: '④ 冷色专业',
+        name: '③ 冷色专业',
         title: '冷色专业',
-        scene: '适用于 <b>策略、科幻、管理模拟、或冷峻叙事风格</b> —— 源自 Unity 调色板，沉稳冷静',
+        scene: '适用于 <b>策略、科幻、管理模拟、或冷峻叙事风格</b> —— 沉稳冷静的灰蓝色调',
         groups: [
             { title: '中性灰阶 · 背景/面板', items: [
                 ['纯白', '#FFFFFF', '#1F2430'],
@@ -621,11 +597,32 @@ schemes.forEach((s, idx) => {
     s.tags.forEach(t => {
         html += `<span class="tag" style="background:${t[0]};color:${t[1]}">${t[2]}提示</span>`;
     });
+    const altColor = s.demo.length > 2 ? s.demo[2][0] : s.demo[0][0];
     html += `</div>
-        <p style="color:${s.demoText[0]};font-size:16px;margin:0 0 4px">面板主文字示例</p>
-        <p style="color:${s.demoText[1]};font-size:13px;margin:0 0 8px">次要说明文字，用于描述或提示</p>
-        <p style="color:${s.demoText[2]};font-size:18px;margin:0">数值高亮 9,999</p>
-    </div></section>`;
+            <div class="demo-divider"></div>
+            <div class="demo-row" style="align-items:center;gap:10px;">
+                <span style="color:${s.demoText[0]};font-size:12px;font-weight:600;min-width:22px;">HP</span>
+                <div class="progress-track"><div class="progress-fill" style="width:72%;background:${s.demo[0][0]};"></div></div>
+                <span style="color:${s.demoText[0]};font-size:11px;white-space:nowrap;">720 / 1000</span>
+            </div>
+            <div class="demo-row" style="align-items:center;gap:10px;">
+                <span style="color:${s.demoText[0]};font-size:12px;font-weight:600;min-width:22px;">MP</span>
+                <div class="progress-track"><div class="progress-fill" style="width:45%;background:${altColor};"></div></div>
+                <span style="color:${s.demoText[0]};font-size:11px;white-space:nowrap;">450 / 1000</span>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-row" style="gap:16px;">
+                <span style="display:flex;align-items:center;gap:5px;font-size:13px;background:rgba(128,128,128,0.1);padding:4px 10px;border-radius:8px;">🪙 <span style="color:${s.demoText[2]};font-weight:700;">12,345</span></span>
+                <span style="display:flex;align-items:center;gap:5px;font-size:13px;background:rgba(128,128,128,0.1);padding:4px 10px;border-radius:8px;">💎 <span style="color:${s.demoText[2]};font-weight:700;">999</span></span>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-row">
+                <input class="preview-input" type="text" placeholder="搜索物品名称..." style="background:rgba(128,128,128,0.08);color:${s.demoText[0]};" readonly>
+            </div>
+            <p style="color:${s.demoText[0]};font-size:16px;margin:14px 0 4px">面板主文字示例</p>
+            <p style="color:${s.demoText[1]};font-size:13px;margin:0 0 8px">次要说明文字，用于描述或提示</p>
+            <p style="color:${s.demoText[2]};font-size:18px;margin:0">数值高亮 9,999</p>
+        </div></section>`;
 
     panel.innerHTML = html;
     contentContainer.appendChild(panel);

@@ -2,18 +2,23 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project overview
+## 项目概览
 
-A standalone HTML color palette tool for indie game UI design. Single file (`game_colors.html`) with embedded CSS and JS. No build step, no dependencies.
+独立游戏 UI 配色参考工具，单文件（`game_colors.html`），CSS 和 JS 全部内嵌，无构建、无依赖。
 
-Open `game_colors.html` directly in a browser to use.
+浏览器直接打开 `game_colors.html` 即可使用。
 
-## Architecture
+## 架构
 
-The JS defines color data as plain arrays/objects, then renders everything via DOM manipulation. Three layers:
+用纯数组/对象定义配色数据，通过 DOM 操作渲染。分三层：
 
-1. **Color scheme data** (`schemes` array) — 4 game-specific palettes, each with groups of color items `[name, hex, foreground]`. Some items have a 4th boolean flag for text/functional colors.
-2. **Universal system colors** (`rarityColors`, `feedbackColors` arrays) — industry-standard rarity tiers and battle feedback colors shared across all game genres.
-3. **Rendering** — `renderSwatchGrid()` for the universal section, inline DOM generation for scheme panels, tabs, and demo previews, all wired up in a single loop over `schemes`.
+1. **配色方案数据**（`schemes` 数组）— 3 套游戏配色（暖橙休闲、暗金像素、冷色专业），每套包含若干分组，每组为 `[名称, hex, 前景色]` 的色块列表。部分色块有第 4 个布尔标记表示文本/功能色。
+2. **通用系统色**（`rarityColors`、`feedbackColors` 数组）— 跨游戏类型通用的稀有度色阶和战斗数值反馈色。
+3. **渲染层** — `renderSwatchGrid()` 负责通用色区域，配色面板、标签页、预览区通过遍历 `schemes` 动态拼接 HTML 生成。
 
-Features: tab switching via `switchScheme()`, click-to-copy hex via event delegation on `.swatch`, export to TypeScript (`exportTs()`) or C# (`exportCsharp()`) via event delegation on `.export-btn`.
+主要功能：
+- `switchScheme()` 切换标签页
+- 点击 `.swatch` 复制 hex 值（事件委托）
+- `exportTs()` / `exportCsharp()` 导出代码常量，遇到同名 key 自动加分組前缀去重
+- 每个色块显示 WCAG 对比度（`hexToLinear` / `contrastRatio` / `ratioHTML`），低于 4.5:1 红色警示
+- 每套方案的组合预览区含：按钮、标签、HP/MP 进度条、资源计数、输入框、文字层级
