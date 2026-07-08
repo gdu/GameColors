@@ -357,6 +357,77 @@
             width: 100%;
         }
         .pinput::placeholder { opacity: 0.3; }
+        /* Range */
+        .prange {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 20px;
+            outline: none;
+            cursor: default;
+            background: transparent;
+            margin: -3px 0;
+        }
+        .prange::-webkit-slider-runnable-track {
+            height: 6px;
+            border-radius: 3px;
+            background: var(--prange-track);
+        }
+        .prange::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: default;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            margin-top: -5px;
+        }
+        .prange::-moz-range-track {
+            height: 6px;
+            border-radius: 3px;
+            border: none;
+            background: var(--prange-track);
+        }
+        .prange::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: default;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        /* Select */
+        .pselect-wrap {
+            position: relative;
+        }
+        .pselect {
+            border-radius: 8px;
+            padding: 9px 32px 9px 12px;
+            font-size: 12.5px;
+            font-family: inherit;
+            outline: none;
+            width: 100%;
+            cursor: default;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .pselect-wrap::after {
+            content: '';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid;
+            opacity: 0.35;
+        }
         /* Toggle */
         .ptoggle {
             width: 38px;
@@ -834,14 +905,23 @@ schemes.forEach((s, idx) => {
                     <div style="display:flex;flex-direction:column;gap:10px;">
                         <input class="pinput" type="text" placeholder="搜索物品名称..." style="background:${p.input.bg};color:${p.text.primary};border:1px solid ${p.input.border};" readonly>
                         <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
-                            <span style="color:${p.text.primary};min-width:32px;">音效</span>
+                            <span style="color:${p.text.primary};min-width:42px;">音效</span>
                             <div class="ptoggle on" style="background:${p.primary.bg}"><div class="ptoggle-knob"></div></div>
-                            <span style="color:${p.text.primary};font-size:10px;opacity:0.6;">ON</span>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
-                            <span style="color:${p.text.secondary};min-width:32px;">音乐</span>
+                            <span style="color:${p.text.secondary};min-width:42px;">音乐</span>
                             <div class="ptoggle" style="background:rgba(128,128,128,0.25)"><div class="ptoggle-knob"></div></div>
-                            <span style="color:${p.text.secondary};font-size:10px;opacity:0.6;">OFF</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+                            <span style="color:${p.text.primary};min-width:42px;">音量</span>
+                            <input type="range" class="prange" style="flex:1;--prange-track:linear-gradient(to right,${p.primary.bg} 65%,rgba(128,128,128,0.15) 65%);" min="0" max="100" value="65">
+                        </div>
+                        <div class="pselect-wrap" style="color:${p.text.primary};">
+                            <select class="pselect" style="background:${p.input.bg};color:${p.text.primary};border:1px solid ${p.input.border};">
+                                <option>简体中文</option>
+                                <option>English</option>
+                                <option>日本語</option>
+                            </select>
                         </div>
                     </div>
                 </div>
