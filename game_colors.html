@@ -321,33 +321,33 @@ const schemes = [
         scene: '适用于 <b>卡通消除、放置类、轻度休闲手游</b> —— 明快友好，降低焦虑感',
         groups: [
             { title: '中性色阶 · 背景/面板', items: [
-                ['全局背景', '#1A1A24', '#F5F5F8'],
-                ['次深背景', '#22222E', '#F5F5F8'],
-                ['面板底图', '#2C2C3A', '#F5F5F8'],
-                ['卡片底图', '#3A3A4A', '#F5F5F8'],
-                ['边框/分割线', '#52525F', '#F5F5F8'],
-                ['禁用底', '#9A9AA8', '#2C2C3A'],
-                ['浅色卡片底', '#F5F5F8', '#2C2C3A']
+                ['全局背景', '#1A1A24', '#F5F5F8', 'bgPrimary'],
+                ['次深背景', '#22222E', '#F5F5F8', 'bgSecondary'],
+                ['面板底图', '#2C2C3A', '#F5F5F8', 'panelBg'],
+                ['卡片底图', '#3A3A4A', '#F5F5F8', 'cardBg'],
+                ['边框/分割线', '#52525F', '#F5F5F8', 'border'],
+                ['禁用底', '#9A9AA8', '#2C2C3A', 'disabledBg'],
+                ['浅色卡片底', '#F5F5F8', '#2C2C3A', 'lightCardBg'],
             ]},
             { title: '主色 · 暖橙按钮', items: [
-                ['常态', '#FF9F43', '#fff'],
-                ['悬浮', '#FFB35F', '#fff'],
-                ['按下', '#F58024', '#fff'],
-                ['阴影/边框', '#D9660F', '#fff'],
-                ['禁用', '#C99A6E', '#eee'],
-                ['浅底/选中', '#FFE8D1', '#8a5a1e']
+                ['常态', '#FF9F43', '#fff', 'primary'],
+                ['悬浮', '#FFB35F', '#fff', 'primaryHover'],
+                ['按下', '#F58024', '#fff', 'primaryPress'],
+                ['阴影/边框', '#D9660F', '#fff', 'primaryBorder'],
+                ['禁用', '#C99A6E', '#eee', 'primaryDisabled'],
+                ['浅底/选中', '#FFE8D1', '#8a5a1e', 'primaryLight'],
             ]},
             { title: '辅助色 · 冷蓝', items: [
-                ['常态', '#4A90D9', '#fff'],
-                ['按下', '#3A75B0', '#fff']
+                ['常态', '#4A90D9', '#fff', 'accent'],
+                ['按下', '#3A75B0', '#fff', 'accentPress'],
             ]},
             { title: '文本 & 功能色', items: [
-                ['深底主文字', '#F5F5F8', '#2C2C3A', true],
-                ['深底次文字', '#9A9AA8', '#2C2C3A', true],
-                ['高亮数值', '#FFD43B', '#2C2C3A', true],
-                ['成功', '#4CD97B', '#0a3319'],
-                ['警告', '#FFC53D', '#402d00'],
-                ['危险', '#FF5A5F', '#3a0505']
+                ['深底主文字', '#F5F5F8', '#2C2C3A', 'textPrimary'],
+                ['深底次文字', '#9A9AA8', '#2C2C3A', 'textSecondary'],
+                ['高亮数值', '#FFD43B', '#2C2C3A', 'textHighlight'],
+                ['成功', '#4CD97B', '#0a3319', 'success'],
+                ['警告', '#FFC53D', '#402d00', 'warning'],
+                ['危险', '#FF5A5F', '#3a0505', 'danger'],
             ]}
         ],
         demoBg: '#2C2C3A',
@@ -364,35 +364,35 @@ const schemes = [
         scene: '适用于 <b>生存建造、荒野拓荒、末日废土</b> —— 暗沉大地色系，金色高光点缀交互',
         groups: [
             { title: '中性色阶 · 背景/面板', items: [
-                ['全局背景', '#010108', '#FFFFF6'],
-                ['次深背景', '#354048', '#FFFFF6'],
-                ['面板底图', '#40374B', '#FFFFF6'],
-                ['卡片底图', '#524541', '#FFFFF6'],
-                ['硬边框(黑)', '#000000', '#FFFFF6'],
-                ['禁用底', '#939393', '#2C2C2A']
+                ['全局背景', '#010108', '#FFFFF6', 'bgPrimary'],
+                ['次深背景', '#354048', '#FFFFF6', 'bgSecondary'],
+                ['面板底图', '#40374B', '#FFFFF6', 'panelBg'],
+                ['卡片底图', '#524541', '#FFFFF6', 'cardBg'],
+                ['硬边框(黑)', '#000000', '#FFFFF6', 'border'],
+                ['禁用底', '#939393', '#2C2C2A', 'disabledBg'],
             ]},
             { title: '主色 · 暖橙黄按钮', items: [
-                ['常态', '#FFC848', '#3A2400'],
-                ['悬浮', '#FFEE79', '#3A2400'],
-                ['按下', '#FDA500', '#3A2400'],
-                ['阴影/边框', '#9A5400', '#fff']
+                ['常态', '#FFC848', '#3A2400', 'primary'],
+                ['悬浮', '#FFEE79', '#3A2400', 'primaryHover'],
+                ['按下', '#FDA500', '#3A2400', 'primaryPress'],
+                ['阴影/边框', '#9A5400', '#fff', 'primaryBorder'],
             ]},
             { title: '辅助色 · 冷蓝', items: [
-                ['常态', '#3089E0', '#fff'],
-                ['按下', '#26556F', '#fff']
+                ['常态', '#3089E0', '#fff', 'accent'],
+                ['按下', '#26556F', '#fff', 'accentPress'],
             ]},
             { title: '文本 & 功能色', items: [
-                ['主文字(暖白)', '#FFFFF6', '#354048', true],
-                ['次要文字', '#DAD7C9', '#354048', true],
-                ['高亮数值', '#FAFCA0', '#354048', true],
-                ['成功', '#1CA455', '#fff'],
-                ['警告', '#DFC50B', '#3A2400'],
-                ['危险', '#DA1625', '#fff']
+                ['主文字(暖白)', '#FFFFF6', '#354048', 'textPrimary'],
+                ['次要文字', '#DAD7C9', '#354048', 'textSecondary'],
+                ['高亮数值', '#FAFCA0', '#354048', 'textHighlight'],
+                ['成功', '#1CA455', '#fff', 'success'],
+                ['警告', '#DFC50B', '#3A2400', 'warning'],
+                ['危险', '#DA1625', '#fff', 'danger'],
             ]},
             { title: '色板专属点缀色', items: [
-                ['紫', '#AF77F9', '#fff'],
-                ['粉', '#F77DB7', '#fff'],
-                ['青', '#75E2EF', '#0F1B1D']
+                ['紫', '#AF77F9', '#fff', 'accentPurple'],
+                ['粉', '#F77DB7', '#fff', 'accentPink'],
+                ['青', '#75E2EF', '#0F1B1D', 'accentCyan'],
             ]}
         ],
         demoBg: '#40374B',
@@ -409,49 +409,49 @@ const schemes = [
         scene: '适用于 <b>策略、科幻、管理模拟、或冷峻叙事风格</b> —— 沉稳冷静的灰蓝色调',
         groups: [
             { title: '中性灰阶 · 背景/面板', items: [
-                ['纯白', '#FFFFFF', '#1F2430'],
-                ['极浅灰', '#EBF0F3', '#1F2430'],
-                ['浅灰', '#C9D3DF', '#1F2430'],
-                ['中浅灰', '#AFBCCD', '#1F2430'],
-                ['中灰', '#8393A7', '#1F2430'],
-                ['中深灰', '#5B6E88', '#1F2430'],
-                ['深灰', '#51627D', '#F5F5F8'],
-                ['更深灰', '#3D4D65', '#F5F5F8'],
-                ['深灰蓝', '#374355', '#F5F5F8'],
-                ['暗灰', '#2C3642', '#F5F5F8'],
-                ['近黑', '#1C232A', '#F5F5F8']
+                ['纯白', '#FFFFFF', '#1F2430', 'white'],
+                ['极浅灰', '#EBF0F3', '#1F2430', 'grayLightest'],
+                ['浅灰', '#C9D3DF', '#1F2430', 'grayLight'],
+                ['中浅灰', '#AFBCCD', '#1F2430', 'grayLightMid'],
+                ['中灰', '#8393A7', '#1F2430', 'grayMid'],
+                ['中深灰', '#5B6E88', '#1F2430', 'grayMidDark'],
+                ['深灰', '#51627D', '#F5F5F8', 'grayDark'],
+                ['更深灰', '#3D4D65', '#F5F5F8', 'grayDarker'],
+                ['深灰蓝', '#374355', '#F5F5F8', 'grayDarkBlue'],
+                ['暗灰', '#2C3642', '#F5F5F8', 'grayDarkest'],
+                ['近黑', '#1C232A', '#F5F5F8', 'nearBlack'],
             ]},
             { title: '主色 · 交互色', items: [
-                ['粉红 (常态)', '#FF648B', '#fff'],
-                ['粉红 (按下)', '#E83F86', '#fff'],
-                ['粉红 (深)', '#D1335B', '#fff'],
-                ['红 (常态)', '#F13242', '#fff'],
-                ['红 (亮)', '#FF4C65', '#fff']
+                ['粉红 (常态)', '#FF648B', '#fff', 'primary'],
+                ['粉红 (按下)', '#E83F86', '#fff', 'primaryPress'],
+                ['粉红 (深)', '#D1335B', '#fff', 'primaryDeep'],
+                ['红 (常态)', '#F13242', '#fff', 'primaryRed'],
+                ['红 (亮)', '#FF4C65', '#fff', 'primaryRedBright'],
             ]},
             { title: '辅助色 · 暖色点缀', items: [
-                ['橙 (常态)', '#FF875A', '#fff'],
-                ['橙 (亮)', '#FFB700', '#1F2430']
+                ['橙 (常态)', '#FF875A', '#fff', 'accentOrange'],
+                ['橙 (亮)', '#FFB700', '#1F2430', 'accentOrangeBright'],
             ]},
             { title: '辅助色 · 冷色/功能', items: [
-                ['绿', '#03BD5B', '#fff'],
-                ['青', '#03BCBD', '#fff'],
-                ['天蓝 (常态)', '#00AFDE', '#fff'],
-                ['蓝 (常态)', '#339AF0', '#fff'],
-                ['蓝 (深)', '#009FD0', '#fff'],
-                ['蓝 (更深)', '#0081D5', '#fff'],
-                ['紫蓝', '#4C6EF5', '#fff'],
-                ['紫', '#7950F2', '#fff'],
-                ['紫 (粉)', '#A939B9', '#fff'],
-                ['紫 (亮)', '#CC5DE8', '#fff']
+                ['绿', '#03BD5B', '#fff', 'accentGreen'],
+                ['青', '#03BCBD', '#fff', 'accentCyan'],
+                ['天蓝 (常态)', '#00AFDE', '#fff', 'accentSkyBlue'],
+                ['蓝 (常态)', '#339AF0', '#fff', 'accentBlue'],
+                ['蓝 (深)', '#009FD0', '#fff', 'accentBlueDeep'],
+                ['蓝 (更深)', '#0081D5', '#fff', 'accentBlueDeeper'],
+                ['紫蓝', '#4C6EF5', '#fff', 'accentIndigo'],
+                ['紫', '#7950F2', '#fff', 'accentPurple'],
+                ['紫 (粉)', '#A939B9', '#fff', 'accentMagenta'],
+                ['紫 (亮)', '#CC5DE8', '#fff', 'accentPurpleBright'],
             ]},
             { title: '文本 & 功能色', items: [
-                ['主文字 (深底)', '#F5F5F8', '#2C3642', true],
-                ['次文字 (深底)', '#9A9AA8', '#2C3642', true],
-                ['高亮数值', '#FFB700', '#1F2430'],
-                ['成功', '#03BD5B', '#fff'],
-                ['警告', '#FFB700', '#1F2430'],
-                ['危险', '#F13242', '#fff'],
-                ['半透明遮罩', '#00000080', '#fff']
+                ['主文字 (深底)', '#F5F5F8', '#2C3642', 'textPrimary'],
+                ['次文字 (深底)', '#9A9AA8', '#2C3642', 'textSecondary'],
+                ['高亮数值', '#FFB700', '#1F2430', 'textHighlight'],
+                ['成功', '#03BD5B', '#fff', 'success'],
+                ['警告', '#FFB700', '#1F2430', 'warning'],
+                ['危险', '#F13242', '#fff', 'danger'],
+                ['半透明遮罩', '#00000080', '#fff', 'overlay'],
             ]}
         ],
         demoBg: '#374355',
@@ -659,10 +659,10 @@ function hexToRgb(hex) {
 function exportTs(scheme) {
     let lines = [`// ${scheme.title} 配色方案 · 自动生成`, `export const ColorScheme = {`];
     const used = new Set();
-    scheme.groups.forEach((g, gIdx) => {
+    scheme.groups.forEach(g => {
         lines.push(`  // ${g.title}`);
-        g.items.forEach((it, iIdx) => {
-            let key = toCamel(it[0]) || `color${gIdx}_${iIdx}`;
+        g.items.forEach(it => {
+            let key = it[3] || toCamel(it[0]) || 'color';
             let uniqueKey = key;
             let counter = 1;
             while (used.has(uniqueKey)) {
@@ -680,10 +680,11 @@ function exportTs(scheme) {
 function exportCsharp(scheme) {
     let lines = [`// ${scheme.title} 配色方案 · 自动生成`, `using UnityEngine;`, ``, `public static class ColorScheme`, `{`];
     const used = new Set();
-    scheme.groups.forEach((g, gIdx) => {
+    scheme.groups.forEach(g => {
         lines.push(`    // ${g.title}`);
-        g.items.forEach((it, iIdx) => {
-            let key = toPascal(it[0]) || `Color${gIdx}_${iIdx}`;
+        g.items.forEach(it => {
+            let raw = it[3] || toPascal(it[0]) || 'Color';
+            let key = raw.charAt(0).toUpperCase() + raw.slice(1);
             let uniqueKey = key;
             let counter = 1;
             while (used.has(uniqueKey)) {
