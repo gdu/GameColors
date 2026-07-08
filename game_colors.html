@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 独立游戏 · 终极 UI 配色系统</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #111116;
+            color: #e8e8ed;
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            padding: 0 0 60px;
+        }
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #17171d;
+            border-bottom: 1px solid #2a2a33;
+            padding: 14px 20px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .topbar .brand {
+            font-weight: 600;
+            font-size: 15px;
+            margin-right: 12px;
+            color: #fff;
+            letter-spacing: 0.3px;
+        }
+        .topbar .brand span {
+            color: #9a9aa8;
+            font-weight: 400;
+            font-size: 12px;
+            margin-left: 6px;
+        }
+        .tab {
+            background: #22222a;
+            color: #9a9aa8;
+            border: none;
+            border-radius: 8px;
+            padding: 9px 16px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background .15s, color .15s;
+        }
+        .tab.active {
+            background: #3d3d4a;
+            color: #fff;
+            font-weight: 600;
+        }
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 20px 0;
+        }
+        .scheme {
+            display: none;
+        }
+        .scheme.active {
+            display: block;
+        }
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 4px;
+        }
+        .scene {
+            color: #9a9aa8;
+            font-size: 13px;
+            margin: 0 0 30px;
+        }
+        .scene b {
+            color: #e8e8ed;
+        }
+        h2 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #2c2c38;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h2 .badge {
+            font-size: 11px;
+            font-weight: 400;
+            color: #9a9aa8;
+            background: #22222a;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+        section {
+            margin-bottom: 32px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+            gap: 10px;
+        }
+        .swatch {
+            border-radius: 10px;
+            padding: 13px 12px;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform .12s ease, box-shadow .15s;
+            user-select: none;
+        }
+        .swatch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+        }
+        .swatch .name {
+            font-size: 11.5px;
+            font-weight: 600;
+            margin-bottom: 22px;
+            opacity: .9;
+            word-break: break-word;
+        }
+        .swatch .hex {
+            font-size: 11.5px;
+            font-family: "SF Mono", Consolas, monospace;
+            opacity: .85;
+        }
+        .swatch .copied {
+            position: absolute;
+            top: 7px;
+            right: 9px;
+            font-size: 10px;
+            background: rgba(0,0,0,0.35);
+            padding: 2px 8px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity .15s;
+        }
+        .swatch.flash .copied {
+            opacity: 1;
+        }
+
+        /* 导出按钮 */
+        .export-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .export-btn {
+            background: #3d3d4a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 9px 16px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background .15s;
+            white-space: nowrap;
+        }
+        .export-btn:hover {
+            background: #525266;
+        }
+        .export-btn.copied {
+            background: #2d7a4a;
+        }
+
+        /* 演示面板 */
+        .demo-panel {
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 4px;
+        }
+        .demo-panel.pixel {
+            border: 3px solid #000;
+            border-radius: 0;
+        }
+        .demo-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        button.demo {
+            border: none;
+            border-radius: 10px;
+            padding: 11px 20px;
+            font-size: 13px;
+            color: #fff;
+            cursor: default;
+            font-family: inherit;
+        }
+        button.demo.pixel {
+            border: 3px solid #000;
+            border-radius: 0;
+            box-shadow: 3px 3px 0 #000;
+        }
+        .tag {
+            border-radius: 8px;
+            padding: 8px 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .tag.pixel {
+            border: 2px solid #000;
+            border-radius: 0;
+        }
+
+        /* 通用系统色区域 */
+        .universal-section {
+            margin-top: 8px;
+            border-top: 1px solid #2a2a33;
+            padding-top: 28px;
+        }
+        .universal-section .grid {
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        }
+        .footnote {
+            text-align: center;
+            color: #5a5a68;
+            font-size: 12px;
+            max-width: 1100px;
+            margin: 40px auto 0;
+            padding: 0 20px;
+            border-top: 1px solid #1e1e26;
+            padding-top: 24px;
+        }
+        .footnote code {
+            background: #26262f;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .topbar .brand { font-size: 13px; margin-right: 6px; }
+            .tab { padding: 6px 12px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar" id="tabsContainer">
+    <div class="brand">🎮 配色系统 <span>独立游戏</span></div>
+    <!-- tabs 由 js 动态生成 -->
+</div>
+
+<div class="wrap" id="contentContainer">
+    <!-- 配色方案面板由 js 动态生成 -->
+</div>
+
+<!-- 通用系统色 (稀有度 / 战斗反馈) -->
+<div class="wrap universal-section" id="universalContainer">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px;">
+        <h1 style="font-size:20px;margin:0;">⚙️ 通用系统色</h1>
+        <span style="font-size:12px;color:#9a9aa8;background:#22222a;padding:3px 12px;border-radius:6px;">行业惯例 · 直接套用</span>
+    </div>
+    <p class="scene" style="margin-bottom:20px;">这两组颜色与美术风格无关，是玩家已经形成认知的<strong>功能色</strong>，不建议自创。</p>
+
+    <section>
+        <h2>🏷️ 稀有度 / 品级 <span class="badge">装备 · 卡牌 · 抽卡</span></h2>
+        <div class="grid" id="rarityGrid"></div>
+    </section>
+
+    <section>
+        <h2>⚡ 战斗数值反馈 <span class="badge">飘字 · 提示</span></h2>
+        <div class="grid" id="feedbackGrid"></div>
+    </section>
+</div>
+
+<div class="footnote">
+    点击任意色块复制 Hex · 点击「导出」可生成 Cocos TS 或 Unity C# 常量代码，直接用于工程。
+</div>
+
+<script>
+// --------------------------------------------------------------
+// 1. 配色方案定义 (融合两版优点)
+// --------------------------------------------------------------
+const schemes = [
+    // ---- 暖橙休闲 ----
+    {
+        id: 'orange',
+        name: '① 暖橙休闲',
+        title: '暖橙休闲',
+        scene: '适用于 <b>卡通消除、放置类、轻度休闲手游</b> —— 明快友好，降低焦虑感',
+        groups: [
+            { title: '中性色阶 · 背景/面板', items: [
+                ['全局背景', '#1A1A24', '#F5F5F8'],
+                ['次深背景', '#22222E', '#F5F5F8'],
+                ['面板底图', '#2C2C3A', '#F5F5F8'],
+                ['卡片底图', '#3A3A4A', '#F5F5F8'],
+                ['边框/分割线', '#52525F', '#F5F5F8'],
+                ['禁用底', '#9A9AA8', '#2C2C3A'],
+                ['浅色卡片底', '#F5F5F8', '#2C2C3A']
+            ]},
+            { title: '主色 · 暖橙按钮', items: [
+                ['常态', '#FF9F43', '#fff'],
+                ['悬浮', '#FFB35F', '#fff'],
+                ['按下', '#F58024', '#fff'],
+                ['阴影/边框', '#D9660F', '#fff'],
+                ['禁用', '#C99A6E', '#eee'],
+                ['浅底/选中', '#FFE8D1', '#8a5a1e']
+            ]},
+            { title: '辅助色 · 冷蓝', items: [
+                ['常态', '#4A90D9', '#fff'],
+                ['按下', '#3A75B0', '#fff']
+            ]},
+            { title: '文本 & 功能色', items: [
+                ['深底主文字', '#F5F5F8', '#2C2C3A', true],
+                ['深底次文字', '#9A9AA8', '#2C2C3A', true],
+                ['高亮数值', '#FFD43B', '#2C2C3A', true],
+                ['成功', '#4CD97B', '#0a3319'],
+                ['警告', '#FFC53D', '#402d00'],
+                ['危险', '#FF5A5F', '#3a0505']
+            ]}
+        ],
+        demoBg: '#2C2C3A',
+        demo: [['#FF9F43', '常态'], ['#F58024', '按下'], ['#4A90D9', '次要'], ['#C99A6E', '禁用']],
+        tags: [['#4CD97B', '#0a3319', '成功'], ['#FFC53D', '#402d00', '警告'], ['#FF5A5F', '#3a0505', '危险']],
+        demoText: ['#F5F5F8', '#9A9AA8', '#FFD43B']
+    },
+
+    // ---- 极简扁平 ----
+    {
+        id: 'minimal',
+        name: '② 极简扁平',
+        title: '极简扁平',
+        scene: '适用于 <b>解谜、棋牌、工具型、UI优先的游戏</b> —— 干净现代，通用性最强',
+        groups: [
+            { title: '中性色阶 · 背景/面板', items: [
+                ['全局背景', '#F4F5F7', '#1F2430'],
+                ['面板底图', '#FFFFFF', '#1F2430'],
+                ['卡片底图', '#EDEFF2', '#1F2430'],
+                ['边框/分割线', '#DCDFE4', '#1F2430']
+            ]},
+            { title: '主色 · 蓝色按钮', items: [
+                ['常态', '#4C6FFF', '#fff'],
+                ['悬浮', '#6483FF', '#fff'],
+                ['按下', '#3A56D4', '#fff'],
+                ['阴影/边框', '#2A3F9E', '#fff']
+            ]},
+            { title: '辅助色 · 青绿', items: [
+                ['常态', '#2BBBAD', '#fff'],
+                ['按下', '#1F9088', '#fff']
+            ]},
+            { title: '文本 & 功能色', items: [
+                ['主文字', '#1F2430', '#EDEFF2', true],
+                ['次要文字', '#7A8194', '#EDEFF2', true],
+                ['强调高亮', '#FF9F1C', '#EDEFF2', true],
+                ['成功', '#34C759', '#0a2e12'],
+                ['警告', '#FFB020', '#402d00'],
+                ['危险', '#FF3B30', '#fff']
+            ]}
+        ],
+        demoBg: '#FFFFFF',
+        demo: [['#4C6FFF', '常态'], ['#3A56D4', '按下'], ['#2BBBAD', '次要']],
+        tags: [['#34C759', '#0a2e12', '成功'], ['#FFB020', '#402d00', '警告'], ['#FF3B30', '#fff', '危险']],
+        demoText: ['#1F2430', '#7A8194', '#FF9F1C']
+    },
+
+    // ---- 自然治愈 ----
+    {
+        id: 'nature',
+        name: '③ 自然治愈',
+        title: '自然治愈',
+        scene: '适用于 <b>模拟经营、放置类、田园/探险题材</b> —— 米黄纸感，温暖不刺眼',
+        groups: [
+            { title: '中性色阶 · 背景/面板', items: [
+                ['全局背景(米黄纸感)', '#EFEAD8', '#3B3223'],
+                ['面板底图', '#F7F3E3', '#3B3223'],
+                ['卡片底图', '#E3DCC0', '#3B3223'],
+                ['边框/分割线', '#C9BD94', '#3B3223']
+            ]},
+            { title: '主色 · 森林绿按钮', items: [
+                ['常态', '#6B9E4E', '#fff'],
+                ['悬浮', '#7FB562', '#fff'],
+                ['按下', '#557E3D', '#fff'],
+                ['阴影/边框', '#3F5E2C', '#fff']
+            ]},
+            { title: '辅助色 · 赭石棕', items: [
+                ['常态', '#B87A3D', '#fff'],
+                ['按下', '#96602C', '#fff']
+            ]},
+            { title: '文本 & 功能色', items: [
+                ['主文字', '#3B3223', '#F7F3E3', true],
+                ['次要文字', '#8A8064', '#F7F3E3', true],
+                ['阳光高亮', '#E8B93A', '#3B3223', true],
+                ['成功', '#6B9E4E', '#fff'],
+                ['警告', '#E8B93A', '#3B3223'],
+                ['危险', '#C1502E', '#fff']
+            ]}
+        ],
+        demoBg: '#F7F3E3',
+        demo: [['#6B9E4E', '常态'], ['#557E3D', '按下'], ['#B87A3D', '次要']],
+        tags: [['#6B9E4E', '#fff', '成功'], ['#E8B93A', '#3B3223', '警告'], ['#C1502E', '#fff', '危险']],
+        demoText: ['#3B3223', '#8A8064', '#E8B93A']
+    },
+
+    // ---- 斑驳拓荒 (像素风) ----
+    {
+        id: 'custompal',
+        name: '④ 斑驳拓荒',
+        title: '斑驳拓荒',
+        scene: '适用于 <b>生存建造、荒野拓荒、末日废土</b> —— 做旧颗粒感，暖橙点缀交互',
+        pixel: true,
+        groups: [
+            { title: '中性色阶 · 背景/面板', items: [
+                ['全局背景', '#010108', '#FFFFF6'],
+                ['次深背景', '#354048', '#FFFFF6'],
+                ['面板底图', '#40374B', '#FFFFF6'],
+                ['卡片底图', '#524541', '#FFFFF6'],
+                ['硬边框(黑)', '#000000', '#FFFFF6'],
+                ['禁用底', '#939393', '#2C2C2A']
+            ]},
+            { title: '主色 · 暖橙黄按钮', items: [
+                ['常态', '#FFC848', '#3A2400'],
+                ['悬浮', '#FFEE79', '#3A2400'],
+                ['按下', '#FDA500', '#3A2400'],
+                ['阴影/边框', '#9A5400', '#fff']
+            ]},
+            { title: '辅助色 · 冷蓝', items: [
+                ['常态', '#3089E0', '#fff'],
+                ['按下', '#26556F', '#fff']
+            ]},
+            { title: '文本 & 功能色', items: [
+                ['主文字(暖白)', '#FFFFF6', '#354048', true],
+                ['次要文字', '#DAD7C9', '#354048', true],
+                ['高亮数值', '#FAFCA0', '#354048', true],
+                ['成功', '#1CA455', '#fff'],
+                ['警告', '#DFC50B', '#3A2400'],
+                ['危险', '#DA1625', '#fff']
+            ]},
+            { title: '色板专属点缀色', items: [
+                ['紫', '#AF77F9', '#fff'],
+                ['粉', '#F77DB7', '#fff'],
+                ['青', '#75E2EF', '#0F1B1D']
+            ]}
+        ],
+        demoBg: '#40374B',
+        demo: [['#FFC848', '常态'], ['#FDA500', '按下'], ['#3089E0', '次要']],
+        tags: [['#1CA455', '#fff', '成功'], ['#DFC50B', '#3A2400', '警告'], ['#DA1625', '#fff', '危险']],
+        demoText: ['#FFFFF6', '#DAD7C9', '#FAFCA0']
+    }
+];
+
+// --------------------------------------------------------------
+// 2. 通用系统色数据
+// --------------------------------------------------------------
+const rarityColors = [
+    ['普通 Common', '#8A8A94', '#fff'],
+    ['优秀 Uncommon', '#3DDC5C', '#0a2e12'],
+    ['稀有 Rare', '#3E9CFF', '#fff'],
+    ['史诗 Epic', '#A855F7', '#fff'],
+    ['传说 Legendary', '#FF9F1C', '#3a2400'],
+    ['神话 Mythic', '#FF3B3B', '#fff']
+];
+const feedbackColors = [
+    ['普通伤害', '#FFFFFF', '#333'],
+    ['暴击伤害', '#FFD93D', '#402d00'],
+    ['治疗回复', '#4CD97B', '#0a3319'],
+    ['经验获得', '#7B61FF', '#fff'],
+    ['金币/资源', '#FFD43B', '#402d00'],
+    ['金牌', '#FFD700', '#3a2c00'],
+    ['银牌', '#C0C0C0', '#333'],
+    ['铜牌', '#CD7F32', '#fff']
+];
+
+// --------------------------------------------------------------
+// 3. 渲染函数
+// --------------------------------------------------------------
+function renderSwatchGrid(containerId, list) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = '';
+    list.forEach(([name, hex, fg]) => {
+        let border = '';
+        if (hex.toUpperCase() === '#FFFFFF') border = 'border:1px solid #ccc;';
+        const div = document.createElement('div');
+        div.className = 'swatch';
+        div.style.cssText = `background:${hex};color:${fg};${border}`;
+        div.setAttribute('data-hex', hex);
+        div.innerHTML = `
+            <div class="name">${name}</div>
+            <div class="hex">${hex}</div>
+            <span class="copied">已复制</span>
+        `;
+        el.appendChild(div);
+    });
+}
+
+// 渲染通用色
+renderSwatchGrid('rarityGrid', rarityColors);
+renderSwatchGrid('feedbackGrid', feedbackColors);
+
+// --------------------------------------------------------------
+// 4. 生成配色面板 + Tab
+// --------------------------------------------------------------
+const tabsContainer = document.getElementById('tabsContainer');
+const contentContainer = document.getElementById('contentContainer');
+
+schemes.forEach((s, idx) => {
+    // ---- Tab ----
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (idx === 0 ? ' active' : '');
+    btn.textContent = s.name;
+    btn.dataset.schemeId = s.id;
+    btn.onclick = () => switchScheme(s.id);
+    tabsContainer.appendChild(btn);
+
+    // ---- Panel ----
+    const panel = document.createElement('div');
+    panel.className = 'scheme' + (idx === 0 ? ' active' : '');
+    panel.id = 'scheme-' + s.id;
+
+    let html = `
+        <div class="panel-header">
+            <div>
+                <h1>${s.title}</h1>
+                <p class="scene" style="margin-bottom:0;">${s.scene}</p>
+            </div>
+            <div class="export-group">
+                <button class="export-btn" data-scheme-index="${idx}" data-target="ts">📄 导出 TS 常量</button>
+                <button class="export-btn" data-scheme-index="${idx}" data-target="csharp">📄 导出 C# 常量</button>
+            </div>
+        </div>
+    `;
+
+    s.groups.forEach(g => {
+        html += `<section><h2>${g.title}</h2><div class="grid">`;
+        g.items.forEach(it => {
+            const [name, hex, fg] = it;
+            let border = (hex.toUpperCase() === '#FFFFFF') ? 'border:1px solid #ccc;' : '';
+            if (s.pixel) border = 'border:2px solid #000;border-radius:0;';
+            html += `
+                <div class="swatch" style="background:${hex};color:${fg};${border}" data-hex="${hex}">
+                    <div class="name">${name}</div>
+                    <div class="hex">${hex}</div>
+                    <span class="copied">已复制</span>
+                </div>
+            `;
+        });
+        html += `</div></section>`;
+    });
+
+    // 组合预览
+    const pixelClass = s.pixel ? 'pixel' : '';
+    const btnClass = s.pixel ? 'demo pixel' : 'demo';
+    const tagClass = s.pixel ? 'tag pixel' : 'tag';
+
+    html += `<section><h2>🧩 组合效果预览</h2>
+        <div class="demo-panel ${pixelClass}" style="background:${s.demoBg}">
+            <div class="demo-row">`;
+    s.demo.forEach(d => {
+        html += `<button class="${btnClass}" style="background:${d[0]}">${d[1]}按钮</button>`;
+    });
+    html += `</div><div class="demo-row">`;
+    s.tags.forEach(t => {
+        html += `<span class="${tagClass}" style="background:${t[0]};color:${t[1]}">${t[2]}提示</span>`;
+    });
+    html += `</div>
+        <p style="color:${s.demoText[0]};font-size:16px;margin:0 0 4px">面板主文字示例</p>
+        <p style="color:${s.demoText[1]};font-size:13px;margin:0 0 8px">次要说明文字，用于描述或提示</p>
+        <p style="color:${s.demoText[2]};font-size:18px;margin:0">数值高亮 9,999</p>
+    </div></section>`;
+
+    panel.innerHTML = html;
+    contentContainer.appendChild(panel);
+});
+
+// --------------------------------------------------------------
+// 5. Tab 切换
+// --------------------------------------------------------------
+function switchScheme(id) {
+    document.querySelectorAll('.tab').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.schemeId === id);
+    });
+    document.querySelectorAll('.scheme').forEach(p => {
+        p.classList.toggle('active', p.id === 'scheme-' + id);
+    });
+}
+
+// --------------------------------------------------------------
+// 6. 导出功能 (TS / C#)
+// --------------------------------------------------------------
+function toCamel(str) {
+    return str.replace(/[()（）·/]/g, ' ').trim().split(/\s+/).map(w => w.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '')).join('');
+}
+function toPascal(str) {
+    const camel = toCamel(str);
+    if (!camel) return 'Color';
+    return camel.charAt(0).toUpperCase() + camel.slice(1);
+}
+function hexToRgb(hex) {
+    hex = hex.replace('#', '');
+    return [parseInt(hex.substring(0,2),16), parseInt(hex.substring(2,4),16), parseInt(hex.substring(4,6),16)];
+}
+
+function exportTs(scheme) {
+    let lines = [`// ${scheme.title} 配色方案 · 自动生成`, `export const ColorScheme = {`];
+    scheme.groups.forEach(g => {
+        lines.push(`  // ${g.title}`);
+        g.items.forEach(it => {
+            const key = toCamel(it[0]) || 'color';
+            lines.push(`  ${key}: '${it[1]}',`);
+        });
+    });
+    lines.push(`};`);
+    return lines.join('\n');
+}
+
+function exportCsharp(scheme) {
+    let lines = [`// ${scheme.title} 配色方案 · 自动生成`, `using UnityEngine;`, ``, `public static class ColorScheme`, `{`];
+    scheme.groups.forEach(g => {
+        lines.push(`    // ${g.title}`);
+        g.items.forEach(it => {
+            const key = toPascal(it[0]) || 'Color';
+            const [r, g2, b] = hexToRgb(it[1]);
+            lines.push(`    public static readonly Color32 ${key} = new Color32(${r}, ${g2}, ${b}, 255);`);
+        });
+    });
+    lines.push(`}`);
+    return lines.join('\n');
+}
+
+// 导出按钮点击事件 (委托)
+document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.export-btn');
+    if (!btn) return;
+    const idx = parseInt(btn.dataset.schemeIndex);
+    const scheme = schemes[idx];
+    if (!scheme) return;
+
+    let text = '';
+    if (btn.dataset.target === 'ts') {
+        text = exportTs(scheme);
+    } else {
+        text = exportCsharp(scheme);
+    }
+
+    navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = '✅ 已复制';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = orig;
+            btn.classList.remove('copied');
+        }, 1800);
+    }).catch(() => {});
+});
+
+// --------------------------------------------------------------
+// 7. 点击色块复制 Hex
+// --------------------------------------------------------------
+document.addEventListener('click', function(e) {
+    const sw = e.target.closest('.swatch');
+    if (!sw) return;
+    const hex = sw.getAttribute('data-hex');
+    if (!hex) return;
+    navigator.clipboard.writeText(hex).catch(() => {});
+    sw.classList.add('flash');
+    setTimeout(() => sw.classList.remove('flash'), 900);
+});
+</script>
+</body>
+</html>
