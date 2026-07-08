@@ -156,7 +156,6 @@
             opacity: 1;
         }
 
-        /* 导出按钮 */
         .export-group {
             display: flex;
             gap: 8px;
@@ -181,7 +180,6 @@
             background: #2d7a4a;
         }
 
-        /* 演示面板 */
         .demo-panel {
             border-radius: 14px;
             padding: 20px;
@@ -222,7 +220,6 @@
             border-radius: 0;
         }
 
-        /* 通用系统色区域 */
         .universal-section {
             margin-top: 8px;
             border-top: 1px solid #2a2a33;
@@ -258,14 +255,10 @@
 
 <div class="topbar" id="tabsContainer">
     <div class="brand">🎮 配色系统 <span>独立游戏</span></div>
-    <!-- tabs 由 js 动态生成 -->
 </div>
 
-<div class="wrap" id="contentContainer">
-    <!-- 配色方案面板由 js 动态生成 -->
-</div>
+<div class="wrap" id="contentContainer"></div>
 
-<!-- 通用系统色 (稀有度 / 战斗反馈) -->
 <div class="wrap universal-section" id="universalContainer">
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px;">
         <h1 style="font-size:20px;margin:0;">⚙️ 通用系统色</h1>
@@ -290,7 +283,7 @@
 
 <script>
 // --------------------------------------------------------------
-// 1. 配色方案定义 (融合两版优点)
+// 1. 配色方案定义 (包含从 Unity 调色板导入的 "冷色专业")
 // --------------------------------------------------------------
 const schemes = [
     // ---- 暖橙休闲 ----
@@ -456,6 +449,61 @@ const schemes = [
         demo: [['#FFC848', '常态'], ['#FDA500', '按下'], ['#3089E0', '次要']],
         tags: [['#1CA455', '#fff', '成功'], ['#DFC50B', '#3A2400', '警告'], ['#DA1625', '#fff', '危险']],
         demoText: ['#FFFFF6', '#DAD7C9', '#FAFCA0']
+    },
+
+    // ---- ⑤ 冷色专业 (从 Unity 调色板导入) ----
+    {
+        id: 'coolpro',
+        name: '⑤ 冷色专业',
+        title: '冷色专业',
+        scene: '适用于 <b>策略、科幻、管理模拟、或冷峻叙事风格</b> —— 源自 Unity 调色板，沉稳冷静',
+        groups: [
+            { title: '中性灰阶 · 背景/面板', items: [
+                ['纯白', '#FFFFFF', '#1F2430'],
+                ['极浅灰', '#EBF0F3', '#1F2430'],
+                ['浅灰', '#C9D3DF', '#1F2430'],
+                ['中浅灰', '#AFBCCD', '#1F2430'],
+                ['中灰', '#8393A7', '#1F2430'],
+                ['中深灰', '#5B6E88', '#1F2430'],
+                ['深灰', '#51627D', '#F5F5F8'],
+                ['更深灰', '#3D4D65', '#F5F5F8'],
+                ['深灰蓝', '#374355', '#F5F5F8'],
+                ['暗灰', '#2C3642', '#F5F5F8'],
+                ['近黑', '#1C232A', '#F5F5F8']
+            ]},
+            { title: '主色 · 交互色', items: [
+                ['粉红 (常态)', '#FF648B', '#fff'],
+                ['粉红 (按下)', '#E83F86', '#fff'],
+                ['粉红 (深)', '#D1335B', '#fff'],
+                ['红 (常态)', '#F13242', '#fff'],
+                ['红 (亮)', '#FF4C65', '#fff']
+            ]},
+            { title: '辅助色 · 暖色点缀', items: [
+                ['橙 (常态)', '#FF875A', '#fff'],
+                ['橙 (亮)', '#FFB700', '#1F2430']
+            ]},
+            { title: '辅助色 · 冷色/功能', items: [
+                ['绿', '#03BD5B', '#fff'],
+                ['青', '#03BCBD', '#fff'],
+                ['天蓝 (常态)', '#00AFDE', '#fff'],
+                ['蓝 (常态)', '#339AF0', '#fff'],
+                ['蓝 (深)', '#009FD0', '#fff'],
+                ['蓝 (更深)', '#0081D5', '#fff'],
+                ['紫蓝', '#4C6EF5', '#fff'],
+                ['紫', '#7950F2', '#fff'],
+                ['紫 (粉)', '#A939B9', '#fff'],
+                ['紫 (亮)', '#CC5DE8', '#fff']
+            ]},
+            { title: '文本 & 功能色', items: [
+                ['主文字 (深底)', '#F5F5F8', '#2C3642', true],
+                ['次文字 (深底)', '#9A9AA8', '#2C3642', true],
+                ['半透明遮罩', '#00000080', '#fff']
+            ]}
+        ],
+        demoBg: '#374355',
+        demo: [['#FF648B', '常态'], ['#E83F86', '按下'], ['#339AF0', '次要'], ['#FFB700', '高亮']],
+        tags: [['#03BD5B', '#fff', '成功'], ['#FFB700', '#1F2430', '警告'], ['#F13242', '#fff', '危险']],
+        demoText: ['#F5F5F8', '#9A9AA8', '#FFB700']
     }
 ];
 
@@ -504,7 +552,6 @@ function renderSwatchGrid(containerId, list) {
     });
 }
 
-// 渲染通用色
 renderSwatchGrid('rarityGrid', rarityColors);
 renderSwatchGrid('feedbackGrid', feedbackColors);
 
@@ -558,7 +605,6 @@ schemes.forEach((s, idx) => {
         html += `</div></section>`;
     });
 
-    // 组合预览
     const pixelClass = s.pixel ? 'pixel' : '';
     const btnClass = s.pixel ? 'demo pixel' : 'demo';
     const tagClass = s.pixel ? 'tag pixel' : 'tag';
@@ -638,7 +684,6 @@ function exportCsharp(scheme) {
     return lines.join('\n');
 }
 
-// 导出按钮点击事件 (委托)
 document.addEventListener('click', function(e) {
     const btn = e.target.closest('.export-btn');
     if (!btn) return;
@@ -664,9 +709,6 @@ document.addEventListener('click', function(e) {
     }).catch(() => {});
 });
 
-// --------------------------------------------------------------
-// 7. 点击色块复制 Hex
-// --------------------------------------------------------------
 document.addEventListener('click', function(e) {
     const sw = e.target.closest('.swatch');
     if (!sw) return;
