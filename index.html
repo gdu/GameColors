@@ -79,15 +79,19 @@
         h1 {
             font-size: 20px;
             font-weight: 600;
-            margin: 0 0 4px;
+            margin: 0;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .scene {
             color: #9a9aa8;
-            font-size: 13px;
-            margin: 0 0 30px;
+            font-size: 12.5px;
+            font-weight: 400;
         }
         .scene b {
-            color: #e8e8ed;
+            color: #b0b0ba;
         }
         h2 {
             font-size: 14px;
@@ -554,9 +558,9 @@ const schemes = [
         id: 'orange',
         name: '① 暖橙休闲',
         title: '暖橙休闲',
-        scene: '适用于 <b>卡通消除、放置类、轻度休闲手游</b> —— 明快友好，降低焦虑感',
+        scene: '<b>卡通消除、放置类、轻度休闲</b> — 明快友好，降低焦虑感',
         groups: [
-            { title: '中性色阶 · 背景/面板', items: [
+            { title: '中性色阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
                 ['全局背景', '#1A1A24', '#F5F5F8', 'bgPrimary'],
                 ['次深背景', '#22222E', '#F5F5F8', 'bgSecondary'],
                 ['面板底图', '#2C2C3A', '#F5F5F8', 'panelBg'],
@@ -565,7 +569,7 @@ const schemes = [
                 ['禁用底', '#9A9AA8', '#2C2C3A', 'disabledBg'],
                 ['浅色卡片底', '#F5F5F8', '#2C2C3A', 'lightCardBg'],
             ]},
-            { title: '主色 · 暖橙按钮', items: [
+            { title: '主色 · 暖橙按钮', usage: '确认/主要操作', items: [
                 ['常态', '#FF9F43', '#fff', 'primary'],
                 ['悬浮', '#FFB35F', '#fff', 'primaryHover'],
                 ['按下', '#F58024', '#fff', 'primaryPress'],
@@ -573,11 +577,11 @@ const schemes = [
                 ['禁用', '#C99A6E', '#eee', 'primaryDisabled'],
                 ['浅底/选中', '#FFE8D1', '#8a5a1e', 'primaryLight'],
             ]},
-            { title: '辅助色 · 冷蓝', items: [
+            { title: '辅助色 · 冷蓝', usage: '取消/次要操作', items: [
                 ['常态', '#4A90D9', '#fff', 'accent'],
                 ['按下', '#3A75B0', '#fff', 'accentPress'],
             ]},
-            { title: '文本 & 功能色', items: [
+            { title: '文本 & 功能色', usage: '内容文字、状态提示', items: [
                 ['深底主文字', '#F5F5F8', '#2C2C3A', 'textPrimary'],
                 ['深底次文字', '#9A9AA8', '#2C2C3A', 'textSecondary'],
                 ['高亮数值', '#FFD43B', '#2C2C3A', 'textHighlight'],
@@ -606,27 +610,27 @@ const schemes = [
         id: 'darkgold',
         name: '② 暗金像素',
         title: '暗金像素',
-        scene: '适用于 <b>生存建造、荒野拓荒、末日废土</b> —— 暗沉大地色系，金色高光点缀交互',
+        scene: '<b>生存建造、荒野拓荒、末日废土</b> — 暗沉大地色系，金色高光点缀',
         groups: [
-            { title: '中性色阶 · 背景/面板', items: [
+            { title: '中性色阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
                 ['全局背景', '#010108', '#FFFFF6', 'bgPrimary'],
                 ['次深背景', '#354048', '#FFFFF6', 'bgSecondary'],
                 ['面板底图', '#40374B', '#FFFFF6', 'panelBg'],
                 ['卡片底图', '#524541', '#FFFFF6', 'cardBg'],
-                ['硬边框(黑)', '#000000', '#FFFFF6', 'border'],
+                ['硬边框', '#1A1210', '#FFFFF6', 'border'],
                 ['禁用底', '#939393', '#2C2C2A', 'disabledBg'],
             ]},
-            { title: '主色 · 暖橙黄按钮', items: [
+            { title: '主色 · 暖橙黄按钮', usage: '确认/主要操作', items: [
                 ['常态', '#FFC848', '#3A2400', 'primary'],
                 ['悬浮', '#FFEE79', '#3A2400', 'primaryHover'],
                 ['按下', '#FDA500', '#3A2400', 'primaryPress'],
                 ['阴影/边框', '#9A5400', '#fff', 'primaryBorder'],
             ]},
-            { title: '辅助色 · 冷蓝', items: [
+            { title: '辅助色 · 冷蓝', usage: '取消/次要操作', items: [
                 ['常态', '#3089E0', '#fff', 'accent'],
                 ['按下', '#26556F', '#fff', 'accentPress'],
             ]},
-            { title: '文本 & 功能色', items: [
+            { title: '文本 & 功能色', usage: '内容文字、状态提示', items: [
                 ['主文字(暖白)', '#FFFFF6', '#354048', 'textPrimary'],
                 ['次要文字', '#DAD7C9', '#354048', 'textSecondary'],
                 ['高亮数值', '#FAFCA0', '#354048', 'textHighlight'],
@@ -634,7 +638,7 @@ const schemes = [
                 ['警告', '#DFC50B', '#3A2400', 'warning'],
                 ['危险', '#DA1625', '#fff', 'danger'],
             ]},
-            { title: '色板专属点缀色', items: [
+            { title: '色板专属点缀色', usage: '稀有度、特效标记', items: [
                 ['紫', '#AF77F9', '#fff', 'accentPurple'],
                 ['粉', '#F77DB7', '#fff', 'accentPink'],
                 ['青', '#75E2EF', '#0F1B1D', 'accentCyan'],
@@ -660,9 +664,9 @@ const schemes = [
         id: 'coolpro',
         name: '③ 冷色专业',
         title: '冷色专业',
-        scene: '适用于 <b>策略、科幻、管理模拟、或冷峻叙事风格</b> —— 沉稳冷静的灰蓝色调',
+        scene: '<b>策略、科幻、管理模拟</b> — 沉稳冷静的灰蓝色调',
         groups: [
-            { title: '中性灰阶 · 背景/面板', items: [
+            { title: '中性灰阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
                 ['纯白', '#FFFFFF', '#1F2430', 'white'],
                 ['极浅灰', '#EBF0F3', '#1F2430', 'grayLightest'],
                 ['浅灰', '#C9D3DF', '#1F2430', 'grayLight'],
@@ -675,18 +679,18 @@ const schemes = [
                 ['暗灰', '#2C3642', '#F5F5F8', 'grayDarkest'],
                 ['近黑', '#1C232A', '#F5F5F8', 'nearBlack'],
             ]},
-            { title: '主色 · 交互色', items: [
+            { title: '主色 · 交互色', usage: '确认/主要操作', items: [
                 ['粉红 (常态)', '#FF648B', '#fff', 'primary'],
                 ['粉红 (按下)', '#E83F86', '#fff', 'primaryPress'],
                 ['粉红 (深)', '#D1335B', '#fff', 'primaryDeep'],
                 ['红 (常态)', '#F13242', '#fff', 'primaryRed'],
                 ['红 (亮)', '#FF4C65', '#fff', 'primaryRedBright'],
             ]},
-            { title: '辅助色 · 暖色点缀', items: [
+            { title: '辅助色 · 暖色点缀', usage: '高亮/强调标记', items: [
                 ['橙 (常态)', '#FF875A', '#fff', 'accentOrange'],
                 ['橙 (亮)', '#FFB700', '#1F2430', 'accentOrangeBright'],
             ]},
-            { title: '辅助色 · 冷色/功能', items: [
+            { title: '辅助色 · 冷色/功能', usage: '取消/次要操作、状态', items: [
                 ['绿', '#03BD5B', '#fff', 'accentGreen'],
                 ['青', '#03BCBD', '#fff', 'accentCyan'],
                 ['天蓝 (常态)', '#00AFDE', '#fff', 'accentSkyBlue'],
@@ -698,7 +702,7 @@ const schemes = [
                 ['紫 (粉)', '#A939B9', '#fff', 'accentMagenta'],
                 ['紫 (亮)', '#CC5DE8', '#fff', 'accentPurpleBright'],
             ]},
-            { title: '文本 & 功能色', items: [
+            { title: '文本 & 功能色', usage: '内容文字、状态提示', items: [
                 ['主文字 (深底)', '#F5F5F8', '#2C3642', 'textPrimary'],
                 ['次文字 (深底)', '#9A9AA8', '#2C3642', 'textSecondary'],
                 ['高亮数值', '#FFB700', '#1F2430', 'textHighlight'],
@@ -822,10 +826,7 @@ schemes.forEach((s, idx) => {
 
     let html = `
         <div class="panel-header">
-            <div>
-                <h1>${s.title}</h1>
-                <p class="scene" style="margin-bottom:0;">${s.scene}</p>
-            </div>
+            <h1>${s.title} <span class="scene">${s.scene}</span></h1>
             <div class="export-group">
                 <button class="export-btn" data-scheme-index="${idx}" data-target="ts">📄 导出 TS 常量</button>
                 <button class="export-btn" data-scheme-index="${idx}" data-target="csharp">📄 导出 C# 常量</button>
@@ -834,7 +835,8 @@ schemes.forEach((s, idx) => {
     `;
 
     s.groups.forEach(g => {
-        html += `<section><h2>${g.title}</h2><div class="grid">`;
+        const usageTag = g.usage ? `<span class="badge">${g.usage}</span>` : '';
+        html += `<section><h2>${g.title} ${usageTag}</h2><div class="grid">`;
         g.items.forEach(it => {
             const [name, hex, fg] = it;
             let border = (hex.toUpperCase() === '#FFFFFF') ? 'border:1px solid #ccc;' : '';
