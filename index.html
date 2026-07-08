@@ -136,7 +136,7 @@
         .swatch .name {
             font-size: 11.5px;
             font-weight: 600;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             opacity: .9;
             word-break: break-word;
         }
@@ -145,20 +145,7 @@
             font-family: "SF Mono", Consolas, monospace;
             opacity: .85;
         }
-        .swatch .ratio {
-            font-size: 10px;
-            opacity: 0.65;
-            margin-top: 2px;
-            font-family: "SF Mono", Consolas, monospace;
-        }
-        .swatch .ratio.low {
-            opacity: 1;
-            font-weight: 700;
-            background: rgba(255,80,60,0.2);
-            display: inline-block;
-            padding: 1px 6px;
-            border-radius: 4px;
-        }
+
         .swatch .copied {
             position: absolute;
             top: 7px;
@@ -751,34 +738,7 @@ const feedbackColors = [
 ];
 
 // --------------------------------------------------------------
-// 3. WCAG 对比度计算
-// --------------------------------------------------------------
-function hexToLinear(hex) {
-    hex = hex.replace('#', '');
-    const sRGB = parseInt(hex, 16);
-    const r = ((sRGB >> 16) & 0xff) / 255;
-    const g = ((sRGB >> 8) & 0xff) / 255;
-    const b = (sRGB & 0xff) / 255;
-    const linearize = c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-    return 0.2126 * linearize(r) + 0.7152 * linearize(g) + 0.0722 * linearize(b);
-}
-
-function contrastRatio(hex1, hex2) {
-    const l1 = hexToLinear(hex1);
-    const l2 = hexToLinear(hex2);
-    const lighter = Math.max(l1, l2);
-    const darker = Math.min(l1, l2);
-    return (lighter + 0.05) / (darker + 0.05);
-}
-
-function ratioHTML(bgHex, fgHex) {
-    const ratio = contrastRatio(bgHex, fgHex);
-    const cls = ratio < 4.5 ? ' class="low"' : '';
-    return `<div class="ratio${cls}">${ratio.toFixed(1)}:1</div>`;
-}
-
-// --------------------------------------------------------------
-// 4. 渲染函数
+// 3. 渲染函数
 // --------------------------------------------------------------
 function renderSwatchGrid(containerId, list) {
     const el = document.getElementById(containerId);
@@ -794,7 +754,6 @@ function renderSwatchGrid(containerId, list) {
         div.innerHTML = `
             <div class="name">${name}</div>
             <div class="hex">${hex}</div>
-            ${ratioHTML(hex, fg)}
             <span class="copied">已复制</span>
         `;
         el.appendChild(div);
@@ -805,7 +764,7 @@ renderSwatchGrid('rarityGrid', rarityColors);
 renderSwatchGrid('feedbackGrid', feedbackColors);
 
 // --------------------------------------------------------------
-// 5. 生成配色面板 + Tab
+// 4. 生成配色面板 + Tab
 // --------------------------------------------------------------
 const tabsContainer = document.getElementById('tabsContainer');
 const contentContainer = document.getElementById('contentContainer');
@@ -844,7 +803,6 @@ schemes.forEach((s, idx) => {
                 <div class="swatch" style="background:${hex};color:${fg};${border}" data-hex="${hex}">
                     <div class="name">${name}</div>
                     <div class="hex">${hex}</div>
-                    ${ratioHTML(hex, fg)}
                     <span class="copied">已复制</span>
                 </div>
             `;
@@ -971,7 +929,7 @@ schemes.forEach((s, idx) => {
 });
 
 // --------------------------------------------------------------
-// 6. Tab 切换
+// 5. Tab 切换
 // --------------------------------------------------------------
 function switchScheme(id) {
     document.querySelectorAll('.tab').forEach(btn => {
@@ -983,7 +941,7 @@ function switchScheme(id) {
 }
 
 // --------------------------------------------------------------
-// 7. 导出功能 (TS / C#)
+// 6. 导出功能 (TS / C#)
 // --------------------------------------------------------------
 function toCamel(str) {
     return str.replace(/[()（）·/]/g, ' ').trim().split(/\s+/).map(w => w.replace(/[^a-zA-Z0-9]/g, '')).filter(Boolean).join('');
