@@ -379,13 +379,12 @@ const schemes = [
         demoText: ['#3D4A5C', '#8A94A6', '#6C8CFF']
     },
 
-    // ---- ④ 斑驳拓荒 (像素风) ----
+    // ---- ④ 暗金像素 ----
     {
-        id: 'custompal',
-        name: '④ 斑驳拓荒',
-        title: '斑驳拓荒',
-        scene: '适用于 <b>生存建造、荒野拓荒、末日废土</b> —— 做旧颗粒感，暖橙点缀交互',
-        pixel: true,
+        id: 'darkgold',
+        name: '④ 暗金像素',
+        title: '暗金像素',
+        scene: '适用于 <b>生存建造、荒野拓荒、末日废土</b> —— 暗沉底色搭配金色高光，像素风格',
         groups: [
             { title: '中性色阶 · 背景/面板', items: [
                 ['全局背景', '#010108', '#FFFFF6'],
@@ -567,7 +566,6 @@ schemes.forEach((s, idx) => {
         g.items.forEach(it => {
             const [name, hex, fg] = it;
             let border = (hex.toUpperCase() === '#FFFFFF') ? 'border:1px solid #ccc;' : '';
-            if (s.pixel) border = 'border:2px solid #000;border-radius:0;';
             html += `
                 <div class="swatch" style="background:${hex};color:${fg};${border}" data-hex="${hex}">
                     <div class="name">${name}</div>
@@ -579,19 +577,15 @@ schemes.forEach((s, idx) => {
         html += `</div></section>`;
     });
 
-    const pixelClass = s.pixel ? 'pixel' : '';
-    const btnClass = s.pixel ? 'demo pixel' : 'demo';
-    const tagClass = s.pixel ? 'tag pixel' : 'tag';
-
     html += `<section><h2>🧩 组合效果预览</h2>
-        <div class="demo-panel ${pixelClass}" style="background:${s.demoBg}">
+        <div class="demo-panel" style="background:${s.demoBg}">
             <div class="demo-row">`;
     s.demo.forEach(d => {
-        html += `<button class="${btnClass}" style="background:${d[0]}">${d[1]}按钮</button>`;
+        html += `<button class="demo" style="background:${d[0]}">${d[1]}按钮</button>`;
     });
     html += `</div><div class="demo-row">`;
     s.tags.forEach(t => {
-        html += `<span class="${tagClass}" style="background:${t[0]};color:${t[1]}">${t[2]}提示</span>`;
+        html += `<span class="tag" style="background:${t[0]};color:${t[1]}">${t[2]}提示</span>`;
     });
     html += `</div>
         <p style="color:${s.demoText[0]};font-size:16px;margin:0 0 4px">面板主文字示例</p>
