@@ -141,6 +141,20 @@
             font-family: "SF Mono", Consolas, monospace;
             opacity: .85;
         }
+        .swatch .ratio {
+            font-size: 10px;
+            opacity: 0.65;
+            margin-top: 2px;
+            font-family: "SF Mono", Consolas, monospace;
+        }
+        .swatch .ratio.low {
+            opacity: 1;
+            font-weight: 700;
+            background: rgba(255,80,60,0.2);
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
         .swatch .copied {
             position: absolute;
             top: 7px;
@@ -185,10 +199,6 @@
             padding: 20px;
             margin-top: 4px;
         }
-        .demo-panel.pixel {
-            border: 3px solid #000;
-            border-radius: 0;
-        }
         .demo-row {
             display: flex;
             gap: 10px;
@@ -204,20 +214,11 @@
             cursor: default;
             font-family: inherit;
         }
-        button.demo.pixel {
-            border: 3px solid #000;
-            border-radius: 0;
-            box-shadow: 3px 3px 0 #000;
-        }
         .tag {
             border-radius: 8px;
             padding: 8px 15px;
             font-size: 12px;
             font-weight: 600;
-        }
-        .tag.pixel {
-            border: 2px solid #000;
-            border-radius: 0;
         }
 
         .universal-section {
@@ -283,7 +284,7 @@
 
 <script>
 // --------------------------------------------------------------
-// 1. 配色方案定义 (已移除「自然治愈」，拓展了「极简扁平」)
+// 1. 配色方案定义
 // --------------------------------------------------------------
 const schemes = [
     // ---- ① 暖橙休闲 ----
@@ -379,12 +380,12 @@ const schemes = [
         demoText: ['#3D4A5C', '#8A94A6', '#6C8CFF']
     },
 
-    // ---- ④ 暗金像素 ----
+    // ---- ③ 暗金像素 ----
     {
         id: 'darkgold',
-        name: '④ 暗金像素',
+        name: '③ 暗金像素',
         title: '暗金像素',
-        scene: '适用于 <b>生存建造、荒野拓荒、末日废土</b> —— 暗沉底色搭配金色高光，像素风格',
+        scene: '适用于 <b>生存建造、荒野拓荒、末日废土</b> —— 暗沉大地色系，金色高光点缀交互',
         groups: [
             { title: '中性色阶 · 背景/面板', items: [
                 ['全局背景', '#010108', '#FFFFF6'],
@@ -424,10 +425,10 @@ const schemes = [
         demoText: ['#FFFFF6', '#DAD7C9', '#FAFCA0']
     },
 
-    // ---- ⑤ 冷色专业 (从 Unity 调色板导入) ----
+    // ---- ④ 冷色专业 (从 Unity 调色板导入) ----
     {
         id: 'coolpro',
-        name: '⑤ 冷色专业',
+        name: '④ 冷色专业',
         title: '冷色专业',
         scene: '适用于 <b>策略、科幻、管理模拟、或冷峻叙事风格</b> —— 源自 Unity 调色板，沉稳冷静',
         groups: [
@@ -470,6 +471,10 @@ const schemes = [
             { title: '文本 & 功能色', items: [
                 ['主文字 (深底)', '#F5F5F8', '#2C3642', true],
                 ['次文字 (深底)', '#9A9AA8', '#2C3642', true],
+                ['高亮数值', '#FFB700', '#1F2430'],
+                ['成功', '#03BD5B', '#fff'],
+                ['警告', '#FFB700', '#1F2430'],
+                ['危险', '#F13242', '#fff'],
                 ['半透明遮罩', '#00000080', '#fff']
             ]}
         ],
@@ -503,7 +508,34 @@ const feedbackColors = [
 ];
 
 // --------------------------------------------------------------
-// 3. 渲染函数
+// 3. WCAG 对比度计算
+// --------------------------------------------------------------
+function hexToLinear(hex) {
+    hex = hex.replace('#', '');
+    const sRGB = parseInt(hex, 16);
+    const r = ((sRGB >> 16) & 0xff) / 255;
+    const g = ((sRGB >> 8) & 0xff) / 255;
+    const b = (sRGB & 0xff) / 255;
+    const linearize = c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    return 0.2126 * linearize(r) + 0.7152 * linearize(g) + 0.0722 * linearize(b);
+}
+
+function contrastRatio(hex1, hex2) {
+    const l1 = hexToLinear(hex1);
+    const l2 = hexToLinear(hex2);
+    const lighter = Math.max(l1, l2);
+    const darker = Math.min(l1, l2);
+    return (lighter + 0.05) / (darker + 0.05);
+}
+
+function ratioHTML(bgHex, fgHex) {
+    const ratio = contrastRatio(bgHex, fgHex);
+    const cls = ratio < 4.5 ? ' class="low"' : '';
+    return `<div class="ratio${cls}">${ratio.toFixed(1)}:1</div>`;
+}
+
+// --------------------------------------------------------------
+// 4. 渲染函数
 // --------------------------------------------------------------
 function renderSwatchGrid(containerId, list) {
     const el = document.getElementById(containerId);
@@ -519,6 +551,7 @@ function renderSwatchGrid(containerId, list) {
         div.innerHTML = `
             <div class="name">${name}</div>
             <div class="hex">${hex}</div>
+            ${ratioHTML(hex, fg)}
             <span class="copied">已复制</span>
         `;
         el.appendChild(div);
@@ -529,7 +562,7 @@ renderSwatchGrid('rarityGrid', rarityColors);
 renderSwatchGrid('feedbackGrid', feedbackColors);
 
 // --------------------------------------------------------------
-// 4. 生成配色面板 + Tab
+// 5. 生成配色面板 + Tab
 // --------------------------------------------------------------
 const tabsContainer = document.getElementById('tabsContainer');
 const contentContainer = document.getElementById('contentContainer');
@@ -570,6 +603,7 @@ schemes.forEach((s, idx) => {
                 <div class="swatch" style="background:${hex};color:${fg};${border}" data-hex="${hex}">
                     <div class="name">${name}</div>
                     <div class="hex">${hex}</div>
+                    ${ratioHTML(hex, fg)}
                     <span class="copied">已复制</span>
                 </div>
             `;
@@ -598,7 +632,7 @@ schemes.forEach((s, idx) => {
 });
 
 // --------------------------------------------------------------
-// 5. Tab 切换
+// 6. Tab 切换
 // --------------------------------------------------------------
 function switchScheme(id) {
     document.querySelectorAll('.tab').forEach(btn => {
@@ -610,7 +644,7 @@ function switchScheme(id) {
 }
 
 // --------------------------------------------------------------
-// 6. 导出功能 (TS / C#)
+// 7. 导出功能 (TS / C#)
 // --------------------------------------------------------------
 function toCamel(str) {
     return str.replace(/[()（）·/]/g, ' ').trim().split(/\s+/).map(w => w.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '')).join('');
@@ -627,10 +661,16 @@ function hexToRgb(hex) {
 
 function exportTs(scheme) {
     let lines = [`// ${scheme.title} 配色方案 · 自动生成`, `export const ColorScheme = {`];
+    const used = new Set();
     scheme.groups.forEach(g => {
         lines.push(`  // ${g.title}`);
+        const groupPrefix = toCamel(g.title.split('·')[0].trim());
         g.items.forEach(it => {
-            const key = toCamel(it[0]) || 'color';
+            let key = toCamel(it[0]) || 'color';
+            if (used.has(key)) {
+                key = groupPrefix + key.charAt(0).toUpperCase() + key.slice(1);
+            }
+            used.add(key);
             lines.push(`  ${key}: '${it[1]}',`);
         });
     });
@@ -640,10 +680,16 @@ function exportTs(scheme) {
 
 function exportCsharp(scheme) {
     let lines = [`// ${scheme.title} 配色方案 · 自动生成`, `using UnityEngine;`, ``, `public static class ColorScheme`, `{`];
+    const used = new Set();
     scheme.groups.forEach(g => {
         lines.push(`    // ${g.title}`);
+        const groupPrefix = toPascal(g.title.split('·')[0].trim());
         g.items.forEach(it => {
-            const key = toPascal(it[0]) || 'Color';
+            let key = toPascal(it[0]) || 'Color';
+            if (used.has(key)) {
+                key = groupPrefix + key;
+            }
+            used.add(key);
             const [r, g2, b] = hexToRgb(it[1]);
             lines.push(`    public static readonly Color32 ${key} = new Color32(${r}, ${g2}, ${b}, 255);`);
         });
