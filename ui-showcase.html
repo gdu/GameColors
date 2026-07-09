@@ -42,6 +42,9 @@
     --warning: #DFC50B;
     --danger: #DA1625;
 
+    /* 主色按钮上的文字（深色，保证在亮色 primary 上可读） */
+    --primary-fg: #3A2400;
+
     /* 点缀色 */
     --purple: #AF77F9;
     --pink: #F77DB7;
@@ -60,6 +63,76 @@
     --radius-md: 10px;
     --radius-lg: 14px;
     --radius-xl: 18px;
+}
+
+/* ============================================================
+   颜色方案切换器
+   ============================================================ */
+.theme-switcher {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(20,20,26,0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 8px 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.theme-switcher-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0 4px;
+    flex-shrink: 0;
+}
+.theme-swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: background .15s, color .15s, box-shadow .15s;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+.theme-swatch:hover {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+}
+.theme-swatch.active {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border-color: rgba(255,255,255,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.theme-swatch-dots {
+    display: inline-flex;
+    gap: 2px;
+}
+.theme-swatch-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.18) inset;
+}
+
+/* 主题切换时全局平滑过渡 */
+body, .card, .sidebar, .btn, .tag, .progress, .quest-item,
+.friend-card, .shop-item, .mail-item, .bag-slot, .warehouse-slot,
+.chat-msg-bubble, .tooltip-popup, .quick-card, .level-node,
+.achieve-medal, .pcard, .resource-item, .lobby-side-card {
+    transition: background-color .25s ease, border-color .25s ease,
+                color .25s ease, box-shadow .25s ease, filter .25s ease;
 }
 
 /* ============================================================
@@ -244,7 +317,7 @@ a { color: inherit; text-decoration: none; }
 .btn:active { transform: scale(0.97); }
 .btn-primary {
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
 }
 .btn-primary:hover { background: var(--primary-hover); }
 .btn-secondary {
@@ -434,7 +507,7 @@ a { color: inherit; text-decoration: none; }
     align-items: center;
     justify-content: center;
     font-size: 10px;
-    color: #3A2400;
+    color: var(--primary-fg);
     font-weight: 700;
 }
 .form-forgot {
@@ -445,7 +518,7 @@ a { color: inherit; text-decoration: none; }
     width: 100%;
     padding: 13px;
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
     border-radius: var(--radius-md);
     font-size: 14px;
     font-weight: 700;
@@ -512,7 +585,7 @@ a { color: inherit; text-decoration: none; }
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    color: #3A2400;
+    color: var(--primary-fg);
     font-weight: 700;
     flex-shrink: 0;
 }
@@ -584,7 +657,7 @@ a { color: inherit; text-decoration: none; }
     display: inline-block;
     padding: 3px 10px;
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
     border-radius: 10px;
     font-size: 11px;
     font-weight: 700;
@@ -747,7 +820,7 @@ a { color: inherit; text-decoration: none; }
 }
 .quest-tab.active {
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
 }
 .quest-tab:hover:not(.active) { color: var(--text-primary); }
 
@@ -881,7 +954,7 @@ a { color: inherit; text-decoration: none; }
 }
 .rank-tab.active {
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
     border-color: var(--primary);
 }
 
@@ -935,7 +1008,7 @@ a { color: inherit; text-decoration: none; }
 .rank-podium-rank {
     font-size: 11px;
     font-weight: 700;
-    color: #3A2400;
+    color: var(--primary-fg);
     padding: 4px 0;
 }
 
@@ -996,7 +1069,7 @@ a { color: inherit; text-decoration: none; }
 }
 .shop-cat.active {
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
     border-color: var(--primary);
 }
 .shop-cat:hover:not(.active) { color: var(--text-primary); border-color: var(--border-gold); }
@@ -1218,7 +1291,7 @@ a { color: inherit; text-decoration: none; }
     width: 100%;
     padding: 10px;
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
     border-radius: var(--radius-md);
     font-size: 13px;
     font-weight: 600;
@@ -1244,7 +1317,7 @@ a { color: inherit; text-decoration: none; }
 .mail-menu-badge {
     margin-left: auto;
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
     font-size: 10px;
     font-weight: 700;
     min-width: 16px;
@@ -1430,7 +1503,7 @@ a { color: inherit; text-decoration: none; }
 }
 .chat-msg.self .chat-msg-bubble {
     background: var(--primary);
-    color: #3A2400;
+    color: var(--primary-fg);
 }
 .chat-msg-name {
     font-size: 11px;
@@ -1438,7 +1511,7 @@ a { color: inherit; text-decoration: none; }
     color: var(--primary);
     margin-bottom: 4px;
 }
-.chat-msg.self .chat-msg-name { color: #3A2400; opacity: 0.7; }
+.chat-msg.self .chat-msg-name { color: var(--primary-fg); opacity: 0.7; }
 .chat-input-area {
     padding: 12px 16px;
     border-top: 1px solid var(--border-soft);
@@ -1890,13 +1963,20 @@ a { color: inherit; text-decoration: none; }
 <body>
 
 <!-- ============================================================
+     颜色方案切换器
+     ============================================================ -->
+<div class="theme-switcher" id="themeSwitcher">
+    <span class="theme-switcher-label">配色</span>
+</div>
+
+<!-- ============================================================
      侧边导航
      ============================================================ -->
 <div class="app-layout">
 <nav class="sidebar">
     <div class="sidebar-logo">
-        <h1>暗金 UI</h1>
-        <p>极简游戏界面库</p>
+        <h1>游戏 UI</h1>
+        <p>极简界面预览库</p>
     </div>
     <div class="sidebar-nav">
         <div class="nav-group-title">系统</div>
@@ -1955,7 +2035,7 @@ a { color: inherit; text-decoration: none; }
         <div class="login-card">
             <div class="login-logo">
                 <div class="login-logo-icon">⚔️</div>
-                <h2>暗金传说</h2>
+                <h2>冒险传说</h2>
                 <p>登录你的冒险之旅</p>
             </div>
             <div class="form-group">
@@ -2972,6 +3052,141 @@ a { color: inherit; text-decoration: none; }
 </div>
 
 <script>
+// ============================================================
+// 颜色方案定义
+// ============================================================
+const themes = {
+    darkgold: {
+        name: '暗金',
+        dots: ['#262329', '#FFC848', '#2FB8C4'],
+        vars: {
+            '--bg-primary': '#121014',
+            '--bg-secondary': '#1C1A1F',
+            '--bg-panel': '#262329',
+            '--bg-card': '#322E35',
+            '--bg-elevated': '#3D3840',
+            '--border': '#17140F',
+            '--border-soft': 'rgba(255,255,255,0.06)',
+            '--border-gold': 'rgba(255,200,72,0.25)',
+
+            '--primary': '#FFC848',
+            '--primary-hover': '#FFEE79',
+            '--primary-press': '#FDA500',
+            '--primary-border': '#9A5400',
+            '--primary-glow': 'rgba(255,200,72,0.15)',
+            '--primary-fg': '#3A2400',
+
+            '--accent': '#2FB8C4',
+            '--accent-press': '#1F8A93',
+            '--accent-light': '#BEF2F2',
+
+            '--text-primary': '#FFFFF6',
+            '--text-secondary': '#DAD7C9',
+            '--text-tertiary': '#8A8A94',
+            '--text-highlight': '#FAFCA0',
+
+            '--success': '#1CA455',
+            '--warning': '#DFC50B',
+            '--danger': '#DA1625',
+
+            '--purple': '#AF77F9',
+            '--pink': '#F77DB7',
+            '--cyan': '#75E2EF',
+
+            '--rarity-common': '#8A8A94',
+            '--rarity-uncommon': '#3DDC5C',
+            '--rarity-rare': '#3E9CFF',
+            '--rarity-epic': '#AF77F9',
+            '--rarity-legendary': '#E8871E',
+            '--rarity-mythic': '#E8342B',
+        }
+    },
+    emerald: {
+        name: '翡翠',
+        dots: ['#1B2C23', '#2ED47A', '#F5C542'],
+        vars: {
+            '--bg-primary': '#0C1410',
+            '--bg-secondary': '#14201A',
+            '--bg-panel': '#1B2C23',
+            '--bg-card': '#243A2E',
+            '--bg-elevated': '#2E4537',
+            '--border': '#0A1A13',
+            '--border-soft': 'rgba(255,255,255,0.06)',
+            '--border-gold': 'rgba(46,212,122,0.25)',
+
+            '--primary': '#2ED47A',
+            '--primary-hover': '#5CF2A0',
+            '--primary-press': '#1BA85E',
+            '--primary-border': '#0E6E3C',
+            '--primary-glow': 'rgba(46,212,122,0.15)',
+            '--primary-fg': '#072717',
+
+            '--accent': '#F5C542',
+            '--accent-press': '#D9A521',
+            '--accent-light': '#FBF1CC',
+
+            '--text-primary': '#F0F5EF',
+            '--text-secondary': '#B8CFC0',
+            '--text-tertiary': '#7A9488',
+            '--text-highlight': '#FFE066',
+
+            '--success': '#2ED47A',
+            '--warning': '#F5C542',
+            '--danger': '#E84C58',
+
+            '--purple': '#9B6CF5',
+            '--pink': '#F77DB7',
+            '--cyan': '#32C8C8',
+
+            '--rarity-common': '#8A948D',
+            '--rarity-uncommon': '#2ED47A',
+            '--rarity-rare': '#4C9BF5',
+            '--rarity-epic': '#9B6CF5',
+            '--rarity-legendary': '#F5C542',
+            '--rarity-mythic': '#E84C58',
+        }
+    },
+};
+
+// ============================================================
+// 颜色方案切换逻辑
+// ============================================================
+const themeSwitcher = document.getElementById('themeSwitcher');
+let currentTheme = 'darkgold';
+
+// 渲染切换器按钮
+Object.entries(themes).forEach(([key, t]) => {
+    const btn = document.createElement('span');
+    btn.className = 'theme-swatch' + (key === currentTheme ? ' active' : '');
+    btn.dataset.theme = key;
+    const dotsHtml = t.dots.map(c =>
+        `<span class="theme-swatch-dot" style="background:${c}"></span>`
+    ).join('');
+    btn.innerHTML = `<span class="theme-swatch-dots">${dotsHtml}</span>${t.name}`;
+    btn.addEventListener('click', () => applyTheme(key));
+    themeSwitcher.appendChild(btn);
+});
+
+function applyTheme(key) {
+    const t = themes[key];
+    if (!t) return;
+    currentTheme = key;
+
+    // 应用到 :root 变量
+    const root = document.documentElement;
+    Object.entries(t.vars).forEach(([name, val]) => {
+        root.style.setProperty(name, val);
+    });
+
+    // 切换按钮高亮
+    themeSwitcher.querySelectorAll('.theme-swatch').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === key);
+    });
+}
+
+// 初始化默认主题
+applyTheme(currentTheme);
+
 // ============================================================
 // 页面导航
 // ============================================================
