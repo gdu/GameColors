@@ -79,239 +79,137 @@ window.GameThemes = (function () {
             }
         },
 
-        /* ---- 科幻：深空蓝 + 霓虹青 ---- */
-        scifi: {
-            id: 'scifi',
-            title: '科幻',
-            scene: '<b>深空蓝 · 霓虹青</b> — 高科技 · 赛博朋克 · 星际冒险',
-            dots: ['#0B1424', '#22D3EE', '#3B82F6'],
+        /* ---- 复古：NES 有限调色板 ---- */
+        nes: {
+            id: 'nes',
+            title: '复古',
+            scene: '<b>有限调色板 · 高对比</b> — 像素 / 平台跳跃 / 弹幕射击 · NES 时代风味',
+            dots: ['#1A1C2C', '#F8D000', '#20C8F8'],
             accentKeys: ['accentCyan', 'accentBlue', 'accentPurple'],
-            accentLabels: ['霓虹青', '电光蓝', '离子紫'],
-            primaryFg: '#06222E',
+            accentLabels: ['NES 青', 'NES 蓝', 'NES 紫'],
+            primaryFg: '#1A1C2C',
 
             colors: {
-                bgPrimary:    '#070D18',
-                bgSecondary:  '#0B1424',
-                panelBg:      '#101C30',
-                cardBg:       '#162640',
-                elevatedBg:   '#1D3252',
-                border:       '#040810',
+                /* 底：经典 NES 深蓝黑（横版游戏最常见的背景色） */
+                bgPrimary:    '#0F0F1B',
+                bgSecondary:  '#1A1C2C',
+                panelBg:      '#23253A',
+                cardBg:       '#2D3049',
+                elevatedBg:   '#383B58',
+                border:       '#08080F',
 
-                primary:        '#22D3EE',
-                primaryHover:   '#67E8F9',
-                primaryPress:   '#0891B2',
-                primaryBorder:  '#0E6474',
+                /* 主色：金币黄 / 马里奥红都可选 — 这里用高饱金币黄 */
+                primary:        '#F8D000',
+                primaryHover:  '#FCE46C',
+                primaryPress:  '#C8A800',
+                primaryBorder: '#7A6400',
 
-                accent:       '#3B82F6',
-                accentPress:  '#2563EB',
-                accentLight:  '#BFDBFE',
+                /* 辅助色：NES 青（天空 / 水面） */
+                accent:       '#20C8F8',
+                accentPress:  '#18A0C8',
+                accentLight:  '#B8E8F8',
 
-                textPrimary:    '#ECF5FF',
-                textSecondary:  '#A8BDD8',
-                textTertiary:   '#5C7190',
-                textHighlight:  '#67E8F9',
+                /* 文本：偏暖白避开纯蓝感 */
+                textPrimary:    '#FCFCFC',
+                textSecondary:  '#B8B8C8',
+                textTertiary:  '#686880',
+                textHighlight:  '#F8D000',
 
-                success: '#34D399',
-                warning: '#FBBF24',
-                danger:  '#FB7185',
+                /* 功能 */
+                success: '#3CBC3C',
+                warning: '#F8D000',
+                danger:  '#F83800',
 
-                accentPurple: '#8B5CF6',
-                accentPink:   '#F472B6',
-                accentCyan:   '#22D3EE',
-                accentBlue:   '#3B82F6',
+                /* 点缀 */
+                accentPurple: '#A854F8',
+                accentPink:   '#F878B8',
+                accentCyan:   '#20C8F8',
+                accentBlue:   '#3858F8',
 
-                rarityCommon:    '#6B7280',
-                rarityUncommon:  '#34D399',
-                rarityRare:      '#3B82F6',
-                rarityEpic:      '#8B5CF6',
-                rarityLegendary: '#FBBF24',
-                rarityMythic:    '#FB7185',
+                /* 稀有度 */
+                rarityCommon:    '#7C7C7C',
+                rarityUncommon:  '#3CBC3C',
+                rarityRare:      '#3858F8',
+                rarityEpic:      '#A854F8',
+                rarityLegendary: '#F8B800',
+                rarityMythic:    '#F83800',
 
-                fbDamage:  '#ECF5FF',
-                fbCrit:    '#FDE68A',
-                fbHeal:    '#34D399',
-                fbExp:     '#8B5CF6',
-                fbGold:    '#FDE68A',
-                fbMedalGold:   '#D4A017',
-                fbMedalSilver: '#C0C0C0',
-                fbMedalBronze: '#B8732A',
+                /* 数值反馈 */
+                fbDamage:  '#FCFCFC',
+                fbCrit:    '#F8D000',
+                fbHeal:    '#3CBC3C',
+                fbExp:     '#A854F8',
+                fbGold:    '#F8D000',
+                fbMedalGold:   '#F8B800',
+                fbMedalSilver: '#B8B8B8',
+                fbMedalBronze: '#D87838',
             }
         },
 
-        /* ---- 绯红：深红 + 鎏金 ---- */
-        crimson: {
-            id: 'crimson',
-            title: '绯红',
-            scene: '<b>深红 · 鎏金</b> — 动作硬核 · 魔导幻想 · 强冲击',
-            dots: ['#1C0A0C', '#EF4444', '#FBBF24'],
-            accentKeys: ['accentPurple', 'accentPink', 'accentCyan'],
-            accentLabels: ['暗紫蔷薇', '血色蔷薇', '寒铁蓝'],
-            primaryFg: '#320606',
+        /* ---- 羊皮纸：暖棕 + 米色 ---- */
+        parchment: {
+            id: 'parchment',
+            title: '羊皮纸',
+            scene: '<b>暖棕 · 羊皮纸</b> — 奇幻 RPG · 冒险 · 桌游感 · 手绘沉浸',
+            dots: ['#3A2A18', '#C89048', '#E8D5B8'],
+            accentKeys: ['accentCyan', 'accentBlue', 'accentPurple'],
+            accentLabels: ['青釉', '靛蓝', '暗紫'],
+            primaryFg: '#2A1A08',
 
             colors: {
-                bgPrimary:    '#140708',
-                bgSecondary:  '#1C0A0C',
-                panelBg:      '#281012',
-                cardBg:       '#36181A',
-                elevatedBg:   '#442022',
-                border:       '#0C0405',
+                /* 底：皮革棕 / 古木箱 */
+                bgPrimary:    '#2A1E12',
+                bgSecondary:  '#3A2A18',
+                panelBg:      '#4A3622',
+                cardBg:       '#5C442C',
+                elevatedBg:   '#6E5236',
+                border:       '#1A1008',
 
-                primary:        '#EF4444',
-                primaryHover:   '#F87171',
-                primaryPress:   '#B91C1C',
-                primaryBorder:  '#7F1D1D',
+                /* 主色：古董金 / 黄铜（挂毯镶边、封印常用色） */
+                primary:        '#C89048',
+                primaryHover:  '#E0A858',
+                primaryPress:  '#A07030',
+                primaryBorder: '#6A4018',
 
-                accent:       '#FBBF24',
-                accentPress:  '#D97706',
-                accentLight:  '#FEF3C7',
+                /* 辅助色：旧木棕 */
+                accent:       '#8B5E3C',
+                accentPress:  '#6B4A2C',
+                accentLight:  '#E8D5B8',
 
-                textPrimary:    '#FDEEEE',
-                textSecondary:  '#E4B7B7',
-                textTertiary:   '#9A6868',
-                textHighlight:  '#FCA5A5',
+                /* 文本：羊皮纸米白（旧纸张受黄） */
+                textPrimary:    '#F0E0C8',
+                textSecondary:  '#C8B490',
+                textTertiary:   '#8A7558',
+                textHighlight:  '#E8C848',
 
-                success: '#34D399',
-                warning: '#FBBF24',
-                danger:  '#EF4444',
+                /* 功能：取自然意象（苔藓绿、琥珀警告、干血红） */
+                success: '#7A9A4C',
+                warning: '#D8A030',
+                danger:  '#B8402C',
 
-                accentPurple: '#A855F7',
-                accentPink:   '#F472B6',
-                accentCyan:   '#67E8F9',
-                accentBlue:   '#60A5FA',
+                /* 点缀 */
+                accentPurple: '#8B6B9A',
+                accentPink:   '#C8887A',
+                accentCyan:   '#6A9AAA',
+                accentBlue:   '#5A7AAA',
 
-                rarityCommon:    '#9A6868',
-                rarityUncommon:  '#34D399',
-                rarityRare:      '#60A5FA',
-                rarityEpic:      '#A855F7',
-                rarityLegendary: '#FBBF24',
-                rarityMythic:    '#EF4444',
+                /* 稀有度（哑光、做旧感） */
+                rarityCommon:    '#8A7558',
+                rarityUncommon:  '#7A9A4C',
+                rarityRare:      '#5A7AAA',
+                rarityEpic:      '#8B6B9A',
+                rarityLegendary: '#C89048',
+                rarityMythic:    '#B8402C',
 
-                fbDamage:  '#FDEEEE',
-                fbCrit:    '#FDE68A',
-                fbHeal:    '#34D399',
-                fbExp:     '#A855F7',
-                fbGold:    '#FDE68A',
-                fbMedalGold:   '#D4A017',
-                fbMedalSilver: '#C0C0C0',
-                fbMedalBronze: '#B8732A',
-            }
-        },
-
-        /* ---- 幻境：深紫 + 品红 ---- */
-        arcane: {
-            id: 'arcane',
-            title: '幻境',
-            scene: '<b>深紫 · 品红</b> — 奇幻 RPG · 魔法秘典 · 华丽史诗',
-            dots: ['#140A1E', '#A855F7', '#F472B6'],
-            accentKeys: ['accentPurple', 'accentPink', 'accentBlue'],
-            accentLabels: ['奥术紫', '魅影粉', '秘法蓝'],
-            primaryFg: '#220B3A',
-
-            colors: {
-                bgPrimary:    '#0F0818',
-                bgSecondary:  '#140A1E',
-                panelBg:      '#1D1130',
-                cardBg:       '#271A42',
-                elevatedBg:   '#322352',
-                border:       '#0A0512',
-
-                primary:        '#A855F7',
-                primaryHover:   '#C084FC',
-                primaryPress:   '#7C3AED',
-                primaryBorder:  '#5B21B6',
-
-                accent:       '#F472B6',
-                accentPress:  '#DB2777',
-                accentLight:  '#FBCFE8',
-
-                textPrimary:    '#F3ECFF',
-                textSecondary:  '#C4B3E0',
-                textTertiary:   '#7A68A0',
-                textHighlight:  '#E879F9',
-
-                success: '#34D399',
-                warning: '#FBBF24',
-                danger:  '#FB7185',
-
-                accentPurple: '#A855F7',
-                accentPink:   '#F472B6',
-                accentCyan:   '#67E8F9',
-                accentBlue:   '#60A5FA',
-
-                rarityCommon:    '#7A68A0',
-                rarityUncommon:  '#34D399',
-                rarityRare:      '#60A5FA',
-                rarityEpic:      '#A855F7',
-                rarityLegendary: '#FBBF24',
-                rarityMythic:    '#FB7185',
-
-                fbDamage:  '#F3ECFF',
-                fbCrit:    '#FDE68A',
-                fbHeal:    '#34D399',
-                fbExp:     '#A855F7',
-                fbGold:    '#FDE68A',
-                fbMedalGold:   '#D4A017',
-                fbMedalSilver: '#C0C0C0',
-                fbMedalBronze: '#B8732A',
-            }
-        },
-
-        /* ---- 极地：深暗 + 冰蓝 ---- */
-        frost: {
-            id: 'frost',
-            title: '极地',
-            scene: '<b>深暗 · 冰蓝</b> — 战术射击 · 末日生存 · 冷峻科幻',
-            dots: ['#0A1018', '#7DD3FC', '#38BDF8'],
-            accentKeys: ['accentBlue', 'accentCyan', 'accentPurple'],
-            accentLabels: ['冰晶蓝', '霜雪白', '极光紫'],
-            primaryFg: '#08202E',
-
-            colors: {
-                bgPrimary:    '#070C14',
-                bgSecondary:  '#0A1018',
-                panelBg:      '#101A26',
-                cardBg:       '#162432',
-                elevatedBg:   '#1E2E3E',
-                border:       '#040810',
-
-                primary:        '#7DD3FC',
-                primaryHover:   '#BAE6FD',
-                primaryPress:   '#38BDF8',
-                primaryBorder:  '#0E6588',
-
-                accent:       '#38BDF8',
-                accentPress:  '#0284C7',
-                accentLight:  '#E0F2FE',
-
-                textPrimary:    '#EEF6FC',
-                textSecondary:  '#A8BFCE',
-                textTertiary:   '#5C7488',
-                textHighlight:  '#BAE6FD',
-
-                success: '#34D399',
-                warning: '#FBBF24',
-                danger:  '#FB7185',
-
-                accentPurple: '#A78BFA',
-                accentPink:   '#F472B6',
-                accentCyan:   '#67E8F9',
-                accentBlue:   '#38BDF8',
-
-                rarityCommon:    '#5C7488',
-                rarityUncommon:  '#34D399',
-                rarityRare:      '#38BDF8',
-                rarityEpic:      '#A78BFA',
-                rarityLegendary: '#FBBF24',
-                rarityMythic:    '#FB7185',
-
-                fbDamage:  '#EEF6FC',
-                fbCrit:    '#FDE68A',
-                fbHeal:    '#34D399',
-                fbExp:     '#A78BFA',
-                fbGold:    '#FDE68A',
-                fbMedalGold:   '#D4A017',
-                fbMedalSilver: '#C0C0C0',
-                fbMedalBronze: '#B8732A',
+                /* 数值反馈 */
+                fbDamage:  '#F0E0C8',
+                fbCrit:    '#E8C848',
+                fbHeal:    '#7A9A4C',
+                fbExp:     '#8B6B9A',
+                fbGold:    '#E8C848',
+                fbMedalGold:   '#C89048',
+                fbMedalSilver: '#A89878',
+                fbMedalBronze: '#9A6838',
             }
         },
     };
