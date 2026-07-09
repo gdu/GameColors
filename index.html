@@ -51,6 +51,19 @@
             cursor: pointer;
             font-family: inherit;
             transition: background .15s, color .15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .tab-dots {
+            display: inline-flex;
+            gap: 2px;
+        }
+        .tab-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.18) inset;
         }
         .tab.active {
             background: #3d3d4a;
@@ -159,6 +172,54 @@
         }
         .swatch.flash .copied {
             opacity: 1;
+        }
+
+        .swatch .clash-badge {
+            position: absolute;
+            top: 7px;
+            left: 9px;
+            font-size: 10px;
+            line-height: 1.5;
+            background: rgba(0,0,0,0.45);
+            padding: 1px 6px;
+            border-radius: 5px;
+            cursor: help;
+        }
+
+        .swatch .contrast-dot {
+            position: absolute;
+            bottom: 8px;
+            right: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+        }
+        .contrast-dot.pass { background: #3ddc5c; }
+        .contrast-dot.warn { background: #ffd43b; }
+        .contrast-dot.fail { background: #ff5a5f; }
+
+        .strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 2px 0 26px;
+        }
+        .strip-chip {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+            transition: transform .1s ease;
+            flex-shrink: 0;
+        }
+        .strip-chip:hover {
+            transform: scale(1.18);
+        }
+        .strip-chip.flash {
+            outline: 2px solid #fff;
+            outline-offset: 1px;
         }
 
         .export-group {
@@ -518,7 +579,7 @@
         <h1 style="font-size:20px;margin:0;">⚙️ 通用系统色</h1>
         <span style="font-size:12px;color:#9a9aa8;background:#22222a;padding:3px 12px;border-radius:6px;">行业惯例 · 直接套用</span>
     </div>
-    <p class="scene" style="margin-bottom:20px;">这两组颜色与美术风格无关，是玩家已经形成认知的<strong>功能色</strong>，不建议自创。</p>
+    <p class="scene" style="margin-bottom:20px;">这两组颜色与美术风格无关，是玩家已经形成认知的<strong>功能色</strong>，不建议自创或跟着方案改动。下方色块会自动和<strong>当前选中方案</strong>的主色/辅助色/点缀色做比对，出现 <span style="color:#ffd43b;">⚠ 撞色</span> 标记时说明色相太接近，实际用到同一界面时注意拉开层次（比如加描边、调整明度），避免玩家分不清"这是稀有度提示"还是"这是普通UI元素"。</p>
 
     <section>
         <h2>🏷️ 稀有度 / 品级 <span class="badge">装备 · 卡牌 · 抽卡</span></h2>
@@ -540,70 +601,19 @@
 // 1. 配色方案定义
 // --------------------------------------------------------------
 const schemes = [
-    // ---- ① 暖橙休闲 ----
-    {
-        id: 'orange',
-        title: '暖橙',
-        scene: '<b>高明度 · 暖橙主色</b> — 高对比、层级柔和',
-        groups: [
-            { title: '中性色阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
-                ['全局背景', '#1A1A24', '#F5F5F8', 'bgPrimary'],
-                ['次深背景', '#22222E', '#F5F5F8', 'bgSecondary'],
-                ['面板底图', '#2C2C3A', '#F5F5F8', 'panelBg'],
-                ['卡片底图', '#3A3A4A', '#F5F5F8', 'cardBg'],
-                ['边框/分割线', '#52525F', '#F5F5F8', 'border'],
-                ['禁用底', '#9A9AA8', '#2C2C3A', 'disabledBg'],
-                ['浅色卡片底', '#F5F5F8', '#2C2C3A', 'lightCardBg'],
-            ]},
-            { title: '主色 · 暖橙按钮', usage: '确认/主要操作', items: [
-                ['常态', '#FF9F43', '#fff', 'primary'],
-                ['悬浮', '#FFB35F', '#fff', 'primaryHover'],
-                ['按下', '#F58024', '#fff', 'primaryPress'],
-                ['阴影/边框', '#D9660F', '#fff', 'primaryBorder'],
-                ['禁用', '#C99A6E', '#eee', 'primaryDisabled'],
-                ['浅底/选中', '#FFE8D1', '#8a5a1e', 'primaryLight'],
-            ]},
-            { title: '辅助色 · 冷蓝', usage: '取消/次要操作', items: [
-                ['常态', '#4A90D9', '#fff', 'accent'],
-                ['按下', '#3A75B0', '#fff', 'accentPress'],
-            ]},
-            { title: '文本 & 功能色', usage: '内容文字、状态提示', items: [
-                ['深底主文字', '#F5F5F8', '#2C2C3A', 'textPrimary'],
-                ['深底次文字', '#9A9AA8', '#2C2C3A', 'textSecondary'],
-                ['高亮数值', '#FFD43B', '#2C2C3A', 'textHighlight'],
-                ['成功', '#4CD97B', '#0a3319', 'success'],
-                ['警告', '#FFC53D', '#402d00', 'warning'],
-                ['危险', '#FF5A5F', '#3a0505', 'danger'],
-            ]}
-        ],
-        preview: {
-            bg: '#2C2C3A',
-            text: { primary: '#F5F5F8', secondary: '#9A9AA8', highlight: '#FFD43B' },
-            primary: { bg: '#FF9F43', fg: '#fff' },
-            primaryHover: { bg: '#FFB35F', fg: '#fff' },
-            accent: { bg: '#4A90D9', fg: '#fff' },
-            disabled: { bg: '#C99A6E', fg: '#eee' },
-            success: { bg: '#4CD97B', fg: '#0a3319' },
-            warning: { bg: '#FFC53D', fg: '#402d00' },
-            danger: { bg: '#FF5A5F', fg: '#3a0505' },
-            card: { bg: '#3A3A4A', border: '#52525F' },
-            input: { bg: 'rgba(128,128,128,0.08)', border: 'rgba(128,128,128,0.2)' },
-        },
-    },
-
-    // ---- ② 暗金像素 ----
+    // ---- ① 暗金像素 ----
     {
         id: 'darkgold',
         title: '暗金',
         scene: '<b>低明度 · 暖对比</b> — 暗底金边、强氛围',
         groups: [
             { title: '中性色阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
-                ['全局背景', '#010108', '#FFFFF6', 'bgPrimary'],
-                ['次深背景', '#354048', '#FFFFF6', 'bgSecondary'],
-                ['面板底图', '#40374B', '#FFFFF6', 'panelBg'],
-                ['卡片底图', '#524541', '#FFFFF6', 'cardBg'],
-                ['硬边框', '#1A1210', '#FFFFF6', 'border'],
-                ['禁用底', '#939393', '#2C2C2A', 'disabledBg'],
+                ['全局背景', '#121014', '#FFFFF6', 'bgPrimary'],
+                ['次深背景', '#1C1A1F', '#FFFFF6', 'bgSecondary'],
+                ['面板底图', '#262329', '#FFFFF6', 'panelBg'],
+                ['卡片底图', '#322E35', '#FFFFF6', 'cardBg'],
+                ['硬边框', '#17140F', '#FFFFF6', 'border'],
+                ['禁用底', '#6E6971', '#2C2C2A', 'disabledBg'],
             ]},
             { title: '主色 · 暖橙黄按钮', usage: '确认/主要操作', items: [
                 ['常态', '#FFC848', '#3A2400', 'primary'],
@@ -611,9 +621,10 @@ const schemes = [
                 ['按下', '#FDA500', '#3A2400', 'primaryPress'],
                 ['阴影/边框', '#9A5400', '#fff', 'primaryBorder'],
             ]},
-            { title: '辅助色 · 冷蓝', usage: '取消/次要操作', items: [
-                ['常态', '#3089E0', '#fff', 'accent'],
-                ['按下', '#26556F', '#fff', 'accentPress'],
+            { title: '辅助色 · 青绿', usage: '取消/次要操作', items: [
+                ['常态', '#2FB8C4', '#fff', 'accent'],
+                ['按下', '#1F8A93', '#fff', 'accentPress'],
+                ['浅底/选中', '#BEF2F2', '#12474C', 'accentLight'],
             ]},
             { title: '文本 & 功能色', usage: '内容文字、状态提示', items: [
                 ['主文字(暖白)', '#FFFFF6', '#354048', 'textPrimary'],
@@ -630,16 +641,16 @@ const schemes = [
             ]}
         ],
         preview: {
-            bg: '#40374B',
+            bg: '#262329',
             text: { primary: '#FFFFF6', secondary: '#DAD7C9', highlight: '#FAFCA0' },
             primary: { bg: '#FFC848', fg: '#3A2400' },
             primaryHover: { bg: '#FFEE79', fg: '#3A2400' },
-            accent: { bg: '#3089E0', fg: '#fff' },
-            disabled: { bg: '#939393', fg: '#2C2C2A' },
+            accent: { bg: '#2FB8C4', fg: '#fff' },
+            disabled: { bg: '#6E6971', fg: '#2C2C2A' },
             success: { bg: '#1CA455', fg: '#fff' },
             warning: { bg: '#DFC50B', fg: '#3A2400' },
             danger: { bg: '#DA1625', fg: '#fff' },
-            card: { bg: '#524541', border: '#000000' },
+            card: { bg: '#322E35', border: '#000000' },
             input: { bg: 'rgba(128,128,128,0.08)', border: 'rgba(128,128,128,0.2)' },
         },
     },
@@ -651,40 +662,23 @@ const schemes = [
         scene: '<b>冷蓝灰 · 多色阶</b> — 低饱和、信息密度高',
         groups: [
             { title: '中性灰阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
-                ['纯白', '#FFFFFF', '#1F2430', 'white'],
-                ['极浅灰', '#EBF0F3', '#1F2430', 'grayLightest'],
-                ['浅灰', '#C9D3DF', '#1F2430', 'grayLight'],
-                ['中浅灰', '#AFBCCD', '#1F2430', 'grayLightMid'],
-                ['中灰', '#8393A7', '#1F2430', 'grayMid'],
-                ['中深灰', '#5B6E88', '#1F2430', 'grayMidDark'],
-                ['深灰', '#51627D', '#F5F5F8', 'grayDark'],
-                ['更深灰', '#3D4D65', '#F5F5F8', 'grayDarker'],
-                ['深灰蓝', '#374355', '#F5F5F8', 'grayDarkBlue'],
-                ['暗灰', '#2C3642', '#F5F5F8', 'grayDarkest'],
-                ['近黑', '#1C232A', '#F5F5F8', 'nearBlack'],
+                ['全局背景', '#1C232A', '#F5F5F8', 'bgPrimary'],
+                ['次深背景', '#2C3642', '#F5F5F8', 'bgSecondary'],
+                ['面板底图', '#374355', '#F5F5F8', 'panelBg'],
+                ['卡片底图', '#3D4D65', '#F5F5F8', 'cardBg'],
+                ['边框', '#5B6E88', '#F5F5F8', 'border'],
+                ['禁用底', '#8393A7', '#1F2430', 'disabledBg'],
             ]},
             { title: '主色 · 交互色', usage: '确认/主要操作', items: [
-                ['粉红 (常态)', '#FF648B', '#fff', 'primary'],
-                ['粉红 (按下)', '#E83F86', '#fff', 'primaryPress'],
-                ['粉红 (深)', '#D1335B', '#fff', 'primaryDeep'],
-                ['红 (常态)', '#F13242', '#fff', 'primaryRed'],
-                ['红 (亮)', '#FF4C65', '#fff', 'primaryRedBright'],
-            ]},
-            { title: '辅助色 · 暖色点缀', usage: '高亮/强调标记', items: [
-                ['橙 (常态)', '#FF875A', '#fff', 'accentOrange'],
-                ['橙 (亮)', '#FFB700', '#1F2430', 'accentOrangeBright'],
+                ['常态', '#FF648B', '#fff', 'primary'],
+                ['悬浮', '#FF85A8', '#fff', 'primaryHover'],
+                ['按下', '#E83F86', '#fff', 'primaryPress'],
+                ['阴影/边框', '#D1335B', '#fff', 'primaryBorder'],
             ]},
             { title: '辅助色 · 冷色/功能', usage: '取消/次要操作、状态', items: [
-                ['绿', '#03BD5B', '#fff', 'accentGreen'],
-                ['青', '#03BCBD', '#fff', 'accentCyan'],
-                ['天蓝 (常态)', '#00AFDE', '#fff', 'accentSkyBlue'],
-                ['蓝 (常态)', '#339AF0', '#fff', 'accentBlue'],
-                ['蓝 (深)', '#009FD0', '#fff', 'accentBlueDeep'],
-                ['蓝 (更深)', '#0081D5', '#fff', 'accentBlueDeeper'],
-                ['紫蓝', '#4C6EF5', '#fff', 'accentIndigo'],
-                ['紫', '#7950F2', '#fff', 'accentPurple'],
-                ['紫 (粉)', '#A939B9', '#fff', 'accentMagenta'],
-                ['紫 (亮)', '#CC5DE8', '#fff', 'accentPurpleBright'],
+                ['常态', '#339AF0', '#fff', 'accent'],
+                ['按下', '#009FD0', '#fff', 'accentPress'],
+                ['强调/点缀', '#FF875A', '#fff', 'accentHighlight'],
             ]},
             { title: '文本 & 功能色', usage: '内容文字、状态提示', items: [
                 ['主文字 (深底)', '#F5F5F8', '#2C3642', 'textPrimary'],
@@ -693,14 +687,18 @@ const schemes = [
                 ['成功', '#03BD5B', '#fff', 'success'],
                 ['警告', '#FFB700', '#1F2430', 'warning'],
                 ['危险', '#F13242', '#fff', 'danger'],
-                ['半透明遮罩', '#00000080', '#fff', 'overlay'],
+            ]},
+            { title: '色板专属点缀色', usage: '稀有度、特效标记', items: [
+                ['紫', '#4C6EF5', '#fff', 'accentIndigo'],
+                ['洋红', '#A939B9', '#fff', 'accentMagenta'],
+                ['青', '#03BCBD', '#fff', 'accentCyan'],
             ]}
         ],
         preview: {
             bg: '#374355',
             text: { primary: '#F5F5F8', secondary: '#9A9AA8', highlight: '#FFB700' },
             primary: { bg: '#FF648B', fg: '#fff' },
-            primaryHover: { bg: '#FF4C65', fg: '#fff' },
+            primaryHover: { bg: '#FF85A8', fg: '#fff' },
             accent: { bg: '#339AF0', fg: '#fff' },
             disabled: { bg: '#8393A7', fg: '#fff' },
             success: { bg: '#03BD5B', fg: '#fff' },
@@ -735,12 +733,92 @@ const feedbackColors = [
 ];
 
 // --------------------------------------------------------------
+// 2.5 对比度工具 (WCAG)
+// --------------------------------------------------------------
+function isValidHex(str) {
+    return typeof str === 'string' && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(str);
+}
+function relLuminance(hex) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+    const rgb = [0, 1, 2].map(i => {
+        const c = parseInt(hex.substr(i * 2, 2), 16) / 255;
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+}
+function contrastRatio(hexA, hexB) {
+    const l1 = relLuminance(hexA) + 0.05;
+    const l2 = relLuminance(hexB) + 0.05;
+    return l1 > l2 ? l1 / l2 : l2 / l1;
+}
+function contrastDotHtml(bg, fg) {
+    if (!isValidHex(bg) || !isValidHex(fg)) return '';
+    const ratio = contrastRatio(bg, fg);
+    const level = ratio >= 4.5 ? 'pass' : (ratio >= 3 ? 'warn' : 'fail');
+    const label = ratio >= 4.5 ? '达标 · 可用于正文' : (ratio >= 3 ? '仅达标大字/图标' : '过低 · 慎用于文字');
+    return `<span class="contrast-dot ${level}" title="文字/底色对比度 ${ratio.toFixed(1)}:1 · ${label}"></span>`;
+}
+function hexToHsl(hex) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+    const r = parseInt(hex.substr(0, 2), 16) / 255;
+    const g = parseInt(hex.substr(2, 2), 16) / 255;
+    const b = parseInt(hex.substr(4, 2), 16) / 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0;
+    const l = (max + min) / 2;
+    const d = max - min;
+    if (d !== 0) {
+        s = d / (1 - Math.abs(2 * l - 1));
+        switch (max) {
+            case r: h = 60 * (((g - b) / d) % 6); break;
+            case g: h = 60 * ((b - r) / d + 2); break;
+            case b: h = 60 * ((r - g) / d + 4); break;
+        }
+        if (h < 0) h += 360;
+    }
+    return { h, s: s * 100, l: l * 100 };
+}
+function hueDist(h1, h2) {
+    const d = Math.abs(h1 - h2);
+    return Math.min(d, 360 - d);
+}
+// 提取方案中"有辨识度"的颜色(主色/辅助色/点缀色)，用于和通用系统色做撞色检测
+function getSchemeAccentColors(scheme) {
+    const list = [];
+    scheme.groups.forEach(g => {
+        if (g.title.includes('主色') || g.title.includes('辅助色') || g.title.includes('点缀')) {
+            g.items.forEach(it => {
+                if (isValidHex(it[1])) list.push({ hex: it[1], label: g.title + ' · ' + it[0] });
+            });
+        }
+    });
+    return list;
+}
+// 判断某个通用色是否和方案强调色"撞色"（色相接近 + 都有一定饱和度）
+function findClash(hex, accents) {
+    if (!isValidHex(hex)) return null;
+    const target = hexToHsl(hex);
+    if (target.s < 25) return null;
+    for (const ac of accents) {
+        const a = hexToHsl(ac.hex);
+        if (a.s < 25) continue;
+        if (hueDist(target.h, a.h) <= 18 && Math.abs(target.l - a.l) <= 22) {
+            return ac;
+        }
+    }
+    return null;
+}
+
+// --------------------------------------------------------------
 // 3. 渲染函数
 // --------------------------------------------------------------
-function renderSwatchGrid(containerId, list) {
+function renderSwatchGrid(containerId, list, schemeAccents) {
     const el = document.getElementById(containerId);
     if (!el) return;
     el.innerHTML = '';
+    const accents = schemeAccents || [];
     list.forEach(([name, hex, fg]) => {
         let border = '';
         if (hex.toUpperCase() === '#FFFFFF') border = 'border:1px solid #ccc;';
@@ -748,17 +826,28 @@ function renderSwatchGrid(containerId, list) {
         div.className = 'swatch';
         div.style.cssText = `background:${hex};color:${fg};${border}`;
         div.setAttribute('data-hex', hex);
+        const clash = findClash(hex, accents);
+        const clashBadge = clash
+            ? `<span class="clash-badge" title="与当前方案「${clash.label}」(${clash.hex})色相接近，注意避免视觉混淆">⚠ 撞色</span>`
+            : '';
         div.innerHTML = `
             <div class="name">${name}</div>
             <div class="hex">${hex}</div>
             <span class="copied">已复制</span>
+            ${contrastDotHtml(hex, fg)}
+            ${clashBadge}
         `;
         el.appendChild(div);
     });
 }
 
-renderSwatchGrid('rarityGrid', rarityColors);
-renderSwatchGrid('feedbackGrid', feedbackColors);
+function renderUniversalForScheme(scheme) {
+    const accents = getSchemeAccentColors(scheme);
+    renderSwatchGrid('rarityGrid', rarityColors, accents);
+    renderSwatchGrid('feedbackGrid', feedbackColors, accents);
+}
+
+renderUniversalForScheme(schemes[0]);
 
 // --------------------------------------------------------------
 // 4. 生成配色面板 + Tab
@@ -770,7 +859,9 @@ schemes.forEach((s, idx) => {
     // ---- Tab ----
     const btn = document.createElement('button');
     btn.className = 'tab' + (idx === 0 ? ' active' : '');
-    btn.textContent = (idx + 1) + '. ' + s.title;
+    const dotColors = [s.preview.bg, s.preview.primary.bg, s.preview.accent.bg];
+    const dotsHtml = dotColors.map(c => `<span class="tab-dot" style="background:${c}"></span>`).join('');
+    btn.innerHTML = `<span class="tab-dots">${dotsHtml}</span>${(idx + 1) + '. ' + s.title}`;
     btn.dataset.schemeId = s.id;
     btn.onclick = () => switchScheme(s.id);
     tabsContainer.appendChild(btn);
@@ -784,27 +875,37 @@ schemes.forEach((s, idx) => {
         <div class="panel-header">
             <h1>${s.title} <span class="scene">${s.scene}</span></h1>
             <div class="export-group">
-                <button class="export-btn" data-scheme-index="${idx}" data-target="ts">📄 导出 TS 常量</button>
-                <button class="export-btn" data-scheme-index="${idx}" data-target="csharp">📄 导出 C# 常量</button>
+                <button class="export-btn" data-scheme-index="${idx}" data-target="ts">📄 TS 常量</button>
+                <button class="export-btn" data-scheme-index="${idx}" data-target="csharp">📄 C# 常量</button>
+                <button class="export-btn" data-scheme-index="${idx}" data-target="css">📄 CSS 变量</button>
+                <button class="export-btn" data-scheme-index="${idx}" data-target="json">📄 JSON</button>
             </div>
         </div>
     `;
 
+    // ---- 色板速览条：全部颜色一次看完，不用逐组滚动 ----
+    const allItems = s.groups.flatMap(g => g.items);
+    html += `<div class="strip">` + allItems.map(it =>
+        `<span class="strip-chip" style="background:${it[1]}" data-hex="${it[1]}" title="${it[0]} · ${it[1]}"></span>`
+    ).join('') + `</div>`;
+
+    let groupsHtml = '';
     s.groups.forEach(g => {
         const usageTag = g.usage ? `<span class="badge">${g.usage}</span>` : '';
-        html += `<section><h2>${g.title} ${usageTag}</h2><div class="grid">`;
+        groupsHtml += `<section><h2>${g.title} ${usageTag}</h2><div class="grid">`;
         g.items.forEach(it => {
             const [name, hex, fg] = it;
             let border = (hex.toUpperCase() === '#FFFFFF') ? 'border:1px solid #ccc;' : '';
-            html += `
+            groupsHtml += `
                 <div class="swatch" style="background:${hex};color:${fg};${border}" data-hex="${hex}">
                     <div class="name">${name}</div>
                     <div class="hex">${hex}</div>
                     <span class="copied">已复制</span>
+                    ${contrastDotHtml(hex, fg)}
                 </div>
             `;
         });
-        html += `</div></section>`;
+        groupsHtml += `</div></section>`;
     });
 
     const p = s.preview;
@@ -921,6 +1022,8 @@ schemes.forEach((s, idx) => {
             </div>
         </div></section>`;
 
+    html += groupsHtml;
+
     panel.innerHTML = html;
     contentContainer.appendChild(panel);
 });
@@ -935,6 +1038,8 @@ function switchScheme(id) {
     document.querySelectorAll('.scheme').forEach(p => {
         p.classList.toggle('active', p.id === 'scheme-' + id);
     });
+    const scheme = schemes.find(s => s.id === id);
+    if (scheme) renderUniversalForScheme(scheme);
 }
 
 // --------------------------------------------------------------
@@ -997,6 +1102,47 @@ function exportCsharp(scheme) {
     return lines.join('\n');
 }
 
+function exportCss(scheme) {
+    let lines = [`/* ${scheme.title} 配色方案 · 自动生成 */`, `:root {`];
+    const used = new Set();
+    scheme.groups.forEach(g => {
+        lines.push(`  /* ${g.title} */`);
+        g.items.forEach(it => {
+            let key = it[3] || toCamel(it[0]) || 'color';
+            let uniqueKey = key;
+            let counter = 1;
+            while (used.has(uniqueKey)) {
+                uniqueKey = key + counter;
+                counter++;
+            }
+            used.add(uniqueKey);
+            const kebab = uniqueKey.replace(/([A-Z])/g, '-$1').toLowerCase();
+            lines.push(`  --${kebab}: ${it[1]}; /* ${it[0]} */`);
+        });
+    });
+    lines.push(`}`);
+    return lines.join('\n');
+}
+
+function exportJson(scheme) {
+    const obj = {};
+    const used = new Set();
+    scheme.groups.forEach(g => {
+        g.items.forEach(it => {
+            let key = it[3] || toCamel(it[0]) || 'color';
+            let uniqueKey = key;
+            let counter = 1;
+            while (used.has(uniqueKey)) {
+                uniqueKey = key + counter;
+                counter++;
+            }
+            used.add(uniqueKey);
+            obj[uniqueKey] = it[1];
+        });
+    });
+    return JSON.stringify(obj, null, 2);
+}
+
 document.addEventListener('click', function(e) {
     const btn = e.target.closest('.export-btn');
     if (!btn) return;
@@ -1007,8 +1153,12 @@ document.addEventListener('click', function(e) {
     let text = '';
     if (btn.dataset.target === 'ts') {
         text = exportTs(scheme);
-    } else {
+    } else if (btn.dataset.target === 'csharp') {
         text = exportCsharp(scheme);
+    } else if (btn.dataset.target === 'css') {
+        text = exportCss(scheme);
+    } else if (btn.dataset.target === 'json') {
+        text = exportJson(scheme);
     }
 
     navigator.clipboard.writeText(text).then(() => {
@@ -1023,7 +1173,7 @@ document.addEventListener('click', function(e) {
 });
 
 document.addEventListener('click', function(e) {
-    const sw = e.target.closest('.swatch');
+    const sw = e.target.closest('.swatch, .strip-chip');
     if (!sw) return;
     const hex = sw.getAttribute('data-hex');
     if (!hex) return;
