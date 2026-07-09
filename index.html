@@ -543,9 +543,8 @@ const schemes = [
     // ---- ① 暖橙休闲 ----
     {
         id: 'orange',
-        name: '① 暖橙休闲',
-        title: '暖橙休闲',
-        scene: '<b>卡通消除、放置类、轻度休闲</b> — 明快友好，降低焦虑感',
+        title: '暖橙',
+        scene: '<b>高明度 · 暖橙主色</b> — 高对比、层级柔和',
         groups: [
             { title: '中性色阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
                 ['全局背景', '#1A1A24', '#F5F5F8', 'bgPrimary'],
@@ -595,9 +594,8 @@ const schemes = [
     // ---- ② 暗金像素 ----
     {
         id: 'darkgold',
-        name: '② 暗金像素',
-        title: '暗金像素',
-        scene: '<b>生存建造、荒野拓荒、末日废土</b> — 暗沉大地色系，金色高光点缀',
+        title: '暗金',
+        scene: '<b>低明度 · 暖对比</b> — 暗底金边、强氛围',
         groups: [
             { title: '中性色阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
                 ['全局背景', '#010108', '#FFFFF6', 'bgPrimary'],
@@ -649,9 +647,8 @@ const schemes = [
     // ---- ③ 冷色专业 ----
     {
         id: 'coolpro',
-        name: '③ 冷色专业',
-        title: '冷色专业',
-        scene: '<b>策略、科幻、管理模拟</b> — 沉稳冷静的灰蓝色调',
+        title: '冷蓝',
+        scene: '<b>冷蓝灰 · 多色阶</b> — 低饱和、信息密度高',
         groups: [
             { title: '中性灰阶 · 背景/面板', usage: '全局底色、卡片容器', items: [
                 ['纯白', '#FFFFFF', '#1F2430', 'white'],
@@ -773,7 +770,7 @@ schemes.forEach((s, idx) => {
     // ---- Tab ----
     const btn = document.createElement('button');
     btn.className = 'tab' + (idx === 0 ? ' active' : '');
-    btn.textContent = s.name;
+    btn.textContent = (idx + 1) + '. ' + s.title;
     btn.dataset.schemeId = s.id;
     btn.onclick = () => switchScheme(s.id);
     tabsContainer.appendChild(btn);
