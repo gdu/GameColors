@@ -126,13 +126,11 @@
     box-shadow: 0 0 0 1px rgba(255,255,255,0.18) inset;
 }
 
-/* 主题切换时全局平滑过渡 */
-body, .card, .sidebar, .btn, .tag, .progress, .quest-item,
-.friend-card, .shop-item, .mail-item, .bag-slot, .warehouse-slot,
-.chat-msg-bubble, .tooltip-popup, .quick-card, .level-node,
-.achieve-medal, .pcard, .resource-item, .lobby-side-card {
-    transition: background-color .25s ease, border-color .25s ease,
-                color .25s ease, box-shadow .25s ease, filter .25s ease;
+/* 主题切换时全局平滑过渡（仅过渡颜色相关属性，不影响 transform/animation） */
+*, *::before, *::after {
+    transition-property: background-color, border-color, color, box-shadow, opacity, filter;
+    transition-duration: .25s;
+    transition-timing-function: ease;
 }
 
 /* ============================================================
@@ -142,8 +140,8 @@ body, .card, .sidebar, .btn, .tag, .progress, .quest-item,
 html { font-size: 14px; }
 body {
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--bg-primary, #121014);
+    color: var(--text-primary, #FFFFF6);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -392,6 +390,168 @@ a { color: inherit; text-decoration: none; }
     height: 1px;
     background: var(--border-soft);
     margin: 16px 0;
+}
+
+/* 稀有度通用 class（替代内联 style） */
+.rarity-common { background: var(--rarity-common) !important; }
+.rarity-uncommon { background: var(--rarity-uncommon) !important; }
+.rarity-rare { background: var(--rarity-rare) !important; }
+.rarity-epic { background: var(--rarity-epic) !important; }
+.rarity-legendary { background: var(--rarity-legendary) !important; }
+.rarity-mythic { background: var(--rarity-mythic) !important; }
+.rarity-text-common { color: var(--rarity-common) !important; }
+.rarity-text-uncommon { color: var(--rarity-uncommon) !important; }
+.rarity-text-rare { color: var(--rarity-rare) !important; }
+.rarity-text-epic { color: var(--rarity-epic) !important; }
+.rarity-text-legendary { color: var(--rarity-legendary) !important; }
+.rarity-text-mythic { color: var(--rarity-mythic) !important; }
+
+/* 属性对比箭头 */
+.stat-up { color: var(--success); }
+.stat-down { color: var(--danger); }
+
+/* 新物品红点 */
+.new-dot {
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--danger);
+    border: 1.5px solid var(--bg-panel);
+    z-index: 2;
+}
+
+/* 稀有度边框 */
+.rarity-legendary-border { border-color: var(--rarity-legendary) !important; }
+.rarity-epic-border { border-color: var(--rarity-epic) !important; }
+.rarity-rare-border { border-color: var(--rarity-rare) !important; }
+.rarity-uncommon-border { border-color: var(--rarity-uncommon) !important; }
+.rarity-common-border { border-color: var(--rarity-common) !important; }
+.rarity-mythic-border { border-color: var(--rarity-mythic) !important; }
+
+/* 折扣标签 */
+.shop-item-discount {
+    position: absolute;
+    top: 8px; right: 8px;
+    padding: 2px 8px;
+    background: var(--success);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* 限时倒计时 */
+.shop-item-countdown {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--warning);
+    font-weight: 600;
+}
+.shop-item-countdown .countdown-icon { font-size: 12px; }
+
+/* 空状态 */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: var(--text-tertiary);
+}
+.empty-state-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+}
+.empty-state-text {
+    font-size: 14px;
+    color: var(--text-tertiary);
+}
+.empty-state-hint {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+/* 加载骨架屏 */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-elevated) 50%, var(--bg-card) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-sm);
+}
+
+/* 错误状态 */
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: var(--text-tertiary);
+}
+.error-state-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+.error-state-text {
+    font-size: 14px;
+    color: var(--danger);
+    margin-bottom: 12px;
+}
+
+/* 聊天系统消息 */
+.chat-msg-system {
+    text-align: center;
+    padding: 6px 0;
+}
+.chat-msg-system span {
+    display: inline-block;
+    padding: 4px 14px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    font-size: 11px;
+    color: var(--text-tertiary);
+}
+
+/* 聊天物品链接 */
+.chat-item-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: var(--primary-glow);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* 关卡敌人预览 */
+.level-enemy-preview {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.level-enemy-icon {
+    width: 36px; height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border: 1px solid var(--border-soft);
 }
 
 /* 滚动条 */
@@ -1308,7 +1468,7 @@ a { color: inherit; text-decoration: none; }
     cursor: pointer;
     margin-bottom: 2px;
 }
-.menu-item:hover { background: var(--bg-card); }
+.mail-menu-item:hover { background: var(--bg-card); }
 .mail-menu-item.active {
     background: var(--primary-glow);
     color: var(--primary);
@@ -1616,33 +1776,41 @@ a { color: inherit; text-decoration: none; }
     padding: 40px;
     background: var(--bg-panel);
     border: 1px solid var(--border-soft);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     margin-bottom: 20px;
     min-height: 200px;
 }
 .tips-trigger {
     width: 56px; height: 56px;
     border-radius: var(--radius-md);
-    background: var(--bg-card);
+    background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary));
     border: 2px solid var(--border-soft);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     cursor: pointer;
-    transition: border-color .15s;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
 }
-.tips-trigger:hover { border-color: var(--primary); }
+.tips-trigger:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
 
-/* Tooltip 弹窗 */
+/* Tooltip 弹窗 — MMO 风格 */
 .tooltip-popup {
-    width: 300px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border-gold);
+    width: 320px;
+    background: linear-gradient(180deg, rgba(35,32,40,0.98), rgba(22,20,26,0.98));
+    border: 2px solid var(--tooltip-border, var(--rarity-legendary));
     border-radius: var(--radius-lg);
-    padding: 18px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    padding: 0;
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,0.5),
+        0 8px 32px rgba(0,0,0,0.6),
+        0 0 20px var(--tooltip-glow, rgba(232,135,30,0.1));
     position: relative;
+    overflow: hidden;
 }
 .tooltip-popup::before {
     content: '';
@@ -1650,45 +1818,99 @@ a { color: inherit; text-decoration: none; }
     bottom: -7px; left: 50%;
     transform: translateX(-50%) rotate(45deg);
     width: 12px; height: 12px;
-    background: var(--bg-elevated);
-    border-right: 1px solid var(--border-gold);
-    border-bottom: 1px solid var(--border-gold);
+    background: rgba(22,20,26,0.98);
+    border-right: 2px solid var(--tooltip-border, var(--rarity-legendary));
+    border-bottom: 2px solid var(--tooltip-border, var(--rarity-legendary));
 }
+
+/* Tooltip 内部通用 */
+.tooltip-body {
+    padding: 14px 16px 12px;
+}
+
+/* 头部：图标 + 名称 + 类型 */
 .tooltip-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-soft);
 }
 .tooltip-icon {
-    width: 40px; height: 40px;
+    width: 44px; height: 44px;
     border-radius: var(--radius-sm);
-    background: var(--bg-card);
+    background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary));
+    border: 1px solid var(--border-soft);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 22px;
+    flex-shrink: 0;
 }
-.tooltip-title-area { flex: 1; }
+.tooltip-title-area { flex: 1; min-width: 0; }
 .tooltip-name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
-    color: var(--rarity-legendary);
+    color: var(--tooltip-border, var(--rarity-legendary));
+    line-height: 1.2;
 }
 .tooltip-type {
     font-size: 11px;
     color: var(--text-tertiary);
+    margin-top: 2px;
 }
-.tooltip-rarity {
-    width: 3px; height: 32px;
-    border-radius: 2px;
-    background: var(--rarity-legendary);
+
+/* 元信息行 */
+.tooltip-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
+
+/* 职业限制 */
+.tooltip-restriction {
+    font-size: 11px;
+    color: var(--danger);
+    margin-bottom: 8px;
+}
+
+/* 主属性 */
+.tooltip-main-stats {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-soft);
+}
+.tooltip-main-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding: 3px 0;
+}
+.tooltip-main-stat.highlight {
+    background: var(--primary-glow);
+    margin: 0 -16px;
+    padding: 4px 16px;
+    border-left: 2px solid var(--primary);
+}
+.tooltip-stat-label { color: var(--text-secondary); }
+.tooltip-stat-value { color: var(--text-primary); font-weight: 600; }
+.tooltip-stat-value.positive { color: var(--success); }
+.tooltip-stat-value.negative { color: var(--danger); }
+
+/* 附加属性 */
 .tooltip-stats {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-bottom: 12px;
+    gap: 3px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-soft);
 }
 .tooltip-stat {
     display: flex;
@@ -1696,23 +1918,146 @@ a { color: inherit; text-decoration: none; }
     justify-content: space-between;
     font-size: 12px;
 }
-.tooltip-stat-label { color: var(--text-tertiary); }
-.tooltip-stat-value { color: var(--text-primary); font-weight: 600; }
-.tooltip-stat-value.bonus { color: var(--success); }
+.tooltip-stat .tooltip-stat-label { color: var(--text-tertiary); }
+.tooltip-stat .tooltip-stat-value { color: var(--text-primary); font-weight: 600; }
+.tooltip-stat .tooltip-stat-value.bonus { color: var(--success); }
+
+/* 对比箭头 */
+.tooltip-compare {
+    font-size: 10px;
+    margin-left: 4px;
+    font-weight: 700;
+}
+.tooltip-compare.up { color: var(--success); }
+.tooltip-compare.down { color: var(--danger); }
+
+/* 套装效果 */
+.tooltip-set {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-soft);
+}
+.tooltip-set-name {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.tooltip-set-piece {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    padding: 1px 0;
+}
+.tooltip-set-piece.active {
+    color: var(--text-highlight);
+    font-weight: 600;
+}
+.tooltip-set-piece::before {
+    content: '• ';
+    color: var(--text-tertiary);
+}
+.tooltip-set-piece.active::before {
+    color: var(--text-highlight);
+}
+.tooltip-set-bonus {
+    font-size: 10px;
+    color: var(--text-secondary);
+    padding: 1px 0 1px 10px;
+    position: relative;
+}
+.tooltip-set-bonus::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+
+/* 物品描述 */
 .tooltip-desc {
     font-size: 12px;
-    color: var(--text-secondary);
+    color: var(--accent-light);
     line-height: 1.5;
-    padding-top: 10px;
-    border-top: 1px solid var(--border-soft);
     font-style: italic;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-soft);
 }
-.tooltip-requirement {
+
+/* 耐久度 */
+.tooltip-durability {
     font-size: 11px;
     color: var(--text-tertiary);
-    margin-top: 8px;
+    margin-bottom: 6px;
 }
-.tooltip-requirement span { color: var(--danger); }
+.tooltip-durability-bar {
+    display: inline-block;
+    width: 60px;
+    height: 3px;
+    background: var(--bg-card);
+    border-radius: 2px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+.tooltip-durability-fill {
+    height: 100%;
+    background: var(--success);
+    border-radius: 2px;
+}
+
+/* 绑定状态 */
+.tooltip-binding {
+    font-size: 11px;
+    color: var(--danger);
+    margin-bottom: 6px;
+}
+
+/* 底部信息 */
+.tooltip-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-tertiary);
+    padding-top: 6px;
+}
+
+/* 稀有度色条（左侧装饰） */
+.tooltip-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--tooltip-border, var(--rarity-legendary));
+}
+
+/* ============================================================
+   10b. 装备 Tips 稀有度对比
+   ============================================================ */
+.tips-rarity-compare {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    margin-top: 20px;
+}
+.tips-rarity-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+.tips-rarity-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+.tips-rarity-row .tooltip-popup {
+    flex: 0 0 240px;
+    width: 240px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.tips-rarity-row .tooltip-popup::before { display: none; }
 
 /* ============================================================
    11. 背包
@@ -1945,6 +2290,1450 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================================
+   13. 角色面板
+   ============================================================ */
+.character-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 20px;
+}
+
+/* 左侧角色卡 */
+.character-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    position: relative;
+}
+.character-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 20%, var(--primary-glow), transparent 70%);
+    pointer-events: none;
+}
+.character-card-banner {
+    height: 90px;
+    background: linear-gradient(135deg, var(--primary-press), var(--primary), var(--accent));
+    position: relative;
+    overflow: hidden;
+}
+.character-card-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 30px;
+    background: linear-gradient(transparent, var(--bg-panel));
+}
+.character-card-body {
+    padding: 0 24px 24px;
+    text-align: center;
+    position: relative;
+}
+.character-avatar-large {
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    border: 3px solid var(--primary);
+    box-shadow: 0 0 20px var(--primary-glow), 0 4px 16px rgba(0,0,0,0.4);
+    margin-top: -48px;
+    position: relative;
+    z-index: 1;
+}
+.character-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+}
+.character-class {
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 4px;
+}
+.character-level {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+.character-level-bar {
+    height: 4px;
+    background: var(--bg-card);
+    border-radius: 2px;
+    margin: 12px auto 0;
+    overflow: hidden;
+    max-width: 200px;
+}
+.character-level-fill {
+    height: 100%;
+    width: 68%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    border-radius: 2px;
+}
+.character-power {
+    margin-top: 16px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border-soft);
+}
+.character-power-label {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+.character-power-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary);
+    text-shadow: 0 0 12px var(--primary-glow);
+    letter-spacing: 1px;
+}
+
+/* 右侧装备 + 属性 */
+.character-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 装备槽 — 人形布局 */
+.equipment-panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-xl);
+    padding: 20px;
+}
+.equipment-panel-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.equipment-panel-title .ilvl {
+    font-size: 11px;
+    color: var(--rarity-epic);
+    background: rgba(175,119,249,0.1);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+.equipment-slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 280px;
+    margin: 0 auto;
+}
+.equip-slot {
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary));
+    border: 2px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    position: relative;
+    cursor: pointer;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+    overflow: hidden;
+}
+.equip-slot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 80%, var(--slot-glow, transparent), transparent 70%);
+    opacity: 0;
+    transition: opacity .2s;
+}
+.equip-slot:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.equip-slot:hover::before { opacity: 1; }
+.equip-slot.empty {
+    border-style: dashed;
+    opacity: 0.4;
+    background: transparent;
+}
+.equip-slot.empty:hover {
+    opacity: 0.7;
+    border-color: var(--text-tertiary);
+}
+.equip-slot-label {
+    position: absolute;
+    top: 4px; left: 6px;
+    font-size: 9px;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.equip-slot-rarity {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+}
+.equip-slot .equip-icon-placeholder {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+
+/* 属性面板 */
+.stats-panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-xl);
+    padding: 20px;
+}
+.stats-panel-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.stats-panel-title .stat-total {
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+.stats-panel-title .stat-total span {
+    color: var(--success);
+    font-weight: 700;
+}
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 13px;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+.stat-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.stat-label {
+    color: var(--text-tertiary);
+    font-size: 12px;
+}
+.stat-bar-track {
+    height: 3px;
+    background: var(--bg-card);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.stat-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--stat-color, var(--primary)), var(--stat-color-light, var(--accent)));
+}
+.stat-value {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 13px;
+    text-align: right;
+    min-width: 70px;
+}
+.stat-value.bonus { color: var(--success); }
+.stat-value.penalty { color: var(--danger); }
+.stat-compare {
+    font-size: 11px;
+    margin-left: 4px;
+    font-weight: 600;
+}
+.stat-compare.stat-up { color: var(--success); }
+.stat-compare.stat-down { color: var(--danger); }
+
+/* ============================================================
+   14. 设置页面
+   ============================================================ */
+.settings-layout {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+}
+.settings-sidebar {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 12px;
+    height: fit-content;
+}
+.settings-menu-item {
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+.settings-menu-item:hover { background: var(--bg-card); }
+.settings-menu-item.active {
+    background: var(--primary-glow);
+    color: var(--primary);
+    font-weight: 600;
+}
+.settings-content {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+}
+.settings-section {
+    margin-bottom: 28px;
+}
+.settings-section:last-child { margin-bottom: 0; }
+.settings-section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-soft);
+}
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-soft);
+}
+.setting-row:last-child { border-bottom: none; }
+.setting-info { flex: 1; }
+.setting-label {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+.setting-desc {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+.setting-control { flex-shrink: 0; }
+
+/* 开关 Toggle */
+.toggle {
+    width: 44px; height: 24px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    cursor: pointer;
+    position: relative;
+    transition: background .2s;
+}
+.toggle.on {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+.toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .2s;
+}
+.toggle.on::after { transform: translateX(20px); }
+
+/* 滑块 */
+.slider {
+    width: 160px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--bg-card);
+    position: relative;
+    cursor: pointer;
+}
+.slider-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--primary);
+}
+.slider-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* 下拉选择 */
+.select-box {
+    padding: 8px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 13px;
+    min-width: 140px;
+    cursor: pointer;
+}
+
+/* 快捷键绑定 */
+.keybind {
+    padding: 6px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-family: monospace;
+    min-width: 80px;
+    text-align: center;
+    cursor: pointer;
+}
+.keybind:hover { border-color: var(--primary); }
+
+/* ============================================================
+   15. 弹窗 & 通知
+   ============================================================ */
+.dialog-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.dialog-demo-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    text-align: center;
+}
+.dialog-demo-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+.dialog-demo-card p {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-bottom: 14px;
+}
+
+/* 遮罩层 */
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn .2s ease;
+}
+.dialog-box {
+    width: 400px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    animation: scaleIn .2s ease;
+}
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.dialog-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+.dialog-body-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.dialog-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+.dialog-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+.dialog-input:focus { border-color: var(--primary); }
+
+/* Toast 通知 */
+.toast-container {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    animation: toastIn .3s ease;
+    min-width: 240px;
+}
+.toast.success { border-left: 3px solid var(--success); }
+.toast.warning { border-left: 3px solid var(--warning); }
+.toast.error { border-left: 3px solid var(--danger); }
+.toast-icon { font-size: 18px; }
+@keyframes toastIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* ============================================================
+   16. 技能树
+   ============================================================ */
+.skill-tree-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.skill-tree-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+}
+.skill-tree-points {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.skill-tree-points span { color: var(--primary); font-size: 20px; }
+
+.skill-tree-branches {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+.skill-branch {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+}
+.skill-branch-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-soft);
+}
+.skill-branch-icon {
+    width: 40px; height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.skill-branch-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.skill-branch-desc {
+    font-size: 11px;
+    color: var(--text-tertiary);
+}
+
+.skill-node {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+}
+.skill-node:hover { background: var(--bg-card); border-color: var(--border-soft); }
+.skill-node.current { background: var(--primary-glow); border-color: var(--border-gold); }
+.skill-node.locked { opacity: 0.4; }
+.skill-node-icon {
+    width: 36px; height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border: 2px solid var(--border-soft);
+    flex-shrink: 0;
+}
+.skill-node.unlocked .skill-node-icon { border-color: var(--primary); }
+.skill-node-info { flex: 1; }
+.skill-node-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.skill-node-level {
+    font-size: 10px;
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   17. 战斗 HUD
+   ============================================================ */
+.hud-container {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    position: relative;
+    height: 480px;
+    background:
+        radial-gradient(ellipse at 30% 10%, rgba(47,184,196,0.08), transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(232,135,30,0.06), transparent 50%),
+        linear-gradient(180deg, #0a0e16 0%, var(--bg-panel) 50%, #1a0e0a 100%);
+}
+
+/* 战场背景装饰 */
+.hud-scene {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.hud-scene-ground {
+    position: absolute;
+    bottom: 90px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-soft) 20%, var(--border-soft) 80%, transparent);
+}
+.hud-scene-grid {
+    position: absolute;
+    bottom: 90px; left: 0; right: 0; top: 200px;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: perspective(400px) rotateX(40deg);
+    transform-origin: bottom;
+}
+.hud-scene-enemy {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 64px;
+    filter: drop-shadow(0 4px 12px rgba(218,22,37,0.4));
+    animation: enemyIdle 2s ease-in-out infinite;
+}
+@keyframes enemyIdle {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* 玩家状态区 */
+.hud-player-area {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    z-index: 2;
+}
+.hud-player-portrait {
+    width: 64px; height: 64px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(145deg, var(--bg-card), var(--bg-elevated));
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 12px var(--primary-glow), inset 0 0 12px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.hud-player-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.1), transparent 60%);
+}
+.hud-player-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.hud-player-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.hud-player-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+.hud-player-lv {
+    font-size: 10px;
+    color: var(--primary);
+    background: var(--primary-glow);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.hud-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 200px;
+}
+.hud-bar {
+    height: 16px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+}
+.hud-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    position: relative;
+    transition: width .3s ease;
+}
+.hud-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent);
+    border-radius: 8px 8px 0 0;
+}
+.hud-bar-fill.hp { background: linear-gradient(90deg, #8B0000, #DA1625); }
+.hud-bar-fill.mp { background: linear-gradient(90deg, #003366, #3E9CFF); }
+.hud-bar-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    letter-spacing: 0.3px;
+}
+
+/* Buff 图标 */
+.hud-buffs {
+    display: flex;
+    gap: 4px;
+}
+.hud-buff {
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+}
+.hud-buff::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--buff-color, var(--success));
+}
+.hud-buff-duration {
+    position: absolute;
+    bottom: 3px; right: 2px;
+    font-size: 8px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+    font-weight: 700;
+}
+
+/* 技能栏 */
+.hud-skills {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+}
+.hud-skill {
+    width: 56px; height: 56px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(145deg, rgba(40,40,50,0.9), rgba(20,20,28,0.95));
+    border: 2px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    position: relative;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.hud-skill:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 12px var(--primary-glow);
+}
+.hud-skill.on-cooldown {
+    opacity: 0.6;
+}
+.hud-skill.on-cooldown:hover {
+    transform: none;
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.hud-skill-cd {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    background: rgba(0,0,0,0.65);
+    border-radius: var(--radius-md);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+.hud-skill-key {
+    position: absolute;
+    top: -7px; right: -5px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    padding: 1px 5px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+/* 小地图 */
+.hud-minimap {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 150px; height: 150px;
+    background: rgba(0,0,0,0.7);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    z-index: 2;
+}
+.hud-minimap-title {
+    position: absolute;
+    top: 4px; left: 8px;
+    font-size: 9px;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+.hud-minimap-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 100%; height: 100%;
+    padding: 4px;
+}
+.hud-minimap-cell {
+    border: 1px solid rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    border-radius: 2px;
+}
+.hud-minimap-cell.player {
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--primary-glow);
+    animation: minimapPulse 1.5s ease-in-out infinite;
+}
+.hud-minimap-cell.enemy {
+    background: var(--danger);
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(218,22,37,0.5);
+}
+.hud-minimap-cell.teammate {
+    background: var(--success);
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(28,164,85,0.5);
+}
+@keyframes minimapPulse {
+    0%, 100% { box-shadow: 0 0 4px var(--primary-glow); }
+    50% { box-shadow: 0 0 10px var(--primary-glow); }
+}
+
+/* 伤害数字 */
+.hud-damage {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--danger);
+    text-shadow: 0 2px 8px rgba(218,22,37,0.6), 0 0 20px rgba(218,22,37,0.3);
+    animation: damageFloat 1.2s ease forwards;
+    pointer-events: none;
+    z-index: 3;
+}
+@keyframes damageFloat {
+    0% { opacity: 1; transform: translateY(0) scale(0.8); }
+    20% { transform: translateY(-10px) scale(1.1); opacity: 1; }
+    100% { opacity: 0; transform: translateY(-70px) scale(1); }
+}
+.hud-damage.crit {
+    color: var(--warning);
+    font-size: 48px;
+    text-shadow: 0 2px 12px rgba(223,197,11,0.7), 0 0 30px rgba(223,197,11,0.3);
+}
+
+/* 连击提示 */
+.hud-combo {
+    position: absolute;
+    top: 16%;
+    right: 180px;
+    text-align: right;
+    z-index: 3;
+}
+.hud-combo-count {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--primary);
+    text-shadow: 0 0 16px var(--primary-glow), 0 2px 4px rgba(0,0,0,0.6);
+    line-height: 1;
+}
+.hud-combo-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-highlight);
+    letter-spacing: 3px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+/* 队伍状态 */
+.hud-party {
+    position: absolute;
+    top: 16px; left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 2;
+}
+.hud-party-member {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-sm);
+    padding: 4px 8px 4px 4px;
+    backdrop-filter: blur(4px);
+}
+.hud-party-avatar {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, var(--bg-card), var(--bg-elevated));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    border: 1px solid var(--border-soft);
+}
+.hud-party-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.hud-party-name {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1;
+}
+.hud-party-bar {
+    width: 90px; height: 5px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.hud-party-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    position: relative;
+}
+.hud-party-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px 3px 0 0;
+}
+
+/* 目标血条 */
+.hud-target-frame {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 2;
+}
+.hud-target-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--danger);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    margin-bottom: 4px;
+}
+.hud-target-bar {
+    width: 220px; height: 12px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(218,22,37,0.3);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.hud-target-fill {
+    height: 100%;
+    width: 62%;
+    background: linear-gradient(90deg, #8B0000, #DA1625);
+    border-radius: 6px;
+    position: relative;
+}
+.hud-target-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.12), transparent);
+    border-radius: 6px 6px 0 0;
+}
+.hud-target-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+}
+.hud-target-level {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    margin-top: 3px;
+}
+
+/* ============================================================
+   18. 公会系统
+   ============================================================ */
+.guild-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 16px;
+}
+.guild-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.guild-info-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.guild-emblem {
+    width: 64px; height: 64px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--primary-press), var(--primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border: 2px solid var(--border-gold);
+    flex-shrink: 0;
+}
+.guild-info { flex: 1; }
+.guild-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+.guild-level {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.guild-exp-bar {
+    height: 8px;
+    background: var(--bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 200px;
+}
+.guild-exp-fill {
+    height: 100%;
+    background: var(--text-highlight);
+    border-radius: 4px;
+}
+.guild-exp-text {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+}
+
+.guild-notice {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+}
+.guild-notice h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+.guild-notice p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.guild-members {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+}
+.guild-members h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.guild-member-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-soft);
+}
+.guild-member-row:last-child { border-bottom: none; }
+.guild-member-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    position: relative;
+    flex-shrink: 0;
+}
+.guild-member-info { flex: 1; }
+.guild-member-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.guild-member-role {
+    font-size: 11px;
+    color: var(--text-tertiary);
+}
+.guild-member-contrib {
+    font-size: 12px;
+    color: var(--text-highlight);
+    font-weight: 600;
+}
+.guild-member-status {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+}
+
+/* 捐献面板 */
+.guild-donate {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    height: fit-content;
+}
+.guild-donate h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+}
+.donate-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.donate-option:hover { border-color: var(--border-gold); }
+.donate-option-info { flex: 1; }
+.donate-option-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.donate-option-reward {
+    font-size: 11px;
+    color: var(--text-highlight);
+}
+
+/* ============================================================
+   设计标注模式 (Inspect Mode)
+   ============================================================ */
+.inspect-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    margin-left: auto;
+}
+.inspect-toggle:hover {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+}
+.inspect-toggle.active {
+    background: rgba(47,184,196,0.15);
+    color: var(--accent, #2FB8C4);
+    border-color: rgba(47,184,196,0.3);
+}
+
+/* 检查模式下的元素高亮 */
+.inspect-mode *:hover:not(.inspect-panel):not(.inspect-panel *):not(.theme-switcher):not(.theme-switcher *):not(.inspect-toggle) {
+    outline: 2px dashed var(--accent, #2FB8C4) !important;
+    outline-offset: 1px;
+    cursor: crosshair !important;
+}
+
+/* 元素标签 */
+.inspect-label {
+    position: fixed;
+    background: var(--accent, #2FB8C4);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 10000;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+/* 变量面板 */
+.inspect-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100vh;
+    background: var(--bg-secondary, #1C1A1F);
+    border-left: 1px solid var(--border-soft, rgba(255,255,255,0.06));
+    z-index: 9998;
+    display: none;
+    flex-direction: column;
+    box-shadow: -8px 0 32px rgba(0,0,0,0.4);
+}
+.inspect-panel.open { display: flex; }
+
+.inspect-panel-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.06));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.inspect-panel-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary, #FFFFF6);
+}
+.inspect-panel-close {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--bg-card, #322E35);
+    color: var(--text-secondary, #DAD7C9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+.inspect-panel-close:hover { background: var(--bg-elevated, #3D3840); }
+
+.inspect-panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+}
+
+.inspect-section {
+    margin-bottom: 20px;
+}
+.inspect-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary, #8A8A94);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.inspect-var-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: var(--bg-card, #322E35);
+    border-radius: var(--radius-sm, 6px);
+    margin-bottom: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background .15s;
+}
+.inspect-var-row:hover { background: var(--bg-elevated, #3D3840); }
+.inspect-var-name {
+    color: var(--text-secondary, #DAD7C9);
+    font-family: monospace;
+    flex: 1;
+}
+.inspect-var-value {
+    color: var(--text-primary, #FFFFF6);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.inspect-var-swatch {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+}
+.inspect-var-copy {
+    font-size: 10px;
+    color: var(--accent, #2FB8C4);
+    opacity: 0;
+    transition: opacity .15s;
+}
+.inspect-var-row:hover .inspect-var-copy { opacity: 1; }
+
+.inspect-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-tertiary, #8A8A94);
+    font-size: 13px;
+}
+.inspect-empty-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+}
+
+/* ============================================================
    响应式
    ============================================================ */
 @media (max-width: 900px) {
@@ -1957,6 +3746,15 @@ a { color: inherit; text-decoration: none; }
     .chat-channels { display: none; }
     .warehouse-layout { grid-template-columns: 1fr; }
     .level-info-grid { grid-template-columns: 1fr; }
+    .character-layout { grid-template-columns: 1fr; }
+    .settings-layout { grid-template-columns: 1fr; }
+    .settings-sidebar { display: none; }
+    .skill-tree-branches { grid-template-columns: 1fr; }
+    .guild-layout { grid-template-columns: 1fr; }
+    .hud-container { height: 420px; }
+    .hud-scene-grid { display: none; }
+    .tips-rarity-row { flex-wrap: wrap; }
+    .dialog-box { width: 90%; }
 }
 </style>
 </head>
@@ -1967,6 +3765,22 @@ a { color: inherit; text-decoration: none; }
      ============================================================ -->
 <div class="theme-switcher" id="themeSwitcher">
     <span class="theme-switcher-label">配色</span>
+    <span class="inspect-toggle" id="inspectToggle">🔍 检查</span>
+</div>
+
+<!-- 检查模式变量面板 -->
+<div class="inspect-panel" id="inspectPanel">
+    <div class="inspect-panel-header">
+        <h3>🎨 设计标注</h3>
+        <div class="inspect-panel-close" id="inspectClose">✕</div>
+    </div>
+    <div class="inspect-panel-body" id="inspectBody">
+        <div class="inspect-empty">
+            <div class="inspect-empty-icon">🔍</div>
+            <div>点击页面任意元素</div>
+            <div style="font-size:11px;margin-top:4px;opacity:0.6;">查看其使用的 CSS 变量</div>
+        </div>
+    </div>
 </div>
 
 <!-- ============================================================
@@ -1980,18 +3794,27 @@ a { color: inherit; text-decoration: none; }
     </div>
     <div class="sidebar-nav">
         <div class="nav-group-title">系统</div>
-        <div class="nav-item active" data-page="login">
+        <div class="nav-item active" data-page="login" data-fullscreen="true">
             <span class="nav-icon">🔑</span>登录
         </div>
         <div class="nav-item" data-page="lobby">
             <span class="nav-icon">🏠</span>主界面
         </div>
         <div class="nav-group-title">玩法</div>
+        <div class="nav-item" data-page="character">
+            <span class="nav-icon">🧑</span>角色面板
+        </div>
         <div class="nav-item" data-page="quest">
             <span class="nav-icon">📜</span>任务成就
         </div>
         <div class="nav-item" data-page="level">
             <span class="nav-icon">🗺️</span>关卡
+        </div>
+        <div class="nav-item" data-page="skill">
+            <span class="nav-icon">✨</span>技能树
+        </div>
+        <div class="nav-item" data-page="battle">
+            <span class="nav-icon">⚔️</span>战斗 HUD
         </div>
         <div class="nav-item" data-page="rank">
             <span class="nav-icon">🏆</span>排行榜
@@ -2007,9 +3830,19 @@ a { color: inherit; text-decoration: none; }
         <div class="nav-item" data-page="friend">
             <span class="nav-icon">👥</span>好友
         </div>
+        <div class="nav-item" data-page="guild">
+            <span class="nav-icon">🏰</span>公会
+        </div>
         <div class="nav-item" data-page="mail">
             <span class="nav-icon">📮</span>邮件
             <span class="nav-badge">3</span>
+        </div>
+        <div class="nav-group-title">系统</div>
+        <div class="nav-item" data-page="settings">
+            <span class="nav-icon">⚙️</span>设置
+        </div>
+        <div class="nav-item" data-page="dialog">
+            <span class="nav-icon">💬</span>弹窗通知
         </div>
         <div class="nav-group-title">物品</div>
         <div class="nav-item" data-page="tips">
@@ -2390,22 +4223,24 @@ a { color: inherit; text-decoration: none; }
     <div class="shop-grid">
         <div class="shop-item">
             <div class="shop-item-media">
-                <div class="shop-item-rarity" style="background:var(--rarity-legendary)"></div>
+                <div class="shop-item-rarity rarity-legendary"></div>
                 <div class="shop-item-hot">HOT</div>
+                <div class="shop-item-discount">-26%</div>
                 ⚔️
             </div>
             <div class="shop-item-info">
                 <div class="shop-item-name">传说之刃</div>
                 <div class="shop-item-desc">攻击力 +280，暴击 +15%</div>
+                <div class="shop-item-countdown"><span class="countdown-icon">⏰</span> 02:35:18 后恢复原价</div>
                 <div class="shop-item-footer">
-                    <div class="shop-item-price"><span class="currency">💎</span> 2,880</div>
+                    <div class="shop-item-price"><span class="currency">💎</span> 2,880 <s style="font-size:11px;color:var(--text-tertiary);font-weight:400;margin-left:4px;">3,880</s></div>
                     <button class="btn btn-primary btn-sm">购买</button>
                 </div>
             </div>
         </div>
         <div class="shop-item">
             <div class="shop-item-media">
-                <div class="shop-item-rarity" style="background:var(--rarity-epic)"></div>
+                <div class="shop-item-rarity rarity-epic"></div>
                 🛡️
             </div>
             <div class="shop-item-info">
@@ -2419,7 +4254,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="shop-item">
             <div class="shop-item-media">
-                <div class="shop-item-rarity" style="background:var(--rarity-rare)"></div>
+                <div class="shop-item-rarity rarity-rare"></div>
                 🧪
             </div>
             <div class="shop-item-info">
@@ -2433,7 +4268,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="shop-item">
             <div class="shop-item-media">
-                <div class="shop-item-rarity" style="background:var(--rarity-uncommon)"></div>
+                <div class="shop-item-rarity rarity-uncommon"></div>
                 💊
             </div>
             <div class="shop-item-info">
@@ -2447,7 +4282,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="shop-item">
             <div class="shop-item-media">
-                <div class="shop-item-rarity" style="background:var(--rarity-mythic)"></div>
+                <div class="shop-item-rarity rarity-mythic"></div>
                 <div class="shop-item-hot">限定</div>
                 🐉
             </div>
@@ -2462,7 +4297,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="shop-item">
             <div class="shop-item-media">
-                <div class="shop-item-rarity" style="background:var(--rarity-common)"></div>
+                <div class="shop-item-rarity rarity-common"></div>
                 📦
             </div>
             <div class="shop-item-info">
@@ -2530,6 +4365,15 @@ a { color: inherit; text-decoration: none; }
                 <div class="level-info-label">通关奖励</div>
                 <div class="level-info-value">EXP +800</div>
             </div>
+        </div>
+
+        <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:8px;">敌方阵容</div>
+        <div class="level-enemy-preview">
+            <div class="level-enemy-icon">👹</div>
+            <div class="level-enemy-icon">👹</div>
+            <div class="level-enemy-icon">🐺</div>
+            <div class="level-enemy-icon">🐺</div>
+            <div class="level-enemy-icon">😈</div>
         </div>
 
         <div class="level-rewards">
@@ -2684,11 +4528,14 @@ a { color: inherit; text-decoration: none; }
                         <div class="chat-msg-bubble">队伍满了没？我奶妈，装备已就位</div>
                     </div>
                 </div>
+                <div class="chat-msg-system">
+                    <span>影刃 加入了队伍</span>
+                </div>
                 <div class="chat-msg">
                     <div class="chat-msg-avatar">🗡️</div>
                     <div>
                         <div class="chat-msg-name">影刃</div>
-                        <div class="chat-msg-bubble">黄金远征活动太香了，刚出了传说碎片！</div>
+                        <div class="chat-msg-bubble">黄金远征活动太香了，刚出了<span class="chat-item-link">⚔️ 传说碎片</span>！</div>
                     </div>
                 </div>
             </div>
@@ -2806,41 +4653,330 @@ a { color: inherit; text-decoration: none; }
         <div class="tips-trigger">🗡️</div>
     </div>
 
-    <!-- Tooltip 示例 -->
-    <div style="display:flex;justify-content:center;">
-        <div class="tooltip-popup">
-            <div class="tooltip-header">
-                <div class="tooltip-icon">⚔️</div>
-                <div class="tooltip-title-area">
-                    <div class="tooltip-name">龙焰之刃</div>
-                    <div class="tooltip-type">传说 · 双手剑</div>
+    <!-- 详细 Tooltip 示例 — 传说武器 -->
+    <div style="display:flex;justify-content:center;margin-bottom:24px;">
+        <div class="tooltip-popup" style="--tooltip-border:var(--rarity-legendary);--tooltip-glow:rgba(232,135,30,0.15)">
+            <div class="tooltip-accent"></div>
+            <div class="tooltip-body">
+                <!-- 头部 -->
+                <div class="tooltip-header">
+                    <div class="tooltip-icon">⚔️</div>
+                    <div class="tooltip-title-area">
+                        <div class="tooltip-name" style="color:var(--rarity-legendary)">龙焰之刃</div>
+                        <div class="tooltip-type">双手剑 · 武器</div>
+                    </div>
                 </div>
-                <div class="tooltip-rarity" style="background:var(--rarity-legendary)"></div>
+                <!-- 元信息 -->
+                <div class="tooltip-meta">
+                    <span>物品等级 286</span>
+                    <span>重量 12.5</span>
+                </div>
+                <!-- 主属性 -->
+                <div class="tooltip-main-stats">
+                    <div class="tooltip-main-stat highlight">
+                        <span class="tooltip-stat-label">物理伤害</span>
+                        <span class="tooltip-stat-value">486-612 <span class="tooltip-compare up">↑</span></span>
+                    </div>
+                    <div class="tooltip-main-stat">
+                        <span class="tooltip-stat-label">攻击速度</span>
+                        <span class="tooltip-stat-value">2.6</span>
+                    </div>
+                </div>
+                <!-- 附加属性 -->
+                <div class="tooltip-stats">
+                    <div class="tooltip-stat">
+                        <span class="tooltip-stat-label">+86 力量</span>
+                        <span class="tooltip-stat-value bonus"><span class="tooltip-compare up">↑</span></span>
+                    </div>
+                    <div class="tooltip-stat">
+                        <span class="tooltip-stat-label">+45 耐力</span>
+                        <span class="tooltip-stat-value bonus"><span class="tooltip-compare up">↑</span></span>
+                    </div>
+                    <div class="tooltip-stat">
+                        <span class="tooltip-stat-label">+15% 暴击几率</span>
+                        <span class="tooltip-stat-value bonus"></span>
+                    </div>
+                    <div class="tooltip-stat">
+                        <span class="tooltip-stat-label">+120 火焰伤害</span>
+                        <span class="tooltip-stat-value bonus"></span>
+                    </div>
+                </div>
+                <!-- 描述 -->
+                <div class="tooltip-desc">
+                    以远古炎龙的脊骨锻造，剑身永不冷却。持有者的每一次挥砍都裹挟着灼热的龙息，燃尽一切敌人。
+                </div>
+                <!-- 耐久 / 绑定 -->
+                <div class="tooltip-durability">
+                    耐久度 100/100 <span class="tooltip-durability-bar"><span class="tooltip-durability-fill" style="width:100%"></span></span>
+                </div>
+                <div class="tooltip-binding">装备后绑定</div>
+                <!-- 底部 -->
+                <div class="tooltip-footer">
+                    <span>商人售价 12,800 金币</span>
+                    <span>需求等级 40</span>
+                </div>
             </div>
-            <div class="tooltip-stats">
-                <div class="tooltip-stat">
-                    <span class="tooltip-stat-label">攻击力</span>
-                    <span class="tooltip-stat-value">+286</span>
+        </div>
+    </div>
+
+    <!-- 详细 Tooltip 示例 — 史诗套装防具 -->
+    <div style="display:flex;justify-content:center;margin-bottom:24px;">
+        <div class="tooltip-popup" style="--tooltip-border:var(--rarity-epic);--tooltip-glow:rgba(175,119,249,0.12)">
+            <div class="tooltip-accent"></div>
+            <div class="tooltip-body">
+                <!-- 头部 -->
+                <div class="tooltip-header">
+                    <div class="tooltip-icon">🧥</div>
+                    <div class="tooltip-title-area">
+                        <div class="tooltip-name" style="color:var(--rarity-epic)">永不停歇者战袍</div>
+                        <div class="tooltip-type">皮甲 · 永不停歇者套装</div>
+                    </div>
                 </div>
-                <div class="tooltip-stat">
-                    <span class="tooltip-stat-label">暴击率</span>
-                    <span class="tooltip-stat-value bonus">+15%</span>
+                <!-- 元信息 -->
+                <div class="tooltip-meta">
+                    <span>物品等级 275</span>
+                    <span>重量 8.5</span>
                 </div>
-                <div class="tooltip-stat">
-                    <span class="tooltip-stat-label">攻击速度</span>
-                    <span class="tooltip-stat-value bonus">+8%</span>
+                <!-- 职业限制 -->
+                <div class="tooltip-restriction">职业限制: 盗贼 · 猎人 · 德鲁伊</div>
+                <!-- 主属性 -->
+                <div class="tooltip-main-stats">
+                    <div class="tooltip-main-stat highlight">
+                        <span class="tooltip-stat-label">护甲</span>
+                        <span class="tooltip-stat-value">850</span>
+                    </div>
+                    <div class="tooltip-main-stat">
+                        <span class="tooltip-stat-label">敏捷</span>
+                        <span class="tooltip-stat-value positive">+128</span>
+                    </div>
                 </div>
-                <div class="tooltip-stat">
-                    <span class="tooltip-stat-label">火焰伤害</span>
-                    <span class="tooltip-stat-value bonus">+120</span>
+                <!-- 附加属性 -->
+                <div class="tooltip-stats">
+                    <div class="tooltip-stat">
+                        <span class="tooltip-stat-label">+72 耐力</span>
+                        <span class="tooltip-stat-value bonus"></span>
+                    </div>
+                    <div class="tooltip-stat">
+                        <span class="tooltip-stat-label">+8% 暴击几率</span>
+                        <span class="tooltip-stat-value bonus"></span>
+                    </div>
+                    <div class="tooltip-stat">
+                        <span class="tooltip-stat-label">+12% 攻击速度</span>
+                        <span class="tooltip-stat-value bonus"></span>
+                    </div>
+                </div>
+                <!-- 套装效果 -->
+                <div class="tooltip-set">
+                    <div class="tooltip-set-name">永不停歇者套装 (2/6)</div>
+                    <div class="tooltip-set-piece active">• 永不停歇者护手</div>
+                    <div class="tooltip-set-piece active">• 永不停歇者战袍</div>
+                    <div class="tooltip-set-piece">• 永不停歇者护腿</div>
+                    <div class="tooltip-set-piece">• 永不停歇者头盔</div>
+                    <div class="tooltip-set-piece">• 永不停歇者披风</div>
+                    <div class="tooltip-set-piece">• 永不停歇者长靴</div>
+                    <div class="tooltip-set-bonus">(2) 套装: +25% 移动速度</div>
+                    <div class="tooltip-set-bonus">(4) 套装: 攻击速度提高 20%</div>
+                    <div class="tooltip-set-bonus">(6) 套装: 50% 几率立即重置技能冷却</div>
+                </div>
+                <!-- 描述 -->
+                <div class="tooltip-desc">
+                    穿上它，你将成为风的一部分。永不停歇，永不回头。
+                </div>
+                <!-- 耐久 / 绑定 -->
+                <div class="tooltip-durability">
+                    耐久度 70/70 <span class="tooltip-durability-bar"><span class="tooltip-durability-fill" style="width:100%"></span></span>
+                </div>
+                <div class="tooltip-binding">装备后绑定</div>
+                <!-- 底部 -->
+                <div class="tooltip-footer">
+                    <span>商人售价 8,500 金币</span>
+                    <span>需求等级 35</span>
                 </div>
             </div>
-            <div class="divider"></div>
-            <div class="tooltip-desc">
-                「远古巨龙之魂凝聚而成的利刃，挥舞时伴有龙吟之声」
+        </div>
+    </div>
+
+    <!-- 稀有度全套对比 -->
+    <div class="tips-rarity-compare">
+        <div class="tips-rarity-title">稀有度对比（普通 → 神话）</div>
+        <div class="tips-rarity-row">
+            <!-- 普通 -->
+            <div class="tooltip-popup" style="--tooltip-border:var(--rarity-common);--tooltip-glow:transparent">
+                <div class="tooltip-accent"></div>
+                <div class="tooltip-body">
+                    <div class="tooltip-header">
+                        <div class="tooltip-icon">🗡️</div>
+                        <div class="tooltip-title-area">
+                            <div class="tooltip-name" style="color:var(--rarity-common)">铁剑</div>
+                            <div class="tooltip-type">单手剑 · 武器</div>
+                        </div>
+                    </div>
+                    <div class="tooltip-meta"><span>物品等级 5</span><span>重量 3.0</span></div>
+                    <div class="tooltip-main-stats">
+                        <div class="tooltip-main-stat highlight">
+                            <span class="tooltip-stat-label">物理伤害</span>
+                            <span class="tooltip-stat-value">12-18</span>
+                        </div>
+                    </div>
+                    <div class="tooltip-footer">
+                        <span>售价 15 金币</span>
+                        <span>需求等级 3</span>
+                    </div>
+                </div>
             </div>
-            <div class="tooltip-requirement">
-                需要等级 <span>40</span> · 力量 <span>120</span>
+            <!-- 优秀 -->
+            <div class="tooltip-popup" style="--tooltip-border:var(--rarity-uncommon);--tooltip-glow:rgba(61,220,92,0.08)">
+                <div class="tooltip-accent"></div>
+                <div class="tooltip-body">
+                    <div class="tooltip-header">
+                        <div class="tooltip-icon">⚔️</div>
+                        <div class="tooltip-title-area">
+                            <div class="tooltip-name" style="color:var(--rarity-uncommon)">精钢长剑</div>
+                            <div class="tooltip-type">单手剑 · 武器</div>
+                        </div>
+                    </div>
+                    <div class="tooltip-meta"><span>物品等级 15</span><span>重量 3.5</span></div>
+                    <div class="tooltip-main-stats">
+                        <div class="tooltip-main-stat highlight">
+                            <span class="tooltip-stat-label">物理伤害</span>
+                            <span class="tooltip-stat-value">45-62</span>
+                        </div>
+                    </div>
+                    <div class="tooltip-stats">
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+5 力量</span><span class="tooltip-stat-value bonus"></span></div>
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+3% 暴击几率</span><span class="tooltip-stat-value bonus"></span></div>
+                    </div>
+                    <div class="tooltip-footer">
+                        <span>售价 150 金币</span>
+                        <span>需求等级 12</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 稀有 -->
+            <div class="tooltip-popup" style="--tooltip-border:var(--rarity-rare);--tooltip-glow:rgba(62,156,255,0.08)">
+                <div class="tooltip-accent"></div>
+                <div class="tooltip-body">
+                    <div class="tooltip-header">
+                        <div class="tooltip-icon">🗡️</div>
+                        <div class="tooltip-title-area">
+                            <div class="tooltip-name" style="color:var(--rarity-rare)">寒冰之刃</div>
+                            <div class="tooltip-type">匕首 · 武器</div>
+                        </div>
+                    </div>
+                    <div class="tooltip-meta"><span>物品等级 28</span><span>重量 2.0</span></div>
+                    <div class="tooltip-main-stats">
+                        <div class="tooltip-main-stat highlight">
+                            <span class="tooltip-stat-label">物理伤害</span>
+                            <span class="tooltip-stat-value">98-135</span>
+                        </div>
+                    </div>
+                    <div class="tooltip-stats">
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+12 敏捷</span><span class="tooltip-stat-value bonus"></span></div>
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+40 冰霜伤害</span><span class="tooltip-stat-value bonus"></span></div>
+                    </div>
+                    <div class="tooltip-desc">刺骨寒气从刀锋渗出，被击中的伤口会瞬间结霜。</div>
+                    <div class="tooltip-footer">
+                        <span>售价 1,200 金币</span>
+                        <span>需求等级 25</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 史诗 -->
+            <div class="tooltip-popup" style="--tooltip-border:var(--rarity-epic);--tooltip-glow:rgba(175,119,249,0.1)">
+                <div class="tooltip-accent"></div>
+                <div class="tooltip-body">
+                    <div class="tooltip-header">
+                        <div class="tooltip-icon">🛡️</div>
+                        <div class="tooltip-title-area">
+                            <div class="tooltip-name" style="color:var(--rarity-epic)">秘银盾牌</div>
+                            <div class="tooltip-type">副手 · 盾牌</div>
+                        </div>
+                    </div>
+                    <div class="tooltip-meta"><span>物品等级 32</span><span>重量 8.0</span></div>
+                    <div class="tooltip-main-stats">
+                        <div class="tooltip-main-stat highlight">
+                            <span class="tooltip-stat-label">护甲</span>
+                            <span class="tooltip-stat-value">1,280</span>
+                        </div>
+                        <div class="tooltip-main-stat">
+                            <span class="tooltip-stat-label">格挡率</span>
+                            <span class="tooltip-stat-value positive">+18%</span>
+                        </div>
+                    </div>
+                    <div class="tooltip-stats">
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+55 耐力</span><span class="tooltip-stat-value bonus"></span></div>
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+10% 格挡值</span><span class="tooltip-stat-value bonus"></span></div>
+                    </div>
+                    <div class="tooltip-footer">
+                        <span>售价 3,500 金币</span>
+                        <span>需求等级 30</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 传说 -->
+            <div class="tooltip-popup" style="--tooltip-border:var(--rarity-legendary);--tooltip-glow:rgba(232,135,30,0.12)">
+                <div class="tooltip-accent"></div>
+                <div class="tooltip-body">
+                    <div class="tooltip-header">
+                        <div class="tooltip-icon">⚔️</div>
+                        <div class="tooltip-title-area">
+                            <div class="tooltip-name" style="color:var(--rarity-legendary)">龙焰之刃</div>
+                            <div class="tooltip-type">双手剑 · 武器</div>
+                        </div>
+                    </div>
+                    <div class="tooltip-meta"><span>物品等级 40</span><span>重量 12.5</span></div>
+                    <div class="tooltip-main-stats">
+                        <div class="tooltip-main-stat highlight">
+                            <span class="tooltip-stat-label">物理伤害</span>
+                            <span class="tooltip-stat-value">486-612</span>
+                        </div>
+                        <div class="tooltip-main-stat">
+                            <span class="tooltip-stat-label">攻击速度</span>
+                            <span class="tooltip-stat-value">2.6</span>
+                        </div>
+                    </div>
+                    <div class="tooltip-stats">
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+86 力量</span><span class="tooltip-stat-value bonus"></span></div>
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+15% 暴击几率</span><span class="tooltip-stat-value bonus"></span></div>
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+120 火焰伤害</span><span class="tooltip-stat-value bonus"></span></div>
+                    </div>
+                    <div class="tooltip-desc">以远古炎龙的脊骨锻造，剑身永不冷却。</div>
+                    <div class="tooltip-footer">
+                        <span>售价 12,800 金币</span>
+                        <span>需求等级 40</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 神话 -->
+            <div class="tooltip-popup" style="--tooltip-border:var(--rarity-mythic);--tooltip-glow:rgba(232,52,43,0.12)">
+                <div class="tooltip-accent"></div>
+                <div class="tooltip-body">
+                    <div class="tooltip-header">
+                        <div class="tooltip-icon">👑</div>
+                        <div class="tooltip-title-area">
+                            <div class="tooltip-name" style="color:var(--rarity-mythic)">灭世王冠</div>
+                            <div class="tooltip-type">头盔 · 板甲</div>
+                        </div>
+                    </div>
+                    <div class="tooltip-meta"><span>物品等级 50</span><span>重量 6.0</span></div>
+                    <div class="tooltip-main-stats">
+                        <div class="tooltip-main-stat highlight">
+                            <span class="tooltip-stat-label">护甲</span>
+                            <span class="tooltip-stat-value">2,150</span>
+                        </div>
+                    </div>
+                    <div class="tooltip-stats">
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+100 全属性</span><span class="tooltip-stat-value bonus"></span></div>
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+25% 伤害加成</span><span class="tooltip-stat-value bonus"></span></div>
+                        <div class="tooltip-stat"><span class="tooltip-stat-label">+15% 技能急速</span><span class="tooltip-stat-value bonus"></span></div>
+                    </div>
+                    <div class="tooltip-desc">传说中唯有征服深渊的王者才有资格佩戴。戴上它的那一刻，世界将为你颤抖。</div>
+                    <div class="tooltip-binding">拾取后绑定</div>
+                    <div class="tooltip-footer">
+                        <span>无法出售</span>
+                        <span>需求等级 45</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2864,27 +5000,29 @@ a { color: inherit; text-decoration: none; }
             </div>
             <div class="bag-slots">
                 <div class="bag-slot">
-                    <div class="bag-slot-rarity" style="background:var(--rarity-legendary)"></div>
+                    <div class="bag-slot-rarity rarity-legendary"></div>
+                    <span class="new-dot"></span>
                     ⚔️
                 </div>
                 <div class="bag-slot">
-                    <div class="bag-slot-rarity" style="background:var(--rarity-epic)"></div>
+                    <div class="bag-slot-rarity rarity-epic"></div>
                     🛡️
                 </div>
                 <div class="bag-slot">
-                    <div class="bag-slot-rarity" style="background:var(--rarity-rare)"></div>
+                    <div class="bag-slot-rarity rarity-rare"></div>
                     💍
                 </div>
                 <div class="bag-slot">
-                    <div class="bag-slot-rarity" style="background:var(--rarity-uncommon)"></div>
+                    <div class="bag-slot-rarity rarity-uncommon"></div>
+                    <span class="new-dot"></span>
                     👑
                 </div>
                 <div class="bag-slot">
-                    <div class="bag-slot-rarity" style="background:var(--rarity-epic)"></div>
+                    <div class="bag-slot-rarity rarity-epic"></div>
                     🧥
                 </div>
                 <div class="bag-slot">
-                    <div class="bag-slot-rarity" style="background:var(--rarity-rare)"></div>
+                    <div class="bag-slot-rarity rarity-rare"></div>
                     👢
                 </div>
                 <div class="bag-slot">
@@ -2924,8 +5062,8 @@ a { color: inherit; text-decoration: none; }
 
         <!-- 选中物品详情 -->
         <div class="bag-detail">
-            <div class="bag-detail-icon" style="border-color:var(--rarity-legendary)">⚔️</div>
-            <div class="bag-detail-name">龙焰之刃</div>
+            <div class="bag-detail-icon rarity-legendary-border">⚔️</div>
+            <div class="bag-detail-name rarity-text-legendary">龙焰之刃</div>
             <div class="bag-detail-type">传说 · 双手剑</div>
             <div class="divider"></div>
             <div class="bag-detail-stats">
@@ -3048,6 +5186,767 @@ a { color: inherit; text-decoration: none; }
     </div>
 </div>
 
+<!-- ==================== 13. 角色面板 ==================== -->
+<div class="page" id="page-character">
+    <div class="page-header">
+        <h2>角色面板</h2>
+        <p>属性总览 · 装备穿戴</p>
+    </div>
+
+    <div class="character-layout">
+        <!-- 左侧：角色卡 -->
+        <div class="character-card">
+            <div class="character-card-banner"></div>
+            <div class="character-card-body">
+                <div class="character-avatar-large">⚔️</div>
+                <div class="character-name">暗影行者</div>
+                <div class="character-class">史诗骑士 · 坦克位</div>
+                <div class="character-level">Lv.42 · 经验 68%</div>
+                <div class="character-level-bar"><div class="character-level-fill"></div></div>
+                <div class="character-power">
+                    <div class="character-power-label">战力评分</div>
+                    <div class="character-power-value">128,750</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧：装备 + 属性 -->
+        <div class="character-right">
+            <!-- 装备槽 -->
+            <div class="equipment-panel">
+                <div class="equipment-panel-title">
+                    装备栏 <span class="ilvl">ilvl 286</span>
+                </div>
+                <div class="equipment-slots">
+                    <div class="equip-slot" style="--slot-glow:rgba(175,119,249,0.2)">
+                        <span class="equip-slot-label">头盔</span>
+                        <span style="font-size:22px;">👑</span>
+                        <div class="equip-slot-rarity" style="background:var(--rarity-epic)"></div>
+                    </div>
+                    <div class="equip-slot" style="--slot-glow:rgba(232,135,30,0.2)">
+                        <span class="equip-slot-label">护甲</span>
+                        <span style="font-size:22px;">🧥</span>
+                        <div class="equip-slot-rarity" style="background:var(--rarity-epic)"></div>
+                    </div>
+                    <div class="equip-slot" style="--slot-glow:rgba(62,156,255,0.2)">
+                        <span class="equip-slot-label">项链</span>
+                        <span style="font-size:22px;">💍</span>
+                        <div class="equip-slot-rarity" style="background:var(--rarity-rare)"></div>
+                    </div>
+                    <div class="equip-slot" style="--slot-glow:rgba(232,135,30,0.25)">
+                        <span class="equip-slot-label">武器</span>
+                        <span style="font-size:22px;">⚔️</span>
+                        <div class="equip-slot-rarity" style="background:linear-gradient(90deg,var(--rarity-legendary),var(--warning))"></div>
+                    </div>
+                    <div class="equip-slot empty">
+                        <span class="equip-slot-label">戒指</span>
+                        <span class="equip-icon-placeholder">+ 空槽</span>
+                    </div>
+                    <div class="equip-slot" style="--slot-glow:rgba(62,156,255,0.2)">
+                        <span class="equip-slot-label">鞋子</span>
+                        <span style="font-size:22px;">👢</span>
+                        <div class="equip-slot-rarity" style="background:var(--rarity-rare)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 属性面板 -->
+            <div class="stats-panel">
+                <div class="stats-panel-title">
+                    基础属性
+                    <div class="stat-total">总计 <span>24,860</span></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">❤️</div>
+                    <div class="stat-info">
+                        <span class="stat-label">生命值</span>
+                        <div class="stat-bar-track"><div class="stat-bar-fill" style="--stat-color:#8B0000;--stat-color-light:#DA1625;width:85%"></div></div>
+                    </div>
+                    <span class="stat-value">12,860</span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">💙</div>
+                    <div class="stat-info">
+                        <span class="stat-label">魔法值</span>
+                        <div class="stat-bar-track"><div class="stat-bar-fill" style="--stat-color:#003366;--stat-color-light:#3E9CFF;width:55%"></div></div>
+                    </div>
+                    <span class="stat-value">3,240</span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">⚔️</div>
+                    <div class="stat-info">
+                        <span class="stat-label">攻击力</span>
+                        <div class="stat-bar-track"><div class="stat-bar-fill" style="--stat-color:var(--rarity-legendary);--stat-color-light:var(--warning);width:72%"></div></div>
+                    </div>
+                    <span class="stat-value">2,860 <span class="stat-compare stat-up">▲120</span></span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">🛡️</div>
+                    <div class="stat-info">
+                        <span class="stat-label">防御力</span>
+                        <div class="stat-bar-track"><div class="stat-bar-fill" style="--stat-color:var(--rarity-epic);--stat-color-light:var(--purple);width:60%"></div></div>
+                    </div>
+                    <span class="stat-value">1,920</span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">💨</div>
+                    <div class="stat-info">
+                        <span class="stat-label">攻击速度</span>
+                        <div class="stat-bar-track"><div class="stat-bar-fill" style="--stat-color:var(--accent);--stat-color-light:var(--cyan);width:48%"></div></div>
+                    </div>
+                    <span class="stat-value">1.25/s <span class="stat-compare stat-up">▲0.05</span></span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-info">
+                        <span class="stat-label">暴击率</span>
+                        <div class="stat-bar-track"><div class="stat-bar-fill" style="--stat-color:var(--success);--stat-color-light:var(--rarity-uncommon);width:65%"></div></div>
+                    </div>
+                    <span class="stat-value bonus">28%</span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">💥</div>
+                    <div class="stat-info">
+                        <span class="stat-label">暴击伤害</span>
+                        <div class="stat-bar-track"><div class="stat-bar-fill" style="--stat-color:var(--danger);--stat-color-light:var(--warning);width:90%"></div></div>
+                    </div>
+                    <span class="stat-value">180%</span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">🏃</div>
+                    <div class="stat-info">
+                        <span class="stat-label">闪避率</span>
+                        <div class="stat-bar-track"><div class="stat-bar-fill" style="--stat-color:var(--rarity-rare);--stat-color-light:var(--cyan);width:35%"></div></div>
+                    </div>
+                    <span class="stat-value">12% <span class="stat-compare stat-down">▼3%</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 14. 设置页面 ==================== -->
+<div class="page" id="page-settings">
+    <div class="page-header">
+        <h2>设置</h2>
+        <p>画质 · 音效 · 操作 · 账号</p>
+    </div>
+
+    <div class="settings-layout">
+        <div class="settings-sidebar">
+            <div class="settings-menu-item active" data-settings="graphics">🖥️ 画质设置</div>
+            <div class="settings-menu-item" data-settings="audio">🔊 音效设置</div>
+            <div class="settings-menu-item" data-settings="control">🎮 操作设置</div>
+            <div class="settings-menu-item" data-settings="account">👤 账号设置</div>
+        </div>
+
+        <div class="settings-content">
+            <!-- 画质 -->
+            <div class="settings-section" id="settings-graphics">
+                <div class="settings-section-title">画质设置</div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">分辨率</div>
+                        <div class="setting-desc">越高画面越清晰，但性能消耗越大</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="select-box">1920 × 1080</div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">画质等级</div>
+                        <div class="setting-desc">整体画面质量预设</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="select-box">极致</div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">帧率限制</div>
+                        <div class="setting-desc">限制最大帧率以降低功耗</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="select-box">60 FPS</div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">垂直同步</div>
+                        <div class="setting-desc">消除画面撕裂，可能增加输入延迟</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle on"></div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">动态模糊</div>
+                        <div class="setting-desc">移动时的运动模糊效果</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 音效 -->
+            <div class="settings-section" id="settings-audio" style="display:none;">
+                <div class="settings-section-title">音效设置</div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">主音量</div>
+                    </div>
+                    <div class="setting-control" style="display:flex;align-items:center;gap:10px;">
+                        <div class="slider" style="width:120px;"><div class="slider-fill" style="width:80%"></div><div class="slider-thumb" style="left:80%"></div></div>
+                        <span style="font-size:12px;color:var(--text-tertiary);">80%</span>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">背景音乐</div>
+                    </div>
+                    <div class="setting-control" style="display:flex;align-items:center;gap:10px;">
+                        <div class="slider" style="width:120px;"><div class="slider-fill" style="width:60%"></div><div class="slider-thumb" style="left:60%"></div></div>
+                        <span style="font-size:12px;color:var(--text-tertiary);">60%</span>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">音效音量</div>
+                    </div>
+                    <div class="setting-control" style="display:flex;align-items:center;gap:10px;">
+                        <div class="slider" style="width:120px;"><div class="slider-fill" style="width:100%"></div><div class="slider-thumb" style="left:100%"></div></div>
+                        <span style="font-size:12px;color:var(--text-tertiary);">100%</span>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">语音音量</div>
+                    </div>
+                    <div class="setting-control" style="display:flex;align-items:center;gap:10px;">
+                        <div class="slider" style="width:120px;"><div class="slider-fill" style="width:70%"></div><div class="slider-thumb" style="left:70%"></div></div>
+                        <span style="font-size:12px;color:var(--text-tertiary);">70%</span>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">3D 环绕音效</div>
+                        <div class="setting-desc">启用空间音频定位</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle on"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 操作 -->
+            <div class="settings-section" id="settings-control" style="display:none;">
+                <div class="settings-section-title">操作设置</div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">移动</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="keybind">W A S D</div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">普通攻击</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="keybind">鼠标左键</div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">技能 1-4</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="keybind">1 2 3 4</div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">闪避</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="keybind">SPACE</div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">锁定目标</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="keybind">TAB</div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">鼠标灵敏度</div>
+                    </div>
+                    <div class="setting-control" style="display:flex;align-items:center;gap:10px;">
+                        <div class="slider" style="width:120px;"><div class="slider-fill" style="width:50%"></div><div class="slider-thumb" style="left:50%"></div></div>
+                        <span style="font-size:12px;color:var(--text-tertiary);">50%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 账号 -->
+            <div class="settings-section" id="settings-account" style="display:none;">
+                <div class="settings-section-title">账号设置</div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">账号绑定</div>
+                        <div class="setting-desc">已绑定：微信、手机</div>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn btn-secondary btn-sm">管理</button>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">推送通知</div>
+                        <div class="setting-desc">活动、邮件、好友上线提醒</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle on"></div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">隐私模式</div>
+                        <div class="setting-desc">隐藏个人信息和在线状态</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle"></div>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <div class="setting-label">退出登录</div>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn btn-danger btn-sm">退出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 15. 弹窗 & 通知 ==================== -->
+<div class="page" id="page-dialog">
+    <div class="page-header">
+        <h2>弹窗 & 通知</h2>
+        <p>对话框 · Toast 提示 · 输入弹窗</p>
+    </div>
+
+    <div class="dialog-demo-grid">
+        <div class="dialog-demo-card">
+            <h4>确认对话框</h4>
+            <p>危险操作前的二次确认</p>
+            <button class="btn btn-primary btn-sm" onclick="document.getElementById('dialog-confirm').style.display='flex'">预览</button>
+        </div>
+        <div class="dialog-demo-card">
+            <h4>提示对话框</h4>
+            <p>重要信息告知</p>
+            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('dialog-alert').style.display='flex'">预览</button>
+        </div>
+        <div class="dialog-demo-card">
+            <h4>输入弹窗</h4>
+            <p>需要用户输入内容</p>
+            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('dialog-input').style.display='flex'">预览</button>
+        </div>
+        <div class="dialog-demo-card">
+            <h4>Toast 通知</h4>
+            <p>操作反馈轻提示</p>
+            <button class="btn btn-primary btn-sm" onclick="showToastDemo()">预览</button>
+        </div>
+    </div>
+
+    <!-- Toast 容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+</div>
+
+<!-- 确认对话框 -->
+<div class="dialog-overlay" id="dialog-confirm" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
+    <div class="dialog-box">
+        <div class="dialog-title">⚠️ 确认分解</div>
+        <div class="dialog-body-text">确定要分解 <span style="color:var(--rarity-legendary);font-weight:600;">「龙焰之刃」</span> 吗？<br>分解后将获得强化石 ×5，此操作不可撤销。</div>
+        <div class="dialog-actions">
+            <button class="btn btn-secondary btn-sm" onclick="this.closest('.dialog-overlay').style.display='none'">取消</button>
+            <button class="btn btn-danger btn-sm">确认分解</button>
+        </div>
+    </div>
+</div>
+
+<!-- 提示对话框 -->
+<div class="dialog-overlay" id="dialog-alert" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
+    <div class="dialog-box">
+        <div class="dialog-title">📢 系统公告</div>
+        <div class="dialog-body-text">服务器将于今晚 23:00 进行例行维护，预计持续 2 小时。请提前安排好游戏时间，给您带来不便敬请谅解。</div>
+        <div class="dialog-actions">
+            <button class="btn btn-primary btn-sm" onclick="this.closest('.dialog-overlay').style.display='none'">我知道了</button>
+        </div>
+    </div>
+</div>
+
+<!-- 输入弹窗 -->
+<div class="dialog-overlay" id="dialog-input" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
+    <div class="dialog-box">
+        <div class="dialog-title">✏️ 修改昵称</div>
+        <div class="dialog-body-text">请输入新的角色昵称（2-8 个字符）</div>
+        <input class="dialog-input" type="text" placeholder="输入新昵称..." value="暗影行者">
+        <div class="dialog-actions">
+            <button class="btn btn-secondary btn-sm" onclick="this.closest('.dialog-overlay').style.display='none'">取消</button>
+            <button class="btn btn-primary btn-sm">确认修改</button>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 16. 技能树 ==================== -->
+<div class="page" id="page-skill">
+    <div class="page-header">
+        <h2>技能树</h2>
+        <p>三系天赋 · 自由加点</p>
+    </div>
+
+    <div class="skill-tree-layout">
+        <div class="skill-tree-header">
+            <div class="skill-tree-points">剩余技能点：<span>5</span></div>
+            <button class="btn btn-ghost btn-sm">重置加点</button>
+        </div>
+
+        <div class="skill-tree-branches">
+            <!-- 战士系 -->
+            <div class="skill-branch">
+                <div class="skill-branch-header">
+                    <div class="skill-branch-icon">⚔️</div>
+                    <div>
+                        <div class="skill-branch-name">战士系</div>
+                        <div class="skill-branch-desc">近战输出 · 高爆发</div>
+                    </div>
+                </div>
+                <div class="skill-node unlocked current">
+                    <div class="skill-node-icon">🗡️</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">强力打击</div>
+                        <div class="skill-node-level">Lv.3 / 5</div>
+                    </div>
+                </div>
+                <div class="skill-node unlocked">
+                    <div class="skill-node-icon">💥</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">旋风斩</div>
+                        <div class="skill-node-level">Lv.2 / 5</div>
+                    </div>
+                </div>
+                <div class="skill-node locked">
+                    <div class="skill-node-icon">🔒</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">狂暴之怒</div>
+                        <div class="skill-node-level">未解锁</div>
+                    </div>
+                </div>
+                <div class="skill-node locked">
+                    <div class="skill-node-icon">🔒</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">终极技能</div>
+                        <div class="skill-node-level">未解锁</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 法师系 -->
+            <div class="skill-branch">
+                <div class="skill-branch-header">
+                    <div class="skill-branch-icon">🔮</div>
+                    <div>
+                        <div class="skill-branch-name">法师系</div>
+                        <div class="skill-branch-desc">远程魔法 · 范围伤害</div>
+                    </div>
+                </div>
+                <div class="skill-node unlocked">
+                    <div class="skill-node-icon">🔥</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">火球术</div>
+                        <div class="skill-node-level">Lv.4 / 5</div>
+                    </div>
+                </div>
+                <div class="skill-node unlocked">
+                    <div class="skill-node-icon">❄️</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">冰霜新星</div>
+                        <div class="skill-node-level">Lv.1 / 5</div>
+                    </div>
+                </div>
+                <div class="skill-node locked">
+                    <div class="skill-node-icon">🔒</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">陨石术</div>
+                        <div class="skill-node-level">未解锁</div>
+                    </div>
+                </div>
+                <div class="skill-node locked">
+                    <div class="skill-node-icon">🔒</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">终极技能</div>
+                        <div class="skill-node-level">未解锁</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 游侠系 -->
+            <div class="skill-branch">
+                <div class="skill-branch-header">
+                    <div class="skill-branch-icon">🏹</div>
+                    <div>
+                        <div class="skill-branch-name">游侠系</div>
+                        <div class="skill-branch-desc">敏捷远程 · 持续输出</div>
+                    </div>
+                </div>
+                <div class="skill-node unlocked">
+                    <div class="skill-node-icon">🎯</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">精准射击</div>
+                        <div class="skill-node-level">Lv.2 / 5</div>
+                    </div>
+                </div>
+                <div class="skill-node locked">
+                    <div class="skill-node-icon">🔒</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">多重箭</div>
+                        <div class="skill-node-level">未解锁</div>
+                    </div>
+                </div>
+                <div class="skill-node locked">
+                    <div class="skill-node-icon">🔒</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">陷阱布置</div>
+                        <div class="skill-node-level">未解锁</div>
+                    </div>
+                </div>
+                <div class="skill-node locked">
+                    <div class="skill-node-icon">🔒</div>
+                    <div class="skill-node-info">
+                        <div class="skill-node-name">终极技能</div>
+                        <div class="skill-node-level">未解锁</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 17. 战斗 HUD ==================== -->
+<div class="page" id="page-battle">
+    <div class="page-header">
+        <h2>战斗 HUD</h2>
+        <p>战斗界面 · 技能栏 · 状态监控</p>
+    </div>
+
+    <div class="hud-container">
+        <!-- 战场背景 -->
+        <div class="hud-scene">
+            <div class="hud-scene-ground"></div>
+            <div class="hud-scene-grid"></div>
+            <div class="hud-scene-enemy">🐉</div>
+        </div>
+
+        <!-- 目标血条 -->
+        <div class="hud-target-frame">
+            <div class="hud-target-name">🔥 炼狱魔龙</div>
+            <div class="hud-target-bar">
+                <div class="hud-target-fill"></div>
+                <div class="hud-target-text">124,800 / 200,000</div>
+            </div>
+            <div class="hud-target-level">Lv.45 · 史诗</div>
+        </div>
+
+        <!-- 队伍状态 -->
+        <div class="hud-party">
+            <div class="hud-party-member">
+                <div class="hud-party-avatar">⚔️</div>
+                <div class="hud-party-info">
+                    <span class="hud-party-name">暗影行者</span>
+                    <div class="hud-party-bar"><div class="hud-party-bar-fill" style="width:85%;background:var(--success)"></div></div>
+                </div>
+            </div>
+            <div class="hud-party-member">
+                <div class="hud-party-avatar">🧙</div>
+                <div class="hud-party-info">
+                    <span class="hud-party-name">星辰法师</span>
+                    <div class="hud-party-bar"><div class="hud-party-bar-fill" style="width:60%;background:var(--accent)"></div></div>
+                </div>
+            </div>
+            <div class="hud-party-member">
+                <div class="hud-party-avatar">🛡️</div>
+                <div class="hud-party-info">
+                    <span class="hud-party-name">圣光骑士</span>
+                    <div class="hud-party-bar"><div class="hud-party-bar-fill" style="width:45%;background:var(--warning)"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 小地图 -->
+        <div class="hud-minimap">
+            <div class="hud-minimap-title">荒野废墟</div>
+            <div class="hud-minimap-grid">
+                <div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div>
+                <div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell teammate"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div>
+                <div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div>
+                <div class="hud-minimap-cell"></div><div class="hud-minimap-cell enemy"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell enemy"></div><div class="hud-minimap-cell"></div>
+                <div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell player"></div><div class="hud-minimap-cell"></div><div class="hud-minimap-cell"></div>
+            </div>
+        </div>
+
+        <!-- 连击提示 -->
+        <div class="hud-combo">
+            <div class="hud-combo-count">×12</div>
+            <div class="hud-combo-label">COMBO</div>
+        </div>
+
+        <!-- 伤害数字 -->
+        <div class="hud-damage">-2,860</div>
+        <div class="hud-damage crit" style="left:55%;top:22%;">暴击！-5,720</div>
+
+        <!-- 玩家状态区 -->
+        <div class="hud-player-area">
+            <div class="hud-player-portrait">⚔️</div>
+            <div class="hud-player-info">
+                <div class="hud-player-name-row">
+                    <span class="hud-player-name">暗影行者</span>
+                    <span class="hud-player-lv">Lv.42</span>
+                </div>
+                <div class="hud-bars">
+                    <div class="hud-bar"><div class="hud-bar-fill hp" style="width:75%"></div><div class="hud-bar-text">HP 9,645 / 12,860</div></div>
+                    <div class="hud-bar"><div class="hud-bar-fill mp" style="width:45%"></div><div class="hud-bar-text">MP 1,458 / 3,240</div></div>
+                </div>
+                <div class="hud-buffs">
+                    <div class="hud-buff" style="--buff-color:var(--accent)">⚡<span class="hud-buff-duration">12s</span></div>
+                    <div class="hud-buff" style="--buff-color:var(--primary)">🛡️<span class="hud-buff-duration">8s</span></div>
+                    <div class="hud-buff" style="--buff-color:var(--rarity-legendary)">🔥<span class="hud-buff-duration">20s</span></div>
+                    <div class="hud-buff" style="--buff-color:var(--success)">💨<span class="hud-buff-duration">5s</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技能栏 -->
+        <div class="hud-skills">
+            <div class="hud-skill"><span class="hud-skill-key">1</span>🗡️</div>
+            <div class="hud-skill"><span class="hud-skill-key">2</span>💥</div>
+            <div class="hud-skill on-cooldown"><span class="hud-skill-cd">3.2</span><span class="hud-skill-key">3</span>⚡</div>
+            <div class="hud-skill"><span class="hud-skill-key">4</span>🔥</div>
+            <div class="hud-skill"><span class="hud-skill-key">Q</span>💊</div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 18. 公会系统 ==================== -->
+<div class="page" id="page-guild">
+    <div class="page-header">
+        <h2>公会系统</h2>
+        <p>成员管理 · 公会建设</p>
+    </div>
+
+    <div class="guild-layout">
+        <div class="guild-main">
+            <!-- 公会信息 -->
+            <div class="guild-info-card">
+                <div class="guild-emblem">🏰</div>
+                <div class="guild-info">
+                    <div class="guild-name">星辰公会</div>
+                    <div class="guild-level">公会等级 Lv.7 · 成员 42/50</div>
+                    <div class="guild-exp-bar"><div class="guild-exp-fill" style="width:65%"></div></div>
+                    <div class="guild-exp-text">升级还需 35,000 公会经验</div>
+                </div>
+                <button class="btn btn-primary">公会商店</button>
+            </div>
+
+            <!-- 公告 -->
+            <div class="guild-notice">
+                <h4>📢 公会公告</h4>
+                <p>欢迎各位冒险者加入星辰公会！每周六晚 8 点公会副本活动，请积极参与。捐献达到 1000 贡献可申请精英职位。祝各位游戏愉快！</p>
+            </div>
+
+            <!-- 成员列表 -->
+            <div class="guild-members">
+                <h4>成员列表 <span style="font-size:12px;color:var(--text-tertiary);font-weight:400;">42 人在线 35 人</span></h4>
+                <div class="guild-member-row">
+                    <div class="guild-member-avatar">🐉<span class="guild-member-status" style="position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--success);border:2px solid var(--bg-panel);"></span></div>
+                    <div class="guild-member-info">
+                        <div class="guild-member-name">龙之怒</div>
+                        <div class="guild-member-role">会长 · Lv.50</div>
+                    </div>
+                    <div class="guild-member-contrib">128,500</div>
+                </div>
+                <div class="guild-member-row">
+                    <div class="guild-member-avatar">🧙<span class="guild-member-status" style="position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--success);border:2px solid var(--bg-panel);"></span></div>
+                    <div class="guild-member-info">
+                        <div class="guild-member-name">星辰法师</div>
+                        <div class="guild-member-role">副会长 · Lv.46</div>
+                    </div>
+                    <div class="guild-member-contrib">95,200</div>
+                </div>
+                <div class="guild-member-row">
+                    <div class="guild-member-avatar">⚔️<span class="guild-member-status" style="position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--success);border:2px solid var(--bg-panel);"></span></div>
+                    <div class="guild-member-info">
+                        <div class="guild-member-name">暗影行者 (我)</div>
+                        <div class="guild-member-role">精英 · Lv.42</div>
+                    </div>
+                    <div class="guild-member-contrib">68,750</div>
+                </div>
+                <div class="guild-member-row">
+                    <div class="guild-member-avatar">🏹<span class="guild-member-status" style="position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--warning);border:2px solid var(--bg-panel);"></span></div>
+                    <div class="guild-member-info">
+                        <div class="guild-member-name">风行者</div>
+                        <div class="guild-member-role">成员 · Lv.45</div>
+                    </div>
+                    <div class="guild-member-contrib">52,100</div>
+                </div>
+                <div class="guild-member-row">
+                    <div class="guild-member-avatar">🛡️<span class="guild-member-status" style="position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--text-tertiary);border:2px solid var(--bg-panel);"></span></div>
+                    <div class="guild-member-info">
+                        <div class="guild-member-name">圣光骑士</div>
+                        <div class="guild-member-role">成员 · Lv.41</div>
+                    </div>
+                    <div class="guild-member-contrib">38,900</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 捐献面板 -->
+        <div class="guild-donate">
+            <h4>💰 公会捐献</h4>
+            <div class="donate-option">
+                <div class="donate-option-info">
+                    <div class="donate-option-name">🪙 金币捐献</div>
+                    <div class="donate-option-reward">+100 贡献 · +500 公会经验</div>
+                </div>
+                <button class="btn btn-secondary btn-sm">捐献 10,000</button>
+            </div>
+            <div class="donate-option">
+                <div class="donate-option-info">
+                    <div class="donate-option-name">💎 钻石捐献</div>
+                    <div class="donate-option-reward">+500 贡献 · +2500 公会经验</div>
+                </div>
+                <button class="btn btn-primary btn-sm">捐献 100</button>
+            </div>
+            <div class="donate-option">
+                <div class="donate-option-info">
+                    <div class="donate-option-name">🏆 高级捐献</div>
+                    <div class="donate-option-reward">+2000 贡献 · +10000 公会经验</div>
+                </div>
+                <button class="btn btn-ghost btn-sm">捐献 500</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </main>
 </div>
 
@@ -3097,11 +5996,15 @@ applyTheme(currentTheme);
 // ============================================================
 const navItems = document.querySelectorAll('.nav-item');
 const pages = document.querySelectorAll('.page');
+const appLayout = document.querySelector('.app-layout');
+const sidebar = document.querySelector('.sidebar');
+const mainContent = document.querySelector('.main-content');
 
 navItems.forEach(item => {
     item.addEventListener('click', () => {
         const pageId = item.dataset.page;
         if (!pageId) return;
+        const isFullscreen = item.dataset.fullscreen === 'true';
 
         // 切换导航高亮
         navItems.forEach(n => n.classList.remove('active'));
@@ -3111,6 +6014,17 @@ navItems.forEach(item => {
         pages.forEach(p => p.classList.remove('active'));
         const target = document.getElementById('page-' + pageId);
         if (target) target.classList.add('active');
+
+        // 全屏页面（登录）隐藏侧边栏和内容区边距
+        if (isFullscreen) {
+            sidebar.style.display = 'none';
+            mainContent.style.padding = '0';
+            mainContent.style.maxWidth = 'none';
+        } else {
+            sidebar.style.display = '';
+            mainContent.style.padding = '';
+            mainContent.style.maxWidth = '';
+        }
     });
 });
 
@@ -3194,6 +6108,201 @@ document.querySelectorAll('.bag-tab').forEach(tab => {
         document.querySelectorAll('.bag-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
     });
+});
+
+// ============================================================
+// 设置页面 Tab 切换
+// ============================================================
+const settingsSections = {
+    graphics: document.getElementById('settings-graphics'),
+    audio: document.getElementById('settings-audio'),
+    control: document.getElementById('settings-control'),
+    account: document.getElementById('settings-account'),
+};
+document.querySelectorAll('.settings-menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+        document.querySelectorAll('.settings-menu-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        const key = item.dataset.settings;
+        Object.entries(settingsSections).forEach(([k, el]) => {
+            if (el) el.style.display = k === key ? '' : 'none';
+        });
+    });
+});
+
+// ============================================================
+// Toast 通知
+// ============================================================
+function showToast(type, message) {
+    const container = document.getElementById('toastContainer');
+    const icons = { success: '✅', warning: '⚠️', error: '❌' };
+    const toast = document.createElement('div');
+    toast.className = 'toast ' + type;
+    toast.innerHTML = `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        toast.style.transition = 'all .3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
+}
+
+// 预览按钮触发一组 Toast
+function showToastDemo() {
+    showToast('success', '装备强化成功！攻击力 +15');
+    setTimeout(() => showToast('warning', '体力即将耗尽，请及时补充'), 400);
+    setTimeout(() => showToast('error', '网络连接失败，请检查网络'), 800);
+}
+
+// ============================================================
+// 设计标注模式 (Inspect Mode)
+// ============================================================
+const inspectToggle = document.getElementById('inspectToggle');
+const inspectPanel = document.getElementById('inspectPanel');
+const inspectBody = document.getElementById('inspectBody');
+const inspectClose = document.getElementById('inspectClose');
+let inspectMode = false;
+let inspectLabel = null;
+
+// 核心 CSS 变量列表（用于检测元素使用了哪些变量）
+const coreVars = [
+    '--bg-primary', '--bg-secondary', '--bg-panel', '--bg-card', '--bg-elevated',
+    '--border', '--border-soft', '--border-gold',
+    '--primary', '--primary-hover', '--primary-press', '--primary-border', '--primary-glow',
+    '--accent', '--accent-press', '--accent-light',
+    '--text-primary', '--text-secondary', '--text-tertiary', '--text-highlight',
+    '--success', '--warning', '--danger',
+    '--primary-fg', '--purple', '--pink', '--cyan',
+    '--rarity-common', '--rarity-uncommon', '--rarity-rare', '--rarity-epic', '--rarity-legendary', '--rarity-mythic',
+    '--radius-sm', '--radius-md', '--radius-lg', '--radius-xl',
+];
+
+function getUsedVars(el) {
+    const styles = getComputedStyle(el);
+    const used = [];
+    coreVars.forEach(v => {
+        const val = styles.getPropertyValue(v).trim();
+        if (val) {
+            used.push({ name: v, value: val });
+        }
+    });
+    return used;
+}
+
+function isColorValue(val) {
+    return val.startsWith('#') || val.startsWith('rgb') || val.startsWith('hsl');
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('success', '已复制: ' + text);
+    }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        showToast('success', '已复制: ' + text);
+    });
+}
+
+function enableInspectMode() {
+    inspectMode = true;
+    document.body.classList.add('inspect-mode');
+    inspectToggle.classList.add('active');
+    inspectPanel.classList.add('open');
+}
+
+function disableInspectMode() {
+    inspectMode = false;
+    document.body.classList.remove('inspect-mode');
+    inspectToggle.classList.remove('active');
+    inspectPanel.classList.remove('open');
+    if (inspectLabel) {
+        inspectLabel.remove();
+        inspectLabel = null;
+    }
+}
+
+inspectToggle.addEventListener('click', () => {
+    if (inspectMode) disableInspectMode();
+    else enableInspectMode();
+});
+
+inspectClose.addEventListener('click', disableInspectMode);
+
+// 鼠标悬停显示标签
+document.addEventListener('mouseover', (e) => {
+    if (!inspectMode) return;
+    const target = e.target;
+    if (target.closest('.inspect-panel') || target.closest('.theme-switcher') || target.closest('.toast-container')) return;
+
+    if (inspectLabel) inspectLabel.remove();
+    inspectLabel = document.createElement('div');
+    inspectLabel.className = 'inspect-label';
+    const tag = target.tagName.toLowerCase();
+    const cls = target.className && typeof target.className === 'string' ? '.' + target.className.trim().split(/\s+/).filter(c => !c.startsWith('nav-') || true).slice(0, 2).join('.') : '';
+    inspectLabel.textContent = tag + (cls !== '.' ? cls : '');
+    document.body.appendChild(inspectLabel);
+    inspectLabel.style.left = (e.clientX + 12) + 'px';
+    inspectLabel.style.top = (e.clientY + 12) + 'px';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!inspectMode || !inspectLabel) return;
+    inspectLabel.style.left = (e.clientX + 12) + 'px';
+    inspectLabel.style.top = (e.clientY + 12) + 'px';
+});
+
+// 点击元素显示变量面板
+document.addEventListener('click', (e) => {
+    if (!inspectMode) return;
+    const target = e.target;
+    if (target.closest('.inspect-panel') || target.closest('.theme-switcher') || target.closest('.toast-container')) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const usedVars = getUsedVars(target);
+    const tag = target.tagName.toLowerCase();
+    const cls = target.className && typeof target.className === 'string' ? target.className.trim().split(/\s+/).slice(0, 3).join('.') : '';
+
+    let html = `<div class="inspect-section">
+        <div class="inspect-section-title">${tag}${cls ? ' .' + cls : ''}</div>
+    </div>`;
+
+    if (usedVars.length === 0) {
+        html += `<div class="inspect-empty">
+            <div class="inspect-empty-icon">📋</div>
+            <div>该元素未使用核心变量</div>
+            <div style="font-size:11px;margin-top:4px;opacity:0.6;">可能使用了继承值或硬编码颜色</div>
+        </div>`;
+    } else {
+        html += `<div class="inspect-section">
+            <div class="inspect-section-title">CSS 变量 (${usedVars.length})</div>`;
+        usedVars.forEach(v => {
+            const isColor = isColorValue(v.value);
+            html += `<div class="inspect-var-row" onclick="copyToClipboard('var(${v.name})')">
+                <span class="inspect-var-name">${v.name}</span>
+                <span class="inspect-var-value">
+                    ${isColor ? `<span class="inspect-var-swatch" style="background:${v.value}"></span>` : ''}
+                    ${v.value}
+                    <span class="inspect-var-copy">复制</span>
+                </span>
+            </div>`;
+        });
+        html += `</div>`;
+    }
+
+    inspectBody.innerHTML = html;
+});
+
+// Esc 退出检查模式
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && inspectMode) disableInspectMode();
 });
 </script>
 </body>
