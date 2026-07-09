@@ -16,11 +16,12 @@ window.GameThemes = (function () {
 
         darkgold: {
             id: 'darkgold',
-            title: '暗金',
+            title: '经典',
             scene: '<b>低明度 · 暖对比</b> — 暗底金边、强氛围',
             dots: ['#262329', '#FFC848', '#2FB8C4'],
             accentKeys: ['accentPurple', 'accentPink', 'accentCyan'],
             accentLabels: ['紫', '粉', '青'],
+            primaryFg: '#3A2400',
 
             colors: {
                 /* 中性底 */
@@ -78,64 +79,236 @@ window.GameThemes = (function () {
             }
         },
 
-        emerald: {
-            id: 'emerald',
-            title: '翡翠',
-            scene: '<b>深森绿 · 鎏金点缀</b> — 高幻想 · 沉浸式角色扮演',
-            dots: ['#1B2C23', '#2ED47A', '#F5C542'],
-            accentKeys: ['accentPurple', 'accentBlue', 'accentCyan'],
-            accentLabels: ['紫', '蓝', '青'],
+        /* ---- 科幻：深空蓝 + 霓虹青 ---- */
+        scifi: {
+            id: 'scifi',
+            title: '科幻',
+            scene: '<b>深空蓝 · 霓虹青</b> — 高科技 · 赛博朋克 · 星际冒险',
+            dots: ['#0B1424', '#22D3EE', '#3B82F6'],
+            accentKeys: ['accentCyan', 'accentBlue', 'accentPurple'],
+            accentLabels: ['霓虹青', '电光蓝', '离子紫'],
+            primaryFg: '#06222E',
 
             colors: {
-                /* 中性底 */
-                bgPrimary:    '#0C1410',
-                bgSecondary:  '#14201A',
-                panelBg:      '#1B2C23',
-                cardBg:       '#243A2E',
-                elevatedBg:   '#2E4537',
-                border:       '#0A1A13',
+                bgPrimary:    '#070D18',
+                bgSecondary:  '#0B1424',
+                panelBg:      '#101C30',
+                cardBg:       '#162640',
+                elevatedBg:   '#1D3252',
+                border:       '#040810',
 
-                /* 主色 · 翡翠魔法 */
-                primary:        '#2ED47A',
-                primaryHover:   '#5CF2A0',
-                primaryPress:   '#1BA85E',
-                primaryBorder:  '#0E6E3C',
+                primary:        '#22D3EE',
+                primaryHover:   '#67E8F9',
+                primaryPress:   '#0891B2',
+                primaryBorder:  '#0E6474',
 
-                /* 辅助色 · 鎏金 */
-                accent:       '#F5C542',
-                accentPress:  '#D9A521',
-                accentLight:  '#FBF1CC',
+                accent:       '#3B82F6',
+                accentPress:  '#2563EB',
+                accentLight:  '#BFDBFE',
 
-                /* 文本 */
-                textPrimary:    '#F0F5EF',
-                textSecondary:  '#B8CFC0',
-                textTertiary:   '#7A9488',
-                textHighlight:  '#FFE066',
+                textPrimary:    '#ECF5FF',
+                textSecondary:  '#A8BDD8',
+                textTertiary:   '#5C7190',
+                textHighlight:  '#67E8F9',
 
-                /* 功能 */
-                success: '#2ED47A',
-                warning: '#F5C542',
-                danger:  '#E84C58',
+                success: '#34D399',
+                warning: '#FBBF24',
+                danger:  '#FB7185',
 
-                /* 点缀 */
-                accentPurple: '#9B6CF5',
-                accentBlue:   '#4C9BF5',
-                accentCyan:   '#32C8C8',
+                accentPurple: '#8B5CF6',
+                accentPink:   '#F472B6',
+                accentCyan:   '#22D3EE',
+                accentBlue:   '#3B82F6',
 
-                /* 稀有度 */
-                rarityCommon:    '#8A948D',
-                rarityUncommon:  '#2ED47A',
-                rarityRare:      '#4C9BF5',
-                rarityEpic:      '#9B6CF5',
-                rarityLegendary: '#F5C542',
-                rarityMythic:    '#E84C58',
+                rarityCommon:    '#6B7280',
+                rarityUncommon:  '#34D399',
+                rarityRare:      '#3B82F6',
+                rarityEpic:      '#8B5CF6',
+                rarityLegendary: '#FBBF24',
+                rarityMythic:    '#FB7185',
 
-                /* 数值反馈 */
-                fbDamage:  '#F0F5EF',
-                fbCrit:    '#FFE066',
-                fbHeal:    '#2ED47A',
-                fbExp:     '#9B6CF5',
-                fbGold:    '#FFE066',
+                fbDamage:  '#ECF5FF',
+                fbCrit:    '#FDE68A',
+                fbHeal:    '#34D399',
+                fbExp:     '#8B5CF6',
+                fbGold:    '#FDE68A',
+                fbMedalGold:   '#D4A017',
+                fbMedalSilver: '#C0C0C0',
+                fbMedalBronze: '#B8732A',
+            }
+        },
+
+        /* ---- 绯红：深红 + 鎏金 ---- */
+        crimson: {
+            id: 'crimson',
+            title: '绯红',
+            scene: '<b>深红 · 鎏金</b> — 动作硬核 · 魔导幻想 · 强冲击',
+            dots: ['#1C0A0C', '#EF4444', '#FBBF24'],
+            accentKeys: ['accentPurple', 'accentPink', 'accentCyan'],
+            accentLabels: ['暗紫蔷薇', '血色蔷薇', '寒铁蓝'],
+            primaryFg: '#320606',
+
+            colors: {
+                bgPrimary:    '#140708',
+                bgSecondary:  '#1C0A0C',
+                panelBg:      '#281012',
+                cardBg:       '#36181A',
+                elevatedBg:   '#442022',
+                border:       '#0C0405',
+
+                primary:        '#EF4444',
+                primaryHover:   '#F87171',
+                primaryPress:   '#B91C1C',
+                primaryBorder:  '#7F1D1D',
+
+                accent:       '#FBBF24',
+                accentPress:  '#D97706',
+                accentLight:  '#FEF3C7',
+
+                textPrimary:    '#FDEEEE',
+                textSecondary:  '#E4B7B7',
+                textTertiary:   '#9A6868',
+                textHighlight:  '#FCA5A5',
+
+                success: '#34D399',
+                warning: '#FBBF24',
+                danger:  '#EF4444',
+
+                accentPurple: '#A855F7',
+                accentPink:   '#F472B6',
+                accentCyan:   '#67E8F9',
+                accentBlue:   '#60A5FA',
+
+                rarityCommon:    '#9A6868',
+                rarityUncommon:  '#34D399',
+                rarityRare:      '#60A5FA',
+                rarityEpic:      '#A855F7',
+                rarityLegendary: '#FBBF24',
+                rarityMythic:    '#EF4444',
+
+                fbDamage:  '#FDEEEE',
+                fbCrit:    '#FDE68A',
+                fbHeal:    '#34D399',
+                fbExp:     '#A855F7',
+                fbGold:    '#FDE68A',
+                fbMedalGold:   '#D4A017',
+                fbMedalSilver: '#C0C0C0',
+                fbMedalBronze: '#B8732A',
+            }
+        },
+
+        /* ---- 幻境：深紫 + 品红 ---- */
+        arcane: {
+            id: 'arcane',
+            title: '幻境',
+            scene: '<b>深紫 · 品红</b> — 奇幻 RPG · 魔法秘典 · 华丽史诗',
+            dots: ['#140A1E', '#A855F7', '#F472B6'],
+            accentKeys: ['accentPurple', 'accentPink', 'accentBlue'],
+            accentLabels: ['奥术紫', '魅影粉', '秘法蓝'],
+            primaryFg: '#220B3A',
+
+            colors: {
+                bgPrimary:    '#0F0818',
+                bgSecondary:  '#140A1E',
+                panelBg:      '#1D1130',
+                cardBg:       '#271A42',
+                elevatedBg:   '#322352',
+                border:       '#0A0512',
+
+                primary:        '#A855F7',
+                primaryHover:   '#C084FC',
+                primaryPress:   '#7C3AED',
+                primaryBorder:  '#5B21B6',
+
+                accent:       '#F472B6',
+                accentPress:  '#DB2777',
+                accentLight:  '#FBCFE8',
+
+                textPrimary:    '#F3ECFF',
+                textSecondary:  '#C4B3E0',
+                textTertiary:   '#7A68A0',
+                textHighlight:  '#E879F9',
+
+                success: '#34D399',
+                warning: '#FBBF24',
+                danger:  '#FB7185',
+
+                accentPurple: '#A855F7',
+                accentPink:   '#F472B6',
+                accentCyan:   '#67E8F9',
+                accentBlue:   '#60A5FA',
+
+                rarityCommon:    '#7A68A0',
+                rarityUncommon:  '#34D399',
+                rarityRare:      '#60A5FA',
+                rarityEpic:      '#A855F7',
+                rarityLegendary: '#FBBF24',
+                rarityMythic:    '#FB7185',
+
+                fbDamage:  '#F3ECFF',
+                fbCrit:    '#FDE68A',
+                fbHeal:    '#34D399',
+                fbExp:     '#A855F7',
+                fbGold:    '#FDE68A',
+                fbMedalGold:   '#D4A017',
+                fbMedalSilver: '#C0C0C0',
+                fbMedalBronze: '#B8732A',
+            }
+        },
+
+        /* ---- 极地：深暗 + 冰蓝 ---- */
+        frost: {
+            id: 'frost',
+            title: '极地',
+            scene: '<b>深暗 · 冰蓝</b> — 战术射击 · 末日生存 · 冷峻科幻',
+            dots: ['#0A1018', '#7DD3FC', '#38BDF8'],
+            accentKeys: ['accentBlue', 'accentCyan', 'accentPurple'],
+            accentLabels: ['冰晶蓝', '霜雪白', '极光紫'],
+            primaryFg: '#08202E',
+
+            colors: {
+                bgPrimary:    '#070C14',
+                bgSecondary:  '#0A1018',
+                panelBg:      '#101A26',
+                cardBg:       '#162432',
+                elevatedBg:   '#1E2E3E',
+                border:       '#040810',
+
+                primary:        '#7DD3FC',
+                primaryHover:   '#BAE6FD',
+                primaryPress:   '#38BDF8',
+                primaryBorder:  '#0E6588',
+
+                accent:       '#38BDF8',
+                accentPress:  '#0284C7',
+                accentLight:  '#E0F2FE',
+
+                textPrimary:    '#EEF6FC',
+                textSecondary:  '#A8BFCE',
+                textTertiary:   '#5C7488',
+                textHighlight:  '#BAE6FD',
+
+                success: '#34D399',
+                warning: '#FBBF24',
+                danger:  '#FB7185',
+
+                accentPurple: '#A78BFA',
+                accentPink:   '#F472B6',
+                accentCyan:   '#67E8F9',
+                accentBlue:   '#38BDF8',
+
+                rarityCommon:    '#5C7488',
+                rarityUncommon:  '#34D399',
+                rarityRare:      '#38BDF8',
+                rarityEpic:      '#A78BFA',
+                rarityLegendary: '#FBBF24',
+                rarityMythic:    '#FB7185',
+
+                fbDamage:  '#EEF6FC',
+                fbCrit:    '#FDE68A',
+                fbHeal:    '#34D399',
+                fbExp:     '#A78BFA',
+                fbGold:    '#FDE68A',
                 fbMedalGold:   '#D4A017',
                 fbMedalSilver: '#C0C0C0',
                 fbMedalBronze: '#B8732A',
@@ -170,10 +343,10 @@ window.GameThemes = (function () {
                 {
                     title: '主色 · 主要按钮', usage: '确认/主要操作',
                     items: [
-                        ['常态',     c.primary,       '#3A2400', 'primary'],
-                        ['悬浮',     c.primaryHover,  '#3A2400', 'primaryHover'],
-                        ['按下',     c.primaryPress,  '#3A2400', 'primaryPress'],
-                        ['阴影/边框', c.primaryBorder, '#fff',    'primaryBorder'],
+                        ['常态',     c.primary,       t.primaryFg, 'primary'],
+                        ['悬浮',     c.primaryHover,  t.primaryFg, 'primaryHover'],
+                        ['按下',     c.primaryPress,  t.primaryFg, 'primaryPress'],
+                        ['阴影/边框', c.primaryBorder, '#fff',      'primaryBorder'],
                     ]
                 },
                 {
@@ -237,12 +410,12 @@ window.GameThemes = (function () {
             preview: {
                 bg:           c.panelBg,
                 text:       { primary: c.textPrimary, secondary: c.textSecondary, highlight: c.textHighlight },
-                primary:    { bg: c.primary,      fg: '#3A2400' },
-                primaryHover:{ bg: c.primaryHover, fg: '#3A2400' },
+                primary:    { bg: c.primary,      fg: t.primaryFg },
+                primaryHover:{ bg: c.primaryHover, fg: t.primaryFg },
                 accent:     { bg: c.accent,       fg: '#fff' },
                 disabled:   { bg: c.textTertiary, fg: '#1A201D' },
                 success:    { bg: c.success,      fg: '#fff' },
-                warning:    { bg: c.warning,      fg: '#3A2400' },
+                warning:    { bg: c.warning,      fg: t.primaryFg },
                 danger:     { bg: c.danger,       fg: '#fff' },
                 card:       { bg: c.cardBg,       border: c.border },
                 input:      { bg: 'rgba(128,128,128,0.08)', border: 'rgba(128,128,128,0.2)' },
@@ -258,8 +431,8 @@ window.GameThemes = (function () {
         if (!t) return {};
         const c = t.colors;
 
-        // 主色按钮文字色 — 按主色亮度自动挑一个可读的深色
-        const primaryFg = (id === 'emerald') ? '#072717' : '#3A2400';
+        // 主色按钮文字色 — 每套方案自定义（保证在主色上的可读性）
+        const primaryFg = t.primaryFg || '#3A2400';
 
         const vars = {
             '--bg-primary':    c.bgPrimary,
