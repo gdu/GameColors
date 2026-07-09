@@ -46,7 +46,12 @@
 ## 修改配色方案时的注意事项
 
 - **改 hex 值**：只改 `GameThemes.js` 中 `themes[id].colors`，`index.html` 的 swatch 颜色和 `ui-showcase.html` 的界面颜色都会自动同步。
-- **加新方案**：在 `GameThemes.js` 的 `themes` 对象中新增一个 key（含 `id / title / scene / dots / colors` 全部字段），两个页面会自动出现对应的 Tab / 切换按钮。
+- **加新方案**：在 `GameThemes.js` 的 `themes` 对象中新增一个 key，必须包含以下字段：
+  - **元数据**：`id / title / scene / dots`（标题、场景描述、切换器上的 3 个色点）
+  - **点缀色**：`accentKeys / accentLabels`（每组 3 个，决定 `index.html` 点缀色区显示哪 3 个颜色及中文标签）
+  - **前景色**：`primaryFg`（主色按钮上的文字色，需保证在主色上可读。浅底主题用深色如 `#18181b`，深底主题用浅色如 `#F5F5F5` 或白）
+  - **语义色板**：`colors`（37 个 hex 键）
+  - 加完后两个页面会自动出现对应的 Tab / 切换按钮。
 - **加新颜色字段**：在 `colors` 中新增 key 后，需同时在 `buildIndexScheme()`（给 index.html 分组）和 `buildCssVars()`（给 ui-showcase.css 变量映射）中引用它。
 - **修改预览结构**：`index.html` 的组合预览在 `indexScheme()` 返回的 `preview` 对象中维护；`ui-showcase.html` 的组合预览直接写在 HTML 中。
 
@@ -54,4 +59,5 @@
 
 - 语义色 key：camelCase（如 `bgPrimary`、`textHighlight`、`rarityLegendary`）
 - CSS 变量：kebab-case + `--` 前缀（如 `--bg-primary`、`--text-highlight`）
-- UI 模板专用的「主色按钮文字」变量 `--primary-fg` 不直接对应某个语义色，而是按主题 ID 自动派生（暗金用深棕 `#3A2400`，翡翠用深绿 `#072717`）。
+- UI 模板专用的「主色按钮文字」变量 `--primary-fg` 不直接对应某个语义色，而是由每套方案的 `primaryFg` 字段提供（保证主色按钮上的文字可读）。
+- 色板展示中的前景色由 `autoFg(hex)` 按底色亮度自动选择黑 / 白,浅底主题下自动用深色字、深底主题下自动用浅色字,无需手动指定。

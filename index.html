@@ -41,6 +41,26 @@
             font-size: 12px;
             margin-left: 6px;
         }
+        .showcase-link {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 9999;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            background: #3d3d4a;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background .15s;
+        }
+        .showcase-link:hover {
+            background: #525266;
+        }
         .tab {
             background: #22222a;
             color: #9a9aa8;
@@ -520,6 +540,7 @@
         @media (max-width: 700px) {
             .preview-grid { grid-template-columns: 1fr; }
             .pcard { width: 100%; }
+            .showcase-link { top: auto; bottom: 16px; right: 16px; }
         }
 
         .footnote {
@@ -550,6 +571,8 @@
 <div class="topbar" id="tabsContainer">
     <div class="brand">🎮 配色系统 <span>独立游戏</span></div>
 </div>
+
+<a href="ui-showcase.html" class="showcase-link">界面预览 →</a>
 
 
 <div class="wrap" id="contentContainer"></div>

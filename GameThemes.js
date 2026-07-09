@@ -146,72 +146,74 @@ window.GameThemes = (function () {
             }
         },
 
-        /* ---- 素白：白底深灰字（和经典完全相反的浅底方案） ---- */
-        light: {
-            id: 'light',
-            title: '素白',
-            scene: '<b>白底 · 深灰字</b> — 与经典相反,清爽明亮 · 适合休闲/益智/文字密集界面',
-            dots: ['#ffffff', '#FFC848', '#2563eb'],
-            accentKeys: ['accentCyan', 'accentBlue', 'accentPurple'],
-            accentLabels: ['青', '蓝', '紫'],
-            primaryFg: '#ffffff',
+        /* ---- 海雾青：深底青灰 + 明亮蓝青,适合工具/Dev 界面 ---- */
+        oceanic: {
+            id: 'oceanic',
+            title: '海雾青',
+            scene: '<b>深底青灰 · 高可读</b> — 低视觉疲劳 · 适合控制台/编辑器/Dev 工具面板',
+            dots: ['#0f172a', '#38bdf8', '#10b981'],
+            accentKeys: ['accentCyan', 'accentGreen', 'accentOrange'],
+            accentLabels: ['青', '翠', '橙'],
+            primaryFg: '#0f172a',
 
             colors: {
-                /* 底：纯白 / 极浅灰 */
-                bgPrimary:    '#ffffff',
-                bgSecondary:  '#f5f5f7',
-                panelBg:      '#f0f0f4',
-                cardBg:       '#ffffff',
-                elevatedBg:   '#fafafa',
-                border:       '#d4d4d8',
+                /* 底：蓝调深灰 */
+                bgPrimary:    '#0b1120',
+                bgSecondary:  '#0f172a',
+                panelBg:      '#131c2e',
+                cardBg:       '#182238',
+                elevatedBg:   '#1e2a42',
+                border:       '#0a0f1a',
 
-                /* 主色：暖金（和经典同款主色,保证按钮上白字可读） */
-                primary:        '#d4941a',
-                primaryHover:  '#b87c14',
-                primaryPress:  '#9a6610',
-                primaryBorder: '#7a520c',
+                /* 主色：天蓝青 */
+                primary:        '#38bdf8',
+                primaryHover:  '#7dd3fc',
+                primaryPress:  '#0ea5e9',
+                primaryBorder: '#0369a1',
 
-                /* 辅助色：蓝灰 */
-                accent:       '#2563eb',
-                accentPress:  '#1d4ed8',
-                accentLight:  '#dbeafe',
+                /* 辅助色：更深蓝 */
+                accent:       '#3b82f6',
+                accentPress:  '#2563eb',
+                accentLight:  '#1e3a5f',
 
-                /* 文本：深灰黑 */
-                textPrimary:    '#18181b',
-                textSecondary:  '#52525b',
-                textTertiary:   '#a1a1aa',
-                textHighlight:  '#b87c14',
+                /* 文本：冷白 */
+                textPrimary:    '#f1f5f9',
+                textSecondary:  '#94a3b8',
+                textTertiary:   '#475569',
+                textHighlight:  '#7dd3fc',
 
                 /* 功能 */
-                success: '#16a34a',
-                warning: '#d97706',
-                danger:  '#dc2626',
+                success: '#10b981',
+                warning: '#f59e0b',
+                danger:  '#ef4444',
 
                 /* 点缀 */
-                accentPurple: '#7c3aed',
-                accentPink:   '#db2777',
-                accentCyan:   '#0891b2',
-                accentBlue:   '#2563eb',
+                accentPurple: '#a78bfa',
+                accentPink:   '#f472b6',
+                accentCyan:   '#22d3ee',
+                accentGreen:  '#34d399',
+                accentOrange: '#fb923c',
 
                 /* 稀有度 */
-                rarityCommon:    '#a1a1aa',
-                rarityUncommon:  '#16a34a',
-                rarityRare:      '#2563eb',
-                rarityEpic:      '#7c3aed',
-                rarityLegendary: '#d97706',
-                rarityMythic:    '#dc2626',
+                rarityCommon:    '#475569',
+                rarityUncommon:  '#34d399',
+                rarityRare:      '#38bdf8',
+                rarityEpic:      '#a78bfa',
+                rarityLegendary: '#fb923c',
+                rarityMythic:    '#ef4444',
 
-                /* 数值反馈（深色字,因为飘字常在浅色 UI 上） */
-                fbDamage:  '#18181b',
-                fbCrit:    '#9a6610',
-                fbHeal:    '#16a34a',
-                fbExp:     '#7c3aed',
-                fbGold:    '#9a6610',
-                fbMedalGold:   '#9a6610',
-                fbMedalSilver: '#71717a',
-                fbMedalBronze: '#9a6610',
+                /* 数值反馈 */
+                fbDamage:  '#f1f5f9',
+                fbCrit:    '#fde047',
+                fbHeal:    '#34d399',
+                fbExp:     '#a78bfa',
+                fbGold:    '#fb923c',
+                fbMedalGold:   '#facc15',
+                fbMedalSilver: '#cbd5e1',
+                fbMedalBronze: '#d97706',
             }
         },
+
     };
 
     /* -------------------------------------------------------------
