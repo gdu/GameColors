@@ -146,70 +146,70 @@ window.GameThemes = (function () {
             }
         },
 
-        /* ---- 羊皮纸：暖棕 + 米色 ---- */
-        parchment: {
-            id: 'parchment',
-            title: '羊皮纸',
-            scene: '<b>暖棕 · 羊皮纸</b> — 奇幻 RPG · 冒险 · 桌游感 · 手绘沉浸',
-            dots: ['#3A2A18', '#C89048', '#E8D5B8'],
+        /* ---- 素白：白底深灰字（和经典完全相反的浅底方案） ---- */
+        light: {
+            id: 'light',
+            title: '素白',
+            scene: '<b>白底 · 深灰字</b> — 与经典相反,清爽明亮 · 适合休闲/益智/文字密集界面',
+            dots: ['#ffffff', '#FFC848', '#2563eb'],
             accentKeys: ['accentCyan', 'accentBlue', 'accentPurple'],
-            accentLabels: ['青釉', '靛蓝', '暗紫'],
-            primaryFg: '#2A1A08',
+            accentLabels: ['青', '蓝', '紫'],
+            primaryFg: '#ffffff',
 
             colors: {
-                /* 底：皮革棕 / 古木箱 */
-                bgPrimary:    '#2A1E12',
-                bgSecondary:  '#3A2A18',
-                panelBg:      '#4A3622',
-                cardBg:       '#5C442C',
-                elevatedBg:   '#6E5236',
-                border:       '#1A1008',
+                /* 底：纯白 / 极浅灰 */
+                bgPrimary:    '#ffffff',
+                bgSecondary:  '#f5f5f7',
+                panelBg:      '#f0f0f4',
+                cardBg:       '#ffffff',
+                elevatedBg:   '#fafafa',
+                border:       '#d4d4d8',
 
-                /* 主色：古董金 / 黄铜（挂毯镶边、封印常用色） */
-                primary:        '#C89048',
-                primaryHover:  '#E0A858',
-                primaryPress:  '#A07030',
-                primaryBorder: '#6A4018',
+                /* 主色：暖金（和经典同款主色,保证按钮上白字可读） */
+                primary:        '#d4941a',
+                primaryHover:  '#b87c14',
+                primaryPress:  '#9a6610',
+                primaryBorder: '#7a520c',
 
-                /* 辅助色：旧木棕 */
-                accent:       '#8B5E3C',
-                accentPress:  '#6B4A2C',
-                accentLight:  '#E8D5B8',
+                /* 辅助色：蓝灰 */
+                accent:       '#2563eb',
+                accentPress:  '#1d4ed8',
+                accentLight:  '#dbeafe',
 
-                /* 文本：羊皮纸米白（旧纸张受黄） */
-                textPrimary:    '#F0E0C8',
-                textSecondary:  '#C8B490',
-                textTertiary:   '#8A7558',
-                textHighlight:  '#E8C848',
+                /* 文本：深灰黑 */
+                textPrimary:    '#18181b',
+                textSecondary:  '#52525b',
+                textTertiary:   '#a1a1aa',
+                textHighlight:  '#b87c14',
 
-                /* 功能：取自然意象（苔藓绿、琥珀警告、干血红） */
-                success: '#7A9A4C',
-                warning: '#D8A030',
-                danger:  '#B8402C',
+                /* 功能 */
+                success: '#16a34a',
+                warning: '#d97706',
+                danger:  '#dc2626',
 
                 /* 点缀 */
-                accentPurple: '#8B6B9A',
-                accentPink:   '#C8887A',
-                accentCyan:   '#6A9AAA',
-                accentBlue:   '#5A7AAA',
+                accentPurple: '#7c3aed',
+                accentPink:   '#db2777',
+                accentCyan:   '#0891b2',
+                accentBlue:   '#2563eb',
 
-                /* 稀有度（哑光、做旧感） */
-                rarityCommon:    '#8A7558',
-                rarityUncommon:  '#7A9A4C',
-                rarityRare:      '#5A7AAA',
-                rarityEpic:      '#8B6B9A',
-                rarityLegendary: '#C89048',
-                rarityMythic:    '#B8402C',
+                /* 稀有度 */
+                rarityCommon:    '#a1a1aa',
+                rarityUncommon:  '#16a34a',
+                rarityRare:      '#2563eb',
+                rarityEpic:      '#7c3aed',
+                rarityLegendary: '#d97706',
+                rarityMythic:    '#dc2626',
 
-                /* 数值反馈 */
-                fbDamage:  '#F0E0C8',
-                fbCrit:    '#E8C848',
-                fbHeal:    '#7A9A4C',
-                fbExp:     '#8B6B9A',
-                fbGold:    '#E8C848',
-                fbMedalGold:   '#C89048',
-                fbMedalSilver: '#A89878',
-                fbMedalBronze: '#9A6838',
+                /* 数值反馈（深色字,因为飘字常在浅色 UI 上） */
+                fbDamage:  '#18181b',
+                fbCrit:    '#9a6610',
+                fbHeal:    '#16a34a',
+                fbExp:     '#7c3aed',
+                fbGold:    '#9a6610',
+                fbMedalGold:   '#9a6610',
+                fbMedalSilver: '#71717a',
+                fbMedalBronze: '#9a6610',
             }
         },
     };
@@ -230,12 +230,12 @@ window.GameThemes = (function () {
                 {
                     title: '中性色阶 · 背景/面板', usage: '全局底色、卡片容器',
                     items: [
-                        ['全局背景',  c.bgPrimary,    '#FFFFF6', 'bgPrimary'],
-                        ['次深背景',  c.bgSecondary,  '#FFFFF6', 'bgSecondary'],
-                        ['面板底图',  c.panelBg,      '#FFFFF6', 'panelBg'],
-                        ['卡片底图',  c.cardBg,       '#FFFFF6', 'cardBg'],
-                        ['硬边框',    c.border,       '#FFFFF6', 'border'],
-                        ['禁用底',    c.textTertiary, '#1A201D', 'disabledBg'],
+                        ['全局背景',  c.bgPrimary,    autoFg(c.bgPrimary),    'bgPrimary'],
+                        ['次深背景',  c.bgSecondary,  autoFg(c.bgSecondary),  'bgSecondary'],
+                        ['面板底图',  c.panelBg,      autoFg(c.panelBg),      'panelBg'],
+                        ['卡片底图',  c.cardBg,       autoFg(c.cardBg),       'cardBg'],
+                        ['硬边框',    c.border,       autoFg(c.border),       'border'],
+                        ['禁用底',    c.textTertiary, autoFg(c.textTertiary), 'disabledBg'],
                     ]
                 },
                 {
@@ -244,26 +244,26 @@ window.GameThemes = (function () {
                         ['常态',     c.primary,       t.primaryFg, 'primary'],
                         ['悬浮',     c.primaryHover,  t.primaryFg, 'primaryHover'],
                         ['按下',     c.primaryPress,  t.primaryFg, 'primaryPress'],
-                        ['阴影/边框', c.primaryBorder, '#fff',      'primaryBorder'],
+                        ['阴影/边框', c.primaryBorder, autoFg(c.primaryBorder), 'primaryBorder'],
                     ]
                 },
                 {
                     title: '辅助色 · 次要按钮', usage: '取消/次要操作',
                     items: [
-                        ['常态',      c.accent,      '#fff', 'accent'],
-                        ['按下',      c.accentPress, '#fff', 'accentPress'],
-                        ['浅底/选中', c.accentLight, '#12474C', 'accentLight'],
+                        ['常态',      c.accent,      autoFg(c.accent),      'accent'],
+                        ['按下',      c.accentPress, autoFg(c.accentPress), 'accentPress'],
+                        ['浅底/选中', c.accentLight, autoFg(c.accentLight), 'accentLight'],
                     ]
                 },
                 {
                     title: '文本 & 功能色', usage: '内容文字、状态提示',
                     items: [
-                        ['主文字(暖白)', c.textPrimary,   '#354048', 'textPrimary'],
-                        ['次要文字',     c.textSecondary, '#354048', 'textSecondary'],
-                        ['高亮数值',     c.textHighlight, '#354048', 'textHighlight'],
-                        ['成功',         c.success,       '#fff',   'success'],
-                        ['警告',         c.warning,       '#3A2400', 'warning'],
-                        ['危险',         c.danger,        '#fff',   'danger'],
+                        ['主文字',   c.textPrimary,   autoFg(c.textPrimary),   'textPrimary'],
+                        ['次要文字', c.textSecondary, autoFg(c.textSecondary), 'textSecondary'],
+                        ['高亮数值', c.textHighlight, autoFg(c.textHighlight), 'textHighlight'],
+                        ['成功',     c.success,       autoFg(c.success),       'success'],
+                        ['警告',     c.warning,       autoFg(c.warning),       'warning'],
+                        ['危险',     c.danger,        autoFg(c.danger),        'danger'],
                     ]
                 },
                 {
@@ -271,36 +271,34 @@ window.GameThemes = (function () {
                     items: (() => {
                         const keys = t.accentKeys;
                         const labels = t.accentLabels;
-                        // 紫 / 蓝 / 青 共用：紫色在深底上配白字，青/蓝配深色
-                        const fgs = { accentPurple: '#fff', accentPink: '#fff', accentCyan: '#0F1B1D', accentBlue: '#fff' };
                         return labels.map((lab, i) => {
                             const k = keys[i];
-                            return [lab, c[k], fgs[k] || '#fff', k];
+                            return [lab, c[k], autoFg(c[k]), k];
                         });
                     })()
                 },
                 {
                     title: '稀有度 / 品级', usage: '装备·卡牌·抽卡',
                     items: [
-                        ['普通 Common',    c.rarityCommon,    '#fff',    'rarityCommon'],
-                        ['优秀 Uncommon',  c.rarityUncommon,  '#0a2e12', 'rarityUncommon'],
-                        ['稀有 Rare',      c.rarityRare,      '#fff',    'rarityRare'],
-                        ['史诗 Epic',      c.rarityEpic,      '#fff',    'rarityEpic'],
-                        ['传说 Legendary', c.rarityLegendary, '#3a2400', 'rarityLegendary'],
-                        ['神话 Mythic',    c.rarityMythic,    '#fff',    'rarityMythic'],
+                        ['普通 Common',    c.rarityCommon,    autoFg(c.rarityCommon),    'rarityCommon'],
+                        ['优秀 Uncommon',  c.rarityUncommon,  autoFg(c.rarityUncommon),  'rarityUncommon'],
+                        ['稀有 Rare',      c.rarityRare,      autoFg(c.rarityRare),      'rarityRare'],
+                        ['史诗 Epic',      c.rarityEpic,      autoFg(c.rarityEpic),      'rarityEpic'],
+                        ['传说 Legendary', c.rarityLegendary, autoFg(c.rarityLegendary), 'rarityLegendary'],
+                        ['神话 Mythic',    c.rarityMythic,    autoFg(c.rarityMythic),    'rarityMythic'],
                     ]
                 },
                 {
                     title: '战斗数值反馈', usage: '飘字·提示',
                     items: [
-                        ['普通伤害', c.fbDamage,      '#333',    'fbDamage'],
-                        ['暴击伤害', c.fbCrit,        '#402d00', 'fbCrit'],
-                        ['治疗回复', c.fbHeal,        '#fff',    'fbHeal'],
-                        ['经验获得', c.fbExp,         '#fff',    'fbExp'],
-                        ['金币/资源', c.fbGold,       '#402d00', 'fbGold'],
-                        ['金牌',     c.fbMedalGold,   '#3a2c00', 'fbMedalGold'],
-                        ['银牌',     c.fbMedalSilver, '#333',    'fbMedalSilver'],
-                        ['铜牌',     c.fbMedalBronze, '#fff',    'fbMedalBronze'],
+                        ['普通伤害', c.fbDamage,      autoFg(c.fbDamage),      'fbDamage'],
+                        ['暴击伤害', c.fbCrit,        autoFg(c.fbCrit),        'fbCrit'],
+                        ['治疗回复', c.fbHeal,        autoFg(c.fbHeal),        'fbHeal'],
+                        ['经验获得', c.fbExp,         autoFg(c.fbExp),         'fbExp'],
+                        ['金币/资源', c.fbGold,       autoFg(c.fbGold),       'fbGold'],
+                        ['金牌',     c.fbMedalGold,   autoFg(c.fbMedalGold),   'fbMedalGold'],
+                        ['银牌',     c.fbMedalSilver, autoFg(c.fbMedalSilver), 'fbMedalSilver'],
+                        ['铜牌',     c.fbMedalBronze, autoFg(c.fbMedalBronze), 'fbMedalBronze'],
                     ]
                 },
             ],
@@ -310,11 +308,11 @@ window.GameThemes = (function () {
                 text:       { primary: c.textPrimary, secondary: c.textSecondary, highlight: c.textHighlight },
                 primary:    { bg: c.primary,      fg: t.primaryFg },
                 primaryHover:{ bg: c.primaryHover, fg: t.primaryFg },
-                accent:     { bg: c.accent,       fg: '#fff' },
-                disabled:   { bg: c.textTertiary, fg: '#1A201D' },
-                success:    { bg: c.success,      fg: '#fff' },
-                warning:    { bg: c.warning,      fg: t.primaryFg },
-                danger:     { bg: c.danger,       fg: '#fff' },
+                accent:     { bg: c.accent,       fg: autoFg(c.accent) },
+                disabled:   { bg: c.textTertiary, fg: autoFg(c.textTertiary) },
+                success:    { bg: c.success,      fg: autoFg(c.success) },
+                warning:    { bg: c.warning,      fg: autoFg(c.warning) },
+                danger:     { bg: c.danger,       fg: autoFg(c.danger) },
                 card:       { bg: c.cardBg,       border: c.border },
                 input:      { bg: 'rgba(128,128,128,0.08)', border: 'rgba(128,128,128,0.2)' },
             },
@@ -374,6 +372,17 @@ window.GameThemes = (function () {
             '--rarity-mythic':    c.rarityMythic,
         };
         return vars;
+    }
+
+    /** 按底色亮度自动返回可读的黑/白前景色 */
+    function autoFg(hex) {
+        hex = hex.replace('#', '');
+        if (hex.length === 3) hex = hex.split('').map(ch => ch + ch).join('');
+        const r = parseInt(hex.substr(0, 2), 16) / 255;
+        const g = parseInt(hex.substr(2, 2), 16) / 255;
+        const b = parseInt(hex.substr(4, 2), 16) / 255;
+        const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        return lum > 0.55 ? '#18181b' : '#F5F5F5';
     }
 
     /** 把 #rrggbb 变成 rgba(r,g,b,a) 字符串 */

@@ -22,7 +22,7 @@
 
 ### 1. 共享色板数据 — `GameThemes.js`
 
-用 IIFE 暴露 `window.GameThemes`，含 3 套配色（`darkgold` 经典、`nes` 复古、`parchment` 羊皮纸），每套含一个扁平 `colors` 对象（37 个语义 hex 键）。对外暴露 3 个 API：
+用 IIFE 暴露 `window.GameThemes`，含 3 套配色（`darkgold` 经典、`nes` 复古、`light` 素白），每套含一个扁平 `colors` 对象（37 个语义 hex 键）。对外暴露 3 个 API：
 
 - `GameThemes.indexScheme(id)` → 供 `index.html` 使用，返回 `{ id, title, scene, groups, preview }` 完整格式。其中 `groups` 每项 items 是 `[名称, hex, 前景色, 导出key]` 4 元素列表；`preview` 含 `bg / text / primary / accent / disabled / success / warning / danger / card / input`。
 - `GameThemes.cssVariables(id)` → 供 `ui-showcase.html` 使用，返回 `{ '--bg-primary': '#...', ... }` 平面映射（33 个 CSS 自定义属性）。
