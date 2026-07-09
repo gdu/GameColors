@@ -174,18 +174,6 @@
             opacity: 1;
         }
 
-        .swatch .clash-badge {
-            position: absolute;
-            top: 7px;
-            left: 9px;
-            font-size: 10px;
-            line-height: 1.5;
-            background: rgba(0,0,0,0.45);
-            padding: 1px 6px;
-            border-radius: 5px;
-            cursor: help;
-        }
-
         .swatch .contrast-dot {
             position: absolute;
             bottom: 8px;
@@ -218,8 +206,7 @@
             transform: scale(1.18);
         }
         .strip-chip.flash {
-            outline: 2px solid #fff;
-            outline-offset: 1px;
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(0,0,0,0.65);
         }
 
         .export-group {
@@ -535,14 +522,6 @@
             .pcard { width: 100%; }
         }
 
-        .universal-section {
-            margin-top: 8px;
-            border-top: 1px solid #2a2a33;
-            padding-top: 28px;
-        }
-        .universal-section .grid {
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        }
         .footnote {
             text-align: center;
             color: #5a5a68;
@@ -572,25 +551,8 @@
     <div class="brand">🎮 配色系统 <span>独立游戏</span></div>
 </div>
 
+
 <div class="wrap" id="contentContainer"></div>
-
-<div class="wrap universal-section" id="universalContainer">
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px;">
-        <h1 style="font-size:20px;margin:0;">⚙️ 通用系统色</h1>
-        <span style="font-size:12px;color:#9a9aa8;background:#22222a;padding:3px 12px;border-radius:6px;">行业惯例 · 直接套用</span>
-    </div>
-    <p class="scene" style="margin-bottom:20px;">这两组颜色与美术风格无关，是玩家已经形成认知的<strong>功能色</strong>，不建议自创或跟着方案改动。下方色块会自动和<strong>当前选中方案</strong>的主色/辅助色/点缀色做比对，出现 <span style="color:#ffd43b;">⚠ 撞色</span> 标记时说明色相太接近，实际用到同一界面时注意拉开层次（比如加描边、调整明度），避免玩家分不清"这是稀有度提示"还是"这是普通UI元素"。</p>
-
-    <section>
-        <h2>🏷️ 稀有度 / 品级 <span class="badge">装备 · 卡牌 · 抽卡</span></h2>
-        <div class="grid" id="rarityGrid"></div>
-    </section>
-
-    <section>
-        <h2>⚡ 战斗数值反馈 <span class="badge">飘字 · 提示</span></h2>
-        <div class="grid" id="feedbackGrid"></div>
-    </section>
-</div>
 
 <div class="footnote">
     点击任意色块复制 Hex · 点击「导出」可生成 Cocos TS 或 Unity C# 常量代码，直接用于工程。
@@ -638,6 +600,24 @@ const schemes = [
                 ['紫', '#AF77F9', '#fff', 'accentPurple'],
                 ['粉', '#F77DB7', '#fff', 'accentPink'],
                 ['青', '#75E2EF', '#0F1B1D', 'accentCyan'],
+            ]},
+            { title: '稀有度 / 品级', usage: '装备·卡牌·抽卡', items: [
+                ['普通 Common', '#8A8A94', '#fff', 'rarityCommon'],
+                ['优秀 Uncommon', '#3DDC5C', '#0a2e12', 'rarityUncommon'],
+                ['稀有 Rare', '#3E9CFF', '#fff', 'rarityRare'],
+                ['史诗 Epic', '#AF77F9', '#fff', 'rarityEpic'],
+                ['传说 Legendary', '#E8871E', '#3a2400', 'rarityLegendary'],
+                ['神话 Mythic', '#E8342B', '#fff', 'rarityMythic'],
+            ]},
+            { title: '战斗数值反馈', usage: '飘字·提示', items: [
+                ['普通伤害', '#FFFFF6', '#333', 'fbDamage'],
+                ['暴击伤害', '#FFE873', '#402d00', 'fbCrit'],
+                ['治疗回复', '#1CA455', '#fff', 'fbHeal'],
+                ['经验获得', '#AF77F9', '#fff', 'fbExp'],
+                ['金币/资源', '#FAFCA0', '#402d00', 'fbGold'],
+                ['金牌', '#D4A017', '#3a2c00', 'fbMedalGold'],
+                ['银牌', '#C0C0C0', '#333', 'fbMedalSilver'],
+                ['铜牌', '#B8732A', '#fff', 'fbMedalBronze'],
             ]}
         ],
         preview: {
@@ -692,6 +672,24 @@ const schemes = [
                 ['紫', '#4C6EF5', '#fff', 'accentIndigo'],
                 ['洋红', '#A939B9', '#fff', 'accentMagenta'],
                 ['青', '#03BCBD', '#fff', 'accentCyan'],
+            ]},
+            { title: '稀有度 / 品级', usage: '装备·卡牌·抽卡', items: [
+                ['普通 Common', '#8A8A94', '#fff', 'rarityCommon'],
+                ['优秀 Uncommon', '#03BD5B', '#fff', 'rarityUncommon'],
+                ['稀有 Rare', '#4C6EF5', '#fff', 'rarityRare'],
+                ['史诗 Epic', '#A939B9', '#fff', 'rarityEpic'],
+                ['传说 Legendary', '#E8951A', '#3a2400', 'rarityLegendary'],
+                ['神话 Mythic', '#E0202E', '#fff', 'rarityMythic'],
+            ]},
+            { title: '战斗数值反馈', usage: '飘字·提示', items: [
+                ['普通伤害', '#F5F5F8', '#333', 'fbDamage'],
+                ['暴击伤害', '#FFB700', '#1F2430', 'fbCrit'],
+                ['治疗回复', '#03BD5B', '#fff', 'fbHeal'],
+                ['经验获得', '#4C6EF5', '#fff', 'fbExp'],
+                ['金币/资源', '#FFD43D', '#402d00', 'fbGold'],
+                ['金牌', '#D4A017', '#3a2c00', 'fbMedalGold'],
+                ['银牌', '#C0C0C0', '#333', 'fbMedalSilver'],
+                ['铜牌', '#B8732A', '#fff', 'fbMedalBronze'],
             ]}
         ],
         preview: {
@@ -711,29 +709,7 @@ const schemes = [
 ];
 
 // --------------------------------------------------------------
-// 2. 通用系统色数据
-// --------------------------------------------------------------
-const rarityColors = [
-    ['普通 Common', '#8A8A94', '#fff'],
-    ['优秀 Uncommon', '#3DDC5C', '#0a2e12'],
-    ['稀有 Rare', '#3E9CFF', '#fff'],
-    ['史诗 Epic', '#A855F7', '#fff'],
-    ['传说 Legendary', '#FF9F1C', '#3a2400'],
-    ['神话 Mythic', '#FF3B3B', '#fff']
-];
-const feedbackColors = [
-    ['普通伤害', '#FFFFFF', '#333'],
-    ['暴击伤害', '#FFD93D', '#402d00'],
-    ['治疗回复', '#4CD97B', '#0a3319'],
-    ['经验获得', '#7B61FF', '#fff'],
-    ['金币/资源', '#FFD43B', '#402d00'],
-    ['金牌', '#FFD700', '#3a2c00'],
-    ['银牌', '#C0C0C0', '#333'],
-    ['铜牌', '#CD7F32', '#fff']
-];
-
-// --------------------------------------------------------------
-// 2.5 对比度工具 (WCAG)
+// 2. 对比度工具 (WCAG)
 // --------------------------------------------------------------
 function isValidHex(str) {
     return typeof str === 'string' && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(str);
@@ -759,96 +735,10 @@ function contrastDotHtml(bg, fg) {
     const label = ratio >= 4.5 ? '达标 · 可用于正文' : (ratio >= 3 ? '仅达标大字/图标' : '过低 · 慎用于文字');
     return `<span class="contrast-dot ${level}" title="文字/底色对比度 ${ratio.toFixed(1)}:1 · ${label}"></span>`;
 }
-function hexToHsl(hex) {
-    hex = hex.replace('#', '');
-    if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
-    const r = parseInt(hex.substr(0, 2), 16) / 255;
-    const g = parseInt(hex.substr(2, 2), 16) / 255;
-    const b = parseInt(hex.substr(4, 2), 16) / 255;
-    const max = Math.max(r, g, b), min = Math.min(r, g, b);
-    let h = 0, s = 0;
-    const l = (max + min) / 2;
-    const d = max - min;
-    if (d !== 0) {
-        s = d / (1 - Math.abs(2 * l - 1));
-        switch (max) {
-            case r: h = 60 * (((g - b) / d) % 6); break;
-            case g: h = 60 * ((b - r) / d + 2); break;
-            case b: h = 60 * ((r - g) / d + 4); break;
-        }
-        if (h < 0) h += 360;
-    }
-    return { h, s: s * 100, l: l * 100 };
-}
-function hueDist(h1, h2) {
-    const d = Math.abs(h1 - h2);
-    return Math.min(d, 360 - d);
-}
-// 提取方案中"有辨识度"的颜色(主色/辅助色/点缀色)，用于和通用系统色做撞色检测
-function getSchemeAccentColors(scheme) {
-    const list = [];
-    scheme.groups.forEach(g => {
-        if (g.title.includes('主色') || g.title.includes('辅助色') || g.title.includes('点缀')) {
-            g.items.forEach(it => {
-                if (isValidHex(it[1])) list.push({ hex: it[1], label: g.title + ' · ' + it[0] });
-            });
-        }
-    });
-    return list;
-}
-// 判断某个通用色是否和方案强调色"撞色"（色相接近 + 都有一定饱和度）
-function findClash(hex, accents) {
-    if (!isValidHex(hex)) return null;
-    const target = hexToHsl(hex);
-    if (target.s < 25) return null;
-    for (const ac of accents) {
-        const a = hexToHsl(ac.hex);
-        if (a.s < 25) continue;
-        if (hueDist(target.h, a.h) <= 18 && Math.abs(target.l - a.l) <= 22) {
-            return ac;
-        }
-    }
-    return null;
-}
 
 // --------------------------------------------------------------
 // 3. 渲染函数
 // --------------------------------------------------------------
-function renderSwatchGrid(containerId, list, schemeAccents) {
-    const el = document.getElementById(containerId);
-    if (!el) return;
-    el.innerHTML = '';
-    const accents = schemeAccents || [];
-    list.forEach(([name, hex, fg]) => {
-        let border = '';
-        if (hex.toUpperCase() === '#FFFFFF') border = 'border:1px solid #ccc;';
-        const div = document.createElement('div');
-        div.className = 'swatch';
-        div.style.cssText = `background:${hex};color:${fg};${border}`;
-        div.setAttribute('data-hex', hex);
-        const clash = findClash(hex, accents);
-        const clashBadge = clash
-            ? `<span class="clash-badge" title="与当前方案「${clash.label}」(${clash.hex})色相接近，注意避免视觉混淆">⚠ 撞色</span>`
-            : '';
-        div.innerHTML = `
-            <div class="name">${name}</div>
-            <div class="hex">${hex}</div>
-            <span class="copied">已复制</span>
-            ${contrastDotHtml(hex, fg)}
-            ${clashBadge}
-        `;
-        el.appendChild(div);
-    });
-}
-
-function renderUniversalForScheme(scheme) {
-    const accents = getSchemeAccentColors(scheme);
-    renderSwatchGrid('rarityGrid', rarityColors, accents);
-    renderSwatchGrid('feedbackGrid', feedbackColors, accents);
-}
-
-renderUniversalForScheme(schemes[0]);
-
 // --------------------------------------------------------------
 // 4. 生成配色面板 + Tab
 // --------------------------------------------------------------
@@ -883,9 +773,13 @@ schemes.forEach((s, idx) => {
         </div>
     `;
 
-    // ---- 色板速览条：全部颜色一次看完，不用逐组滚动 ----
-    const allItems = s.groups.flatMap(g => g.items);
-    html += `<div class="strip">` + allItems.map(it =>
+    // ---- 色板速览条：只挑"能代表风格"的颜色（中性/主色/辅助色/点缀色），
+    //      不包含文本功能色和稀有度/战斗反馈这类查表用的颜色，保持一眼看完 ----
+    const styleGroupTitles = ['中性', '主色', '辅助色', '点缀'];
+    const stripItems = s.groups
+        .filter(g => styleGroupTitles.some(t => g.title.includes(t)))
+        .flatMap(g => g.items);
+    html += `<div class="strip">` + stripItems.map(it =>
         `<span class="strip-chip" style="background:${it[1]}" data-hex="${it[1]}" title="${it[0]} · ${it[1]}"></span>`
     ).join('') + `</div>`;
 
@@ -1038,8 +932,6 @@ function switchScheme(id) {
     document.querySelectorAll('.scheme').forEach(p => {
         p.classList.toggle('active', p.id === 'scheme-' + id);
     });
-    const scheme = schemes.find(s => s.id === id);
-    if (scheme) renderUniversalForScheme(scheme);
 }
 
 // --------------------------------------------------------------
@@ -1143,6 +1035,33 @@ function exportJson(scheme) {
     return JSON.stringify(obj, null, 2);
 }
 
+// 统一的复制函数：优先用 Clipboard API，不可用/失败时用 execCommand 兜底，
+// 并且只有真正复制成功后才回调，避免视觉反馈"假成功"
+function copyText(text, onSuccess) {
+    function fallback() {
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.top = '-9999px';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            const ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            if (ok && onSuccess) onSuccess();
+        } catch (err) { /* 静默失败 */ }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            if (onSuccess) onSuccess();
+        }).catch(fallback);
+    } else {
+        fallback();
+    }
+}
+
 document.addEventListener('click', function(e) {
     const btn = e.target.closest('.export-btn');
     if (!btn) return;
@@ -1161,7 +1080,7 @@ document.addEventListener('click', function(e) {
         text = exportJson(scheme);
     }
 
-    navigator.clipboard.writeText(text).then(() => {
+    copyText(text, () => {
         const orig = btn.textContent;
         btn.textContent = '✅ 已复制';
         btn.classList.add('copied');
@@ -1169,7 +1088,7 @@ document.addEventListener('click', function(e) {
             btn.textContent = orig;
             btn.classList.remove('copied');
         }, 1800);
-    }).catch(() => {});
+    });
 });
 
 document.addEventListener('click', function(e) {
@@ -1177,9 +1096,10 @@ document.addEventListener('click', function(e) {
     if (!sw) return;
     const hex = sw.getAttribute('data-hex');
     if (!hex) return;
-    navigator.clipboard.writeText(hex).catch(() => {});
-    sw.classList.add('flash');
-    setTimeout(() => sw.classList.remove('flash'), 900);
+    copyText(hex, () => {
+        sw.classList.add('flash');
+        setTimeout(() => sw.classList.remove('flash'), 900);
+    });
 });
 </script>
 </body>
