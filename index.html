@@ -653,12 +653,13 @@ schemes.forEach((s, idx) => {
         </div>
     `;
 
-    // ---- 色板速览条：只挑"能代表风格"的颜色（中性/主色/辅助色/点缀色），
-    //      不包含文本功能色和稀有度/战斗反馈这类查表用的颜色，保持一眼看完 ----
-    const styleGroupTitles = ['中性', '主色', '辅助色', '点缀'];
-    const stripItems = s.groups
-        .filter(g => styleGroupTitles.some(t => g.title.includes(t)))
-        .flatMap(g => g.items);
+    // ---- 色板速览条：全色、分组顺序、hex 去重 ----
+    const seen = new Set();
+    const stripItems = s.groups.flatMap(g => g.items).filter(it => {
+        if (seen.has(it[1])) return false;
+        seen.add(it[1]);
+        return true;
+    });
     html += `<div class="strip">` + stripItems.map(it =>
         `<span class="strip-chip" style="background:${it[1]}" data-hex="${it[1]}" title="${it[0]} · ${it[1]}"></span>`
     ).join('') + `</div>`;
