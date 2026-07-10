@@ -1,0 +1,943 @@
+fileFormatVersion: 2
+guid: CS5Otiz/B3t1dPE3hLfxF0rMQCCLqlBTC+oQkbaKBGMYs3392xhGyOs=
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: ui_bg_1
+  - first:
+      213: 21300002
+    second: ui_bg_2
+  - first:
+      213: 21300004
+    second: ui_btn_1
+  - first:
+      213: 21300006
+    second: ui_btn_2
+  - first:
+      213: 21300008
+    second: ui_btn_3
+  - first:
+      213: 21300010
+    second: ui_border_3
+  - first:
+      213: 21300012
+    second: icon_Random
+  - first:
+      213: 21300014
+    second: icon_Lock
+  - first:
+      213: 21300016
+    second: ui_bg_3
+  - first:
+      213: 21300018
+    second: ui_bg_4
+  - first:
+      213: 21300020
+    second: ui_btn_4
+  - first:
+      213: 21300022
+    second: ui_btn_5
+  - first:
+      213: 21300024
+    second: ui_btn_6
+  - first:
+      213: 21300026
+    second: ui_border_2
+  - first:
+      213: 21300028
+    second: icon_Color
+  - first:
+      213: 21300030
+    second: icon_LockOpen
+  - first:
+      213: 21300032
+    second: icon_Save
+  - first:
+      213: 21300034
+    second: icon_Load
+  - first:
+      213: 21300036
+    second: icon_Edit
+  - first:
+      213: 21300038
+    second: icon_New
+  - first:
+      213: 21300040
+    second: icon_Logo
+  - first:
+      213: 21300042
+    second: SPBG_Head
+  - first:
+      213: 21300044
+    second: SPBG_Helmet
+  - first:
+      213: 21300046
+    second: icon_LogoBG
+  - first:
+      213: 21300048
+    second: SPBG_Eye
+  - first:
+      213: 21300050
+    second: SPBG_Mustache
+  - first:
+      213: 21300052
+    second: SPBG_Hair
+  - first:
+      213: 21300054
+    second: SPBG_Armor
+  - first:
+      213: 21300056
+    second: icon_Rando
+  - first:
+      213: 21300058
+    second: icon_Delete
+  - first:
+      213: 21300060
+    second: SPBG_Body
+  - first:
+      213: 21300062
+    second: SPBG_Cloth
+  - first:
+      213: 21300064
+    second: SPBG_Weapon
+  - first:
+      213: 21300066
+    second: SPBG_Back
+  - first:
+      213: 21300068
+    second: SPBG_Pants
+  - first:
+      213: 21300070
+    second: icon_DeleteTxt
+  - first:
+      213: 21300072
+    second: Button_11
+  - first:
+      213: 21300074
+    second: Button_12
+  - first:
+      213: 21300076
+    second: Button_13
+  - first:
+      213: 21300078
+    second: Test1
+  - first:
+      213: 21300080
+    second: Test2
+  - first:
+      213: 21300082
+    second: ui_close
+  - first:
+      213: 21300084
+    second: ui_line_1px
+  - first:
+      213: 21300086
+    second: ui_gradient
+  - first:
+      213: 21300088
+    second: pixel_ui_set_1
+  - first:
+      213: 21300090
+    second: ui_item_frame
+  - first:
+      213: 21300092
+    second: ui_border_1
+  - first:
+      213: 21300094
+    second: ui_win_border
+  - first:
+      213: 21300096
+    second: Ellipse32
+  - first:
+      213: 21300098
+    second: Ellipse64
+  - first:
+      213: 21300100
+    second: Ellipse64Outline
+  - first:
+      213: 21300102
+    second: Ellipse64OutlineColored
+  - first:
+      213: 21300104
+    second: FillRed
+  - first:
+      213: 21300106
+    second: FillRedSmall
+  - first:
+      213: 21300108
+    second: FillBlueSmall
+  - first:
+      213: 21300110
+    second: EllipseGlass64
+  - first:
+      213: 21300112
+    second: health_handle
+  - first:
+      213: 21300114
+    second: icon_star
+  - first:
+      213: 21300116
+    second: tipbtn_normal
+  - first:
+      213: 21300118
+    second: tipbtn_press
+  - first:
+      213: 21300120
+    second: Empty
+  - first:
+      213: 21300122
+    second: ui-select
+  - first:
+      213: 21300124
+    second: talentbg1
+  - first:
+      213: 21300126
+    second: talentbg2
+  - first:
+      213: 21300128
+    second: talentline1
+  - first:
+      213: 21300130
+    second: talentline2
+  - first:
+      213: 21300132
+    second: talentline
+  - first:
+      213: 21300134
+    second: talentbg3
+  - first:
+      213: 21300136
+    second: talentbg_border
+  - first:
+      213: 21300138
+    second: talentbg_border1
+  - first:
+      213: 21300140
+    second: ui-border16
+  - first:
+      213: 21300142
+    second: ui-round16
+  - first:
+      213: 21300144
+    second: ui-test01
+  - first:
+      213: 21300146
+    second: ui-test2
+  - first:
+      213: 21300148
+    second: ui-background-white
+  - first:
+      213: 21300150
+    second: ui-background-green
+  - first:
+      213: 21300152
+    second: ui-background-blue
+  - first:
+      213: 21300154
+    second: ui-background-purple
+  - first:
+      213: 21300156
+    second: ui-background-orange
+  - first:
+      213: 21300158
+    second: ui-background48
+  - first:
+      213: 21300160
+    second: ui-line48
+  - first:
+      213: 21300162
+    second: ui-title01
+  - first:
+      213: 21300164
+    second: item_frame02
+  - first:
+      213: 21300166
+    second: item_frame05
+  - first:
+      213: 21300168
+    second: item_frame01
+  - first:
+      213: 21300170
+    second: item_frame04
+  - first:
+      213: 21300172
+    second: item_frame05
+  - first:
+      213: 21300174
+    second: item_border_red
+  - first:
+      213: 21300176
+    second: item_frame03
+  - first:
+      213: 21300178
+    second: ui_title_bg
+  - first:
+      213: 21300180
+    second: uipad_arrow
+  - first:
+      213: 21300182
+    second: health_bg
+  - first:
+      213: 21300184
+    second: mana_bg
+  - first:
+      213: 21300186
+    second: mana_handle
+  - first:
+      213: 21300188
+    second: ui-background49
+  externalObjects: {}
+  serializedVersion: 14
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  webStreaming: 0
+  priorityLevel: 0
+  uploadedMode: 2
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: 2
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: 13
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: 13
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: HMIAndroid
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: 13
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: OpenHarmony
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: 13
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: WeixinMiniGame
+    maxTextureSize: 256
+    maxPlaceholderSize: 32
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ui_bg_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 244
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46283d1fc85b52e10800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_bg_2
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 244
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a83078853be3ee4c0800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_btn_3
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 244
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 4, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86213c914906e9fd0800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_btn_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 244
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1587812e287356480800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_btn_1
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 244
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed898f840f05d1f70800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_border_3
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 244
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b48ba52d0e22c7690800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_bg_3
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 228
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d898b92f2042a1220800000000000000
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_bg_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 228
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b6555a702f7a4b0800000000000000
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_btn_outline_1
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 227
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4b933ec392a07c90800000000000000
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_btn_outline_3
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 227
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09010d32b70e85470800000000000000
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_btn_outline_2
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 227
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d679ca18e91f0c0d0800000000000000
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_border_2
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 228
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3f5ee4934cf29000800000000000000
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_border_1
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 228
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f43933f9c9ac4cd88b94760923bcde2
+      internalID: 21300092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_circle64_bg
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c739aa31d73f4134a9d85220b8b6b83
+      internalID: 21300098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_circle64_border
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 326049771b12c407899e391f21bbed58
+      internalID: 21300100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_empty
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 244
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f52336dbac578f4783f17629bf3b24f
+      internalID: 21300120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_select
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 227
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 511473b111b80524ea6a49461b05b370
+      internalID: 21300122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_circle26_border
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e69b15848d847219c677920e57d2ee
+      internalID: -2021613271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_circle26_bg
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 5
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21b7986fccfe549c6b9380ccf341c07e
+      internalID: 1861985863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: fb6c3ba631a294391a6761af9baffc2c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Ellipse32: 21300096
+      Ellipse64OutlineColored: 21300102
+      EllipseGlass64: 21300110
+      health_bg: 21300182
+      health_handle: 21300112
+      item_frame01: 21300168
+      item_frame02: 21300164
+      item_frame03: 21300176
+      item_frame04: 21300170
+      item_frame05: 21300166
+      item_frame06: 21300174
+      mana_bg: 21300184
+      mana_handle: 21300186
+      talentbg1: 21300124
+      talentbg2: 21300126
+      talentbg_border: 21300136
+      talentbg_border1: 21300138
+      talentline: 21300132
+      ui-background48: 21300158
+      ui-background49: 21300188
+      ui_bg_1: 21300000
+      ui_bg_2: 21300002
+      ui_bg_3: 21300016
+      ui_bg_4: 21300018
+      ui_border_1: 21300092
+      ui_border_2: 21300026
+      ui_border_3: 21300010
+      ui_btn_1: 21300008
+      ui_btn_2: 21300006
+      ui_btn_3: 21300004
+      ui_btn_outline_1: 21300020
+      ui_btn_outline_2: 21300024
+      ui_btn_outline_3: 21300022
+      ui_circle26_bg: 1861985863
+      ui_circle26_border: -2021613271
+      ui_circle64_bg: 21300098
+      ui_circle64_border: 21300100
+      ui_empty: 21300120
+      ui_gradient: 21300086
+      ui_select: 21300122
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  doOverrideTextureManagerOperations: 0
+  platformOperationGroupSettings: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
